@@ -53,8 +53,15 @@
     <UnityVersion>2021.2.13f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\RayToggler.cs" />
+    <Compile Include="Assets\Scripts\ForceGrabPullInteractable.cs" />
     <Compile Include="Assets\Scripts\GlobalPhysicsSetup.cs" />
+    <Compile Include="Assets\giantHandHider.cs" />
     <Compile Include="Assets\Scripts\GiantHand.cs" />
+    <Compile Include="Assets\Scripts\GiantInteractor.cs" />
+    <Compile Include="Assets\Scripts\GiantInteractable.cs" />
+    <Compile Include="Assets\GiantHandInteractor.cs" />
+    <Compile Include="Assets\Scripts\ReadRotation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
