@@ -53,15 +53,29 @@
     <UnityVersion>2021.2.13f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\PushInteractor.cs" />
     <Compile Include="Assets\Scripts\RayToggler.cs" />
+    <Compile Include="Assets\Scripts\OmniDirectionForcePullInteractor.cs" />
     <Compile Include="Assets\Scripts\ForceGrabPullInteractable.cs" />
     <Compile Include="Assets\Scripts\GlobalPhysicsSetup.cs" />
     <Compile Include="Assets\giantHandHider.cs" />
+    <Compile Include="Assets\Scripts\PushInteractable.cs" />
+    <Compile Include="Assets\Scripts\FlyingEnemy.cs" />
     <Compile Include="Assets\Scripts\GiantHand.cs" />
+    <Compile Include="Assets\Scripts\PhysicsHand.cs" />
+    <Compile Include="Assets\Scripts\ImpactAudio.cs" />
     <Compile Include="Assets\Scripts\GiantInteractor.cs" />
+    <Compile Include="Assets\Scripts\HandToggler.cs" />
     <Compile Include="Assets\Scripts\GiantInteractable.cs" />
     <Compile Include="Assets\GiantHandInteractor.cs" />
     <Compile Include="Assets\Scripts\ReadRotation.cs" />
+    <Compile Include="Assets\Scripts\HoveringTarget.cs" />
+    <Compile Include="Assets\Scripts\GrabDirectInteractor.cs" />
+    <Compile Include="Assets\Scripts\FlyingEnemyProjectile.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\IdiaSoftware\Blades&amp;Bludgeonings-Free\Documentation-Free.txt" />
+    <None Include="Assets\StoneKeep\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -804,6 +818,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{FA5C4078-2DA1-21A5-D62C-1C54F4FE7772}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

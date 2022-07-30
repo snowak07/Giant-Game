@@ -24,10 +24,13 @@ public class GiantHand : MonoBehaviour
     {
         // Set Rotation
         Quaternion giantHandNewRotation = Quaternion.Slerp(giantHandT.rotation, controllerT.rotation, rotationSpeed * Time.deltaTime);
-        giantHandT.rotation = giantHandNewRotation;
+        //giantHandT.rotation = giantHandNewRotation;
+        giantHand.MoveRotation(giantHandNewRotation);
 
         // Set Position
         Vector3 giantHandNewPosition = Vector3.LerpUnclamped(giantHandT.position, controllerT.position, translationSpeed * Time.deltaTime);
-        giantHandT.position = giantHandNewPosition;
+        //giantHandT.position = giantHandNewPosition;
+        //giantHand.MovePosition(controllerT.position * Time.deltaTime);
+        giantHand.MovePosition(giantHandNewPosition);
     }
 }

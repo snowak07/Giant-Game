@@ -6,51 +6,30 @@ using UnityEngine.InputSystem;
 
 public class ForceGrabPullInteractable : XRGrabInteractable
 {
-    public InputActionReference activateReference = null;
-
-    private bool interactableHovering;
-    private Transform hoveringInteractor_T = null;
     private Transform interactable_T = null;
     private Rigidbody interactableRigidbody = null;
 
-    // Start is called before the first frame update
     void Start()
     {
-        interactableHovering = false;
         interactable_T = GetComponent<Transform>();
         interactableRigidbody = GetComponent<Rigidbody>();
-        activateReference.action.performed += HandlePullAction;
+
+        selectEntered.AddListener(EnableMovement);
     }
 
-    protected override void OnDisable()
+    // Disable isKinematic and enable useGravity so that the Interactable can be moved while selected.
+    protected void EnableMovement(SelectEnterEventArgs args)
     {
-        base.OnDisable();
-
-        activateReference.action.performed -= HandlePullAction;
+        Rigidbody body = GetComponent<Rigidbody>();
+        body.isKinematic = false;
+        body.useGravity = true;
     }
 
-    protected override void OnHoverEntered(HoverEnterEventArgs args)
+    protected override void OnActivated(ActivateEventArgs args)
     {
-        base.OnHoverEntered(args);
-
-        hoveringInteractor_T = args.interactorObject.transform;
-
-        interactableHovering = true;
-    }
-
-    protected override void OnHoverExited(HoverExitEventArgs args)
-    {
-        base.OnHoverExited(args);
-
-        hoveringInteractor_T = null;
-
-        interactableHovering = false;
-    }
-
-    private void HandlePullAction(InputAction.CallbackContext ctx)
-    {
-        if (interactableHovering && hoveringInteractor_T != null)
-            Pull(hoveringInteractor_T);
+        // Get position of activater
+        Transform pullLocation_T = args.interactorObject.transform;
+        Pull(pullLocation_T);
     }
 
     private void Pull(Transform pullLocation_T)
