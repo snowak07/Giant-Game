@@ -6,6 +6,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 // Handle hands colliding with interactables and connecting a joint to them on select activated.
 public class GrabDirectInteractor : XRDirectInteractor
 {
+    public float massScaling = 0.2f;
+
     protected override void Start()
     {
         base.Start();
@@ -16,30 +18,50 @@ public class GrabDirectInteractor : XRDirectInteractor
 
     protected void AttachBody(SelectEnterEventArgs args)
     {
-        Rigidbody interactableRigidbody = args.interactableObject.colliders[0].attachedRigidbody;
-        AttachJoint(interactableRigidbody);
+        //Rigidbody interactableRigidbody = args.interactableObject.colliders[0].attachedRigidbody;
+        List<IXRInteractable> targets = new List<IXRInteractable>();
+        GetValidTargets(targets);
+        foreach (IXRInteractable interactable in targets)
+        {
+            AttachJoint(interactable.colliders[0].attachedRigidbody);
+        }
+        //List<Collider> interactableColliders = args.interactableObject.colliders;
+        //foreach (Collider interactableCollider in interactableColliders)
+        //{
+        //    Debug.Log("Attaching Joint");
+        //    AttachJoint(interactableCollider.attachedRigidbody);
+        //}
     }
 
     protected void DetachBody(SelectExitEventArgs args)
     {
-        DetachJoint();
+        DetachJoint(args.interactableObject.colliders[0].attachedRigidbody);
     }
 
-    protected void AttachJoint(Rigidbody rigidbodyToAttach)
+    public void AttachJoint(Rigidbody rigidbodyToAttach)
     {
-        gameObject.AddComponent<FixedJoint>();
-        FixedJoint joint = GetComponent<FixedJoint>();
-        rigidbodyToAttach.mass = 5;
+        Debug.Log("Attaching Joint");
+        Debug.Log("RigidbodyToAttach: " + rigidbodyToAttach.name);
+        FixedJoint joint = gameObject.AddComponent<FixedJoint>();
+        rigidbodyToAttach.mass = rigidbodyToAttach.mass * massScaling;
         joint.connectedBody = rigidbodyToAttach;
+        Debug.Log("AttachJoint End");
     }
 
-    protected void DetachJoint()
+    protected void DetachJoint(Rigidbody bodyToDetach)
     {
+        Debug.Log("DetachJoints");
         FixedJoint[] joints = GetComponents<FixedJoint>();
+        Debug.Log("joints to detach length: " + joints.Length);
         foreach(FixedJoint joint in joints)
         {
-            joint.connectedBody.mass = 25;
-            Destroy(joint);
+            Debug.Log("Checking if correct Rigidbody");
+            //if (joint.connectedBody.Equals(bodyToDetach)) // TODO change to check for all colliders in SelectExitEventArgs
+            //{
+                Debug.Log("Detaching Rigidbody");
+                joint.connectedBody.mass = joint.connectedBody.mass / massScaling;
+                Destroy(joint);
+            //}
         }
     }
 }

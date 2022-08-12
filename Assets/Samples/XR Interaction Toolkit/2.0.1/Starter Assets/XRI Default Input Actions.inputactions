@@ -699,9 +699,9 @@
                 },
                 {
                     "name": "",
-                    "id": "6011e1e6-b2dd-4cb1-8da5-29b03868f2c5",
+                    "id": "291389ed-bd94-4132-9423-1718cdee717e",
                     "path": "<XRController>{RightHand}/*",
-                    "interactions": "",
+                    "interactions": "Hold(duration=0.2,pressPoint=0.8)",
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Haptic Device",
@@ -796,6 +796,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Grip Held",
+                    "type": "Value",
+                    "id": "ca6b1a54-cd15-4da4-9c5a-5b9ac71ee1e6",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -813,8 +822,8 @@
                 {
                     "name": "",
                     "id": "dd433817-216c-46b9-8dd3-f3a4ea1767b9",
-                    "path": "<XRController>{RightHand}/grip",
-                    "interactions": "",
+                    "path": "<ValveIndexController>{RightHand}/gripForce",
+                    "interactions": "Hold(pressPoint=0.8)",
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Select Value",
@@ -974,6 +983,17 @@
                     "action": "Translate Anchor",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "115d9ad5-cd69-446a-b6fe-1b8107d7d341",
+                    "path": "<ValveIndexController>{RightHand}/gripForce",
+                    "interactions": "Hold(duration=0.2,pressPoint=0.8)",
+                    "processors": "AxisDeadzone(max=0.8)",
+                    "groups": "Generic XR Controller",
+                    "action": "Grip Held",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

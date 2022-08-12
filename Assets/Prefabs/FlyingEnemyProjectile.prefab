@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4398281709342586306}
   - component: {fileID: 1267557868613518036}
   - component: {fileID: 1810716426006186621}
+  - component: {fileID: 7123429832514622674}
   m_Layer: 6
   m_Name: FlyingEnemyProjectile
   m_TagString: Projectile
@@ -114,3 +115,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7123429832514622674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212360307313981037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35aea478114d9054e8d230cdae4dfcd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 6176452459482110404, guid: e9d778bd3dfbf02418ba4e8493c997a8, type: 3}
