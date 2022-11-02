@@ -88,6 +88,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Velocity",
+                    "type": "Value",
+                    "id": "5d2ebfbb-4415-4f20-bec3-503eb27fa0eb",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -198,6 +207,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Tracking State",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "66cfd3c9-03c2-4ddf-b2da-0e9ba6df4c4b",
+                    "path": "<ValveIndexController>{LeftHand}/devicePose/velocity",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Velocity",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -606,6 +626,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Velocity",
+                    "type": "Value",
+                    "id": "00924b1e-addb-4509-a2c3-e1edb740387d",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -718,6 +747,17 @@
                     "action": "Tracking State",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bc4b1f0c-9433-4bd1-ba1b-cd8dd069074c",
+                    "path": "<ValveIndexController>{RightHand}/devicePose/velocity",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Velocity",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -798,20 +838,29 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Grip Held",
-                    "type": "Value",
-                    "id": "ca6b1a54-cd15-4da4-9c5a-5b9ac71ee1e6",
-                    "expectedControlType": "Axis",
+                    "name": "TriggerHaptics",
+                    "type": "PassThrough",
+                    "id": "2a0e13d8-3f42-43fa-aa32-681dd7f6e5ba",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Activate Shield",
+                    "type": "Button",
+                    "id": "222efae9-49fa-4364-9be3-26af8917baa1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "1ce80054-410d-4112-a332-50faa7fb4f23",
-                    "path": "<XRController>{RightHand}/gripPressed",
+                    "path": "<XRController>{RightHand}/triggerPressed",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -823,7 +872,7 @@
                     "name": "",
                     "id": "dd433817-216c-46b9-8dd3-f3a4ea1767b9",
                     "path": "<ValveIndexController>{RightHand}/gripForce",
-                    "interactions": "Hold(pressPoint=0.8)",
+                    "interactions": "Hold(duration=0.1,pressPoint=0.7)",
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Select Value",
@@ -833,7 +882,7 @@
                 {
                     "name": "",
                     "id": "fa59aed1-ae0b-4074-a58c-294b85f46228",
-                    "path": "<XRController>{RightHand}/triggerPressed",
+                    "path": "<XRController>{RightHand}/secondaryButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -986,12 +1035,23 @@
                 },
                 {
                     "name": "",
-                    "id": "115d9ad5-cd69-446a-b6fe-1b8107d7d341",
-                    "path": "<ValveIndexController>{RightHand}/gripForce",
-                    "interactions": "Hold(duration=0.2,pressPoint=0.8)",
-                    "processors": "AxisDeadzone(max=0.8)",
+                    "id": "9c6ea63a-a74f-4113-aa96-fbeac1b15188",
+                    "path": "<XRInputV1::Valve::IndexControllerOpenXR>{RightHand}/haptic",
+                    "interactions": "",
+                    "processors": "",
                     "groups": "Generic XR Controller",
-                    "action": "Grip Held",
+                    "action": "TriggerHaptics",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8adf7ea6-31f0-4ea1-973a-a502660f6a93",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Activate Shield",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

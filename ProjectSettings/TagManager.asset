@@ -4,10 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - GiantHand
-  - Interact
-  - Projectile
+  - Shootable
   - Enemy
+  - Interact
+  - GiantHand
+  - Spawner
+  - Water
+  - Projectile
+  - Ground
+  - Hull
   layers:
   - Default
   - TransparentFX
@@ -15,14 +20,14 @@ TagManager:
   - 
   - Water
   - UI
-  - Projectile
+  - 
+  - 
+  - Lighting
+  - Ground
+  - Postprocessing
   - Enemy
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - PlayerProjectile
   - 
   - 
   - 
@@ -42,6 +47,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Fire
+    uniqueID: 3804908061
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

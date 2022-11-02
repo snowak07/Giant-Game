@@ -10,26 +10,29 @@ public class PhysicsHand : MonoBehaviour
     public float positionSpeed = 3;
     public float positionStrength = 20;
     public float positionThreshold = 0.005f;
-    public float maxDistance = 1f;
     public float rotationSpeed = 3;
     public float rotationStrength = 30;
     public float rotationThreshold = 10f;
 
+    private Quaternion previousTrackedRotation;
+
     void FixedUpdate()
+    {
+        SetPosition();
+        SetRotation();
+    }
+
+    void SetPosition()
     {
         Vector3 lerpTrackedTransformPosition = Vector3.LerpUnclamped(transform.position, trackedTransform.position, positionSpeed * Time.deltaTime);
         var distance = Vector3.Distance(lerpTrackedTransformPosition, body.position);
-        //if (distance > maxDistance || distance < positionThreshold)
-        //{
-        //    body.MovePosition(lerpTrackedTransformPosition);
-        //}
-        //else
-        //{
         var vel = (lerpTrackedTransformPosition - body.position).normalized * positionStrength * distance;
         body.velocity = vel;
-        //}
+    }
 
-        //Quaternion slerpTrackedTransformRotation = Quaternion.Slerp(transform.rotation, trackedTransform.rotation, rotationSpeed * Time.deltaTime);
+    // TODO Add rotation "history" tracking so that the controller doesn't rotate in the direction of the shortest distance but follows the path of the controller rotation instead
+    void SetRotation()
+    {
         float angleDistance = Quaternion.Angle(body.rotation, trackedTransform.rotation);
         if (angleDistance < rotationThreshold)
         {

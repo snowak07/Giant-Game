@@ -2,57 +2,144 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyingEnemy : MonoBehaviour
+// TODO add flame trail particle effect to projectiles
+
+// TODO Possibly use a random range to fly around in. Could break off, fly in random direction, then continue circling again.
+
+// TODO Make the FlyingEnemy bob up and down in the y direction when beelining for the player. (Might not do this?)
+
+// TODO Adding health and visual damage indicators on the model would be interesting. Need to throw harder to do more damage. Enemies get bonked back but don't die. Are taken out the fight briefly though.
+
+// TODO Add endless spawning of FlyingEnemy
+
+// TODO Vary maxRange for each new enemy
+
+public class FlyingEnemy : Enemy
 {
-    public Transform playerTransform = null;
-    public float speed = 1;
+    public float orbitSpeed = 1;
+    public float radialSpeed = 0.1f;
     public Rigidbody projectile = null;
     public float firingSpeed = 1;
     public float verticalOscillationsPerRotation = 4;
     public float verticalOscillationMagnitude = 0.5f;
 
     private Rigidbody body;
-    private bool isKilled = false;
 
     private float timeCounter;
     private float horizontalMaxDistance;
-    private float initialYHeight;
     private float xPlayerOffset;
     private float zPlayerOffset;
+    private float yIntercept;
+    private float xIntercept;
+    private float zIntercept;
 
+    private bool isSelected;
+    private float maxRange;
+    private bool clockwiseOrbit;
     private bool firingCooldown;
+    private bool enteredRange;
 
     void Start()
     {
+        maxRange = Random.Range(0, 5) + 10;
+        clockwiseOrbit = Random.Range(0, 2) == 0;
+        enteredRange = false;
         body = GetComponent<Rigidbody>();
         float initialTimeOffset = Mathf.Atan2(transform.position.z, transform.position.x);
+
+        // Set time such that position on rotation circle is the same point that the FlyingEnemy enters range
         timeCounter = initialTimeOffset;
-        initialYHeight = transform.position.y;
-        xPlayerOffset = playerTransform.position.x;
-        zPlayerOffset = playerTransform.position.z;
-        horizontalMaxDistance = Mathf.Sqrt(Mathf.Pow(transform.position.x, 2) + Mathf.Pow(transform.position.z, 2));
     }
 
-    void FixedUpdate()
+    protected override void UpdateEnemy()
     {
-        // TODO Make the FlyingEnemy move towards the player before flying around them at a constant speed. Possibly use a random range to fly around in. Could break off, fly in random direction, then continue circling again.
-
-        // TODO Make the FlyingEnemy bob up and down in the y direction both when circling and beelining for the player.
-
-        // TODO Adding health and visual damage indicators on the model would be interesting. Need to throw harder to do more damage. Enemies get bonked back but don't die. Are taken out the fight briefly though.
-
-        if (!isKilled)
+        if (isSelected)
         {
-            // Shooting projectile at the player when they are circling.
-            StartCoroutine(ShootProjectileAtPlayer());
-
-            timeCounter += (speed * (Time.deltaTime / horizontalMaxDistance));
-            float y = initialYHeight + (verticalOscillationMagnitude * Mathf.Sin(verticalOscillationsPerRotation * timeCounter));
-            float x = (horizontalMaxDistance * Mathf.Cos(timeCounter));// + xPlayerOffset; // TODO I think these are necessary to properly orbit around the player.
-            float z = (horizontalMaxDistance * Mathf.Sin(timeCounter));// + zPlayerOffset;
-            Vector3 newPosition = new Vector3(x, y, z);
-            body.MovePosition(newPosition); // TODO movement appears jittery. Can I use forces instead? Use normal Update() function instead?
+            enteredRange = false;
         }
+
+        if (!isKilled && playerTransform != null && !isSelected)
+        {
+            bool inRange = (playerTransform.position - transform.position).magnitude < maxRange;
+            if (!inRange && !enteredRange) // Make the FlyingEnemy move towards the player before flying around them at a constant orbitSpeed.
+            {
+                //enteredRange = false; // TODO set this to false if the FlyingEnemy is moved outside a farther radius than inRange checks for. Enough extra distance that oscillations don't have a chance to go outside the bounds.
+
+                Vector3 newPosition = Vector3.Lerp(transform.position, playerTransform.position, radialSpeed * Time.deltaTime); // Speed proportional to distance
+                //Vector3 newPosition = Vector3.MoveTowards(transform.position, playerTransform.position, radialSpeed); // Constant speed
+                newPosition.y = 0.5f; // TODO remove
+                body.MovePosition(newPosition);
+
+                Vector3 flyingEnemyToPlayer = playerTransform.position - transform.position;
+                Vector3 upwards = new Vector3(0, 1, 0);
+                Quaternion playerDirection = Quaternion.LookRotation(flyingEnemyToPlayer, upwards);
+                body.MoveRotation(playerDirection);
+            }
+            else
+            {
+                // Handle first time entering range
+                if (!enteredRange)
+                {
+                    xPlayerOffset = playerTransform.position.x;
+                    zPlayerOffset = playerTransform.position.z;
+                    horizontalMaxDistance = Mathf.Sqrt(Mathf.Pow(transform.position.x - xPlayerOffset, 2) + Mathf.Pow(transform.position.z - zPlayerOffset, 2));
+
+                    if (clockwiseOrbit)
+                    {
+                        timeCounter -= (orbitSpeed * (Time.deltaTime / horizontalMaxDistance));
+                    }
+                    else
+                    {
+                        timeCounter += (orbitSpeed * (Time.deltaTime / horizontalMaxDistance));
+                    }
+
+                    yIntercept = transform.position.y - (verticalOscillationMagnitude * Mathf.Sin(verticalOscillationsPerRotation * timeCounter));
+                    xIntercept = transform.position.x - xPlayerOffset - (horizontalMaxDistance * Mathf.Cos(timeCounter));
+                    zIntercept = transform.position.z - zPlayerOffset - (horizontalMaxDistance * Mathf.Sin(timeCounter));
+
+                    enteredRange = true;
+                }
+
+                Vector3 playerPositionHorizontal = playerTransform.position;
+                playerPositionHorizontal.y = 0;
+                Vector3 currentPosition = new Vector3(xPlayerOffset, 0, zPlayerOffset);
+
+                Vector3 playerOffset = Vector3.MoveTowards(currentPosition, playerPositionHorizontal, 0.01f);
+
+                xPlayerOffset = playerOffset.x;
+                zPlayerOffset = playerOffset.z;
+
+                // Shooting projectile at the player when they are circling.
+                StartCoroutine(ShootProjectileAtPlayer());
+
+                float y = (verticalOscillationMagnitude * Mathf.Sin(verticalOscillationsPerRotation * timeCounter)) + yIntercept;
+                float x = (horizontalMaxDistance * Mathf.Cos(timeCounter)) + xPlayerOffset + xIntercept;
+                float z = (horizontalMaxDistance * Mathf.Sin(timeCounter)) + zPlayerOffset + zIntercept;
+
+                Vector3 newPosition = new Vector3(x, y, z);
+                newPosition.y = 0.5f; // TODO remove
+                body.MovePosition(newPosition);
+
+                Vector3 flyingEnemyToPlayer = playerTransform.position - transform.position;
+                Vector3 upwards = new Vector3(0, 1, 0);
+                Quaternion playerDirection = Quaternion.LookRotation(flyingEnemyToPlayer, upwards);
+                body.MoveRotation(playerDirection);
+
+                if (clockwiseOrbit)
+                {
+                    timeCounter -= (orbitSpeed * (Time.deltaTime / horizontalMaxDistance));
+                }
+                else
+                {
+                    timeCounter += (orbitSpeed * (Time.deltaTime / horizontalMaxDistance));
+                }
+            }
+        }
+    }
+
+    public void setIsSelected(bool selected)
+    {
+        isSelected = selected;
     }
 
     void Shoot()
@@ -76,12 +163,9 @@ public class FlyingEnemy : MonoBehaviour
             Shoot();
             yield return new WaitForSeconds(firingSpeed);
             firingCooldown = false;
+            yield break;
         }
-    }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        isKilled = true;
-        body.useGravity = true;
+        yield break;
     }
 }

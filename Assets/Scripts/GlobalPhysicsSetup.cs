@@ -7,7 +7,6 @@ public class GlobalPhysicsSetup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Setting Gravity");
         //Physics.gravity = new Vector3(0, -2.0f, 0);
     }
 }

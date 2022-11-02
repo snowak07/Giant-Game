@@ -36,8 +36,6 @@ public class PushInteractor : MonoBehaviour
 
             foreach (Vector3 pastVelocity in pastVelocities)
             {
-                Debug.Log("pastVelocity: " + pastVelocity.ToString());
-                Debug.Log("xyzSums: " + xyzSums[0].ToString() + ", " + xyzSums[1].ToString() + ", " + xyzSums[2].ToString());
                 xyzSums[0] = xyzSums[0] + pastVelocity.x;
                 xyzSums[1] = xyzSums[1] + pastVelocity.y;
                 xyzSums[2] = xyzSums[2] + pastVelocity.z;
@@ -49,12 +47,8 @@ public class PushInteractor : MonoBehaviour
             averageInteractorVelocity.y = xyzAverage[1] / pastVelocities.Count; // FIXME: I think something is going wrong when calculating the average velocity. Either with the assigning to the Vector3 or in the calculation (different types?)
             averageInteractorVelocity.z = xyzAverage[2] / pastVelocities.Count; // FIXME: I think something is going wrong when calculating the average velocity. Either with the assigning to the Vector3 or in the calculation (different types?)
 
-            Debug.Log("Average Interactor Velocity: " + averageInteractorVelocity.ToString());
-
             //Debug.Log("giantHand velocity: " + r_interactor.velocity.ToString());
-            Debug.Log("Object velocity BEFORE: " + collision.rigidbody.velocity.ToString());
             collision.rigidbody.AddForce(averageInteractorVelocity, ForceMode.VelocityChange);
-            Debug.Log("Object velocity AFTER: " + collision.rigidbody.velocity.ToString());
             //Vector3 otherColliderVelocity = collision.rigidbody.velocity;
             //Debug.Log("giantHand Velocity: " + otherColliderVelocity.ToString());
             //r_interactor.AddForce(otherColliderVelocity, ForceMode.VelocityChange);
