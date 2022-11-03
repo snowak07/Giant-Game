@@ -4,15 +4,42 @@ using System;
 using UnityEngine;
 using System.Linq;
 
-public abstract class Enemy : GiantGrabInteractable
+public abstract class Enemy : MonoBehaviour
 {
     public string[] ignoredDamageCollisionTags = { "Enemy", "Water" };
     public Transform playerTransform = null;
+    public float health;
 
-    protected bool isPickedUp = false;
+    public bool IsPickedUp { get; set; }
+
     protected bool isKilled = false;
-    protected float damageDealt = 0;
-    protected float damageThreshold;
+
+    /**
+     * Handle when enemy is first created
+     * 
+     * @return void
+     */
+    protected virtual void Start()
+    {
+        IsPickedUp = false;
+
+        SetStartingHealth();
+    }
+
+    /**
+     * Call UpdateEnemy and allow checks for all enemies that can skip updates.
+     *
+     * TODO: Add different Update functions for particular actions an enemy might take e.g. UpdatePosition, UpdateHealth, etc
+     * 
+     * @return void
+     */
+    protected void FixedUpdate()
+    {
+        if (!IsPickedUp && !isKilled)
+        {
+            UpdateEnemy();
+        }
+    }
 
     /**
      *  Handle breaking enemy into pieces.
@@ -50,21 +77,6 @@ public abstract class Enemy : GiantGrabInteractable
     }
 
     /**
-     * Call UpdateEnemy and allow checks for all enemies that can skip updates.
-     *
-     * TODO: Add different Update functions for particular actions an enemy might take e.g. UpdatePosition, UpdateHealth, etc
-     * 
-     * @return void
-     */
-    protected void FixedUpdate()
-    {
-        if (!isPickedUp)
-        {
-            UpdateEnemy();
-        }
-    }
-
-    /**
      *  Handle colliding with objects that could potentially kill the enemy.
      *  
      *  @param collision    collision that can do damage to enemy
@@ -73,23 +85,27 @@ public abstract class Enemy : GiantGrabInteractable
      */
     protected virtual void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Enemy damage dealt: " + collision.impulse.magnitude);
         if (!isKilled && !ignoredDamageCollisionTags.Contains(collision.transform.root.gameObject.tag))
         {
-            // Check for impact cooldown so that an Enemy can only be hit once by an object after leaving the player's hand
-            if ((collision.transform.TryGetComponent(out GiantGrabInteractable forceGrabPullInteractable) && !forceGrabPullInteractable.impactCooldownEnabled()) || collision.transform.root.tag == "Projectile") // Only can be killed by GiantGrabInteractable currently
+            if (collision.transform.TryGetComponent(out GiantGrabInteractable forceGrabPullInteractable))
             {
-                // Enable impact cooldown so the Enemy can't be hit by the same object again
-                if (forceGrabPullInteractable != null)
+                // Check for impact cooldown so that an Enemy can only be hit once by an object after leaving the player's hand
+                if (!forceGrabPullInteractable.ImpactCooldown)
                 {
-                    forceGrabPullInteractable.enableImpactCooldown();
-                }
+                    forceGrabPullInteractable.ImpactCooldown = true;
 
-                damageDealt += collision.impulse.magnitude;
-
-                if (damageDealt > damageThreshold)
-                {
-                    Kill();
+                    health -= collision.impulse.magnitude;
                 }
+            }
+            else
+            {
+                health -= collision.impulse.magnitude;
+            }
+             
+            if (health <= 0)
+            {
+                Kill();
             }
         }
     }
@@ -130,9 +146,16 @@ public abstract class Enemy : GiantGrabInteractable
     }
 
     /**
+     * Handle setting starting health
+     * 
+     * @return void
+     */
+    protected abstract void SetStartingHealth();
+
+    /**
      * Where subclasses should handle updating the enemy each frame
      * 
-     * @return voidaaaaaaaaa
+     * @return void
      */
     protected abstract void UpdateEnemy();
 }

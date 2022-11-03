@@ -12,6 +12,11 @@ public class GroundEnemy : Enemy
 
     private bool knockedDown = false;
 
+    protected override void Start()
+    {
+        base.Start();
+    }
+
     protected override void UpdateEnemy()
     {
         // Move towards player until within striking distance
@@ -51,9 +56,11 @@ public class GroundEnemy : Enemy
 
     protected override void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("GroundEnemy collision: " + collision.transform.tag);
         // Disable movement until
-        if (collision.transform.tag == "Player" || collision.transform.root.TryGetComponent(out Shockwave shockwave) || (collision.transform.root.TryGetComponent(out GiantGrabInteractable interactable) && !interactable.impactCooldownEnabled()))
+        if (collision.transform.tag == "Player" || collision.transform.root.TryGetComponent(out Shockwave shockwave) || (collision.transform.root.TryGetComponent(out GiantGrabInteractable interactable) && !interactable.ImpactCooldown))
         {
+            Debug.Log("GroundEnemy knocked down");
             knockedDown = true;
         }
 
@@ -70,5 +77,10 @@ public class GroundEnemy : Enemy
         }
 
         return false;
+    }
+
+    protected override void SetStartingHealth()
+    {
+        health = 10;
     }
 }

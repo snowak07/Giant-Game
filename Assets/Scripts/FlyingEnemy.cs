@@ -39,8 +39,10 @@ public class FlyingEnemy : Enemy
     private bool firingCooldown;
     private bool enteredRange;
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
         maxRange = Random.Range(0, 5) + 10;
         clockwiseOrbit = Random.Range(0, 2) == 0;
         enteredRange = false;
@@ -140,6 +142,11 @@ public class FlyingEnemy : Enemy
     public void setIsSelected(bool selected)
     {
         isSelected = selected;
+    }
+
+    protected override void SetStartingHealth()
+    {
+        health = 20;
     }
 
     void Shoot()

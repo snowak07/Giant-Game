@@ -30,12 +30,12 @@ public class BattleshipEnemy : Enemy
     private float settledVelocityThreshold = 0.01f;
     private float settledAngularVelocityThreshold = 0.005f;
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
         // Determine random orbit radius that will determine the "desired" path.
         orbitRadius = orbitRadiusStepSize * Random.Range(minRandonizedOrbitRadius, maxRandomizedOrbitRadius);
-
-        damageThreshold = 40;
     }
 
     protected override void UpdateEnemy()
@@ -175,7 +175,7 @@ public class BattleshipEnemy : Enemy
 
             // Enable impact cooldown so the projecile doesn't collide with the Enemy
             GiantGrabInteractable ep = projectileObject.GetComponent<GiantGrabInteractable>();
-            ep.enableImpactCooldown();
+            ep.ImpactCooldown = true;
 
             // Get rigidbody and add force and torque
             Rigidbody p = projectileObject.GetComponent<Rigidbody>();
@@ -278,5 +278,10 @@ public class BattleshipEnemy : Enemy
     private void updateCannonPosition(Vector3 firingDirection)
     {
         GetComponentInChildren<CannonTurn>().setFiringDirection(firingDirection);
+    }
+
+    protected override void SetStartingHealth()
+    {
+        health = 40;
     }
 }

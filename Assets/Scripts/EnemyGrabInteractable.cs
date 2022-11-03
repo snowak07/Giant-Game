@@ -3,44 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class EnemyGrabInteractable : XRGrabInteractable
+public class EnemyGrabInteractable : GiantGrabInteractable
 {
-    void Start()
+    protected override void DisablePickup(SelectExitEventArgs args)
     {
-        selectEntered.AddListener(EnablePickup);
-        selectExited.AddListener(DisablePickup);
-    }
+        base.DisablePickup(args);
 
-    protected void DisablePickup(SelectExitEventArgs args)
-    {
-        Rigidbody body = GetComponent<Rigidbody>();
-        body.useGravity = false;
-
-        FlyingEnemy enemy = GetComponent<FlyingEnemy>(); // TODO make generic type
-        enemy.setIsSelected(false);
-
-        //Animator animation = GetComponent<Animator>(); // Disable animation on pickup?
-        //animation.enabled = true;
+        Enemy enemy = GetComponent<Enemy>();
+        enemy.IsPickedUp = false;
     }
 
     // Enable useGravity so that the Interactable can be moved with PhysicsHand while selected.
-    protected void EnablePickup(SelectEnterEventArgs args)
+    protected override void EnablePickup(SelectEnterEventArgs args)
     {
-        Rigidbody body = GetComponent<Rigidbody>();
-        body.useGravity = true;
-        body.isKinematic = false;
+        base.EnablePickup(args);
 
-        FlyingEnemy enemy = GetComponent<FlyingEnemy>(); // TODO make generic type
-        enemy.setIsSelected(true);
-
-        //Animator animation = GetComponent<Animator>(); // Disable animation on pickup?
-        //animation.enabled = false;
-    }
-
-    protected override void OnDisable()
-    {
-        base.OnDisable();
-        selectEntered.RemoveListener(EnablePickup);
-        selectExited.RemoveListener(DisablePickup);
+        Enemy enemy = GetComponent<Enemy>();
+        enemy.IsPickedUp = true;
     }
 }

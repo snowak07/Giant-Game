@@ -6,36 +6,43 @@ using UnityEngine.InputSystem;
 
 public class GiantGrabInteractable : XRGrabInteractable
 {
-    private bool impactCooldown = false;
+    public bool ImpactCooldown { get; set; }
+
+    private bool gravityEnabled;
 
     void Start()
     {
-        selectEntered.AddListener(EnableMovement);
+        // Disable XRGrabInteractable tracking because we handle it ourselves in GiantDirectInteractor
+        trackPosition = false;
+        trackRotation = false;
+
+        // Keep track of base gravity enabled state
+        gravityEnabled = GetComponent<Rigidbody>().useGravity;
+
+        selectEntered.AddListener(EnablePickup);
+        selectExited.AddListener(DisablePickup);
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        selectEntered.RemoveListener(EnablePickup);
+        selectExited.RemoveListener(DisablePickup);
     }
 
     // Disable isKinematic and enable useGravity so that the Interactable can be moved while selected.
-    protected void EnableMovement(SelectEnterEventArgs args)
+    protected virtual void EnablePickup(SelectEnterEventArgs args)
     {
-        impactCooldown = false;
+        ImpactCooldown = false;
 
         Rigidbody body = GetComponent<Rigidbody>();
         body.isKinematic = false;
         body.useGravity = true;
     }
 
-    protected override void OnDisable()
+    protected virtual void DisablePickup(SelectExitEventArgs args)
     {
-        base.OnDisable();
-        selectEntered.RemoveListener(EnableMovement);
-    }
-
-    public void enableImpactCooldown()
-    {
-        impactCooldown = true;
-    }
-
-    public bool impactCooldownEnabled()
-    {
-        return impactCooldown;
+        Rigidbody body = GetComponent<Rigidbody>();
+        body.useGravity = gravityEnabled;
     }
 }
