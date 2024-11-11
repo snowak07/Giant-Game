@@ -7,12 +7,12 @@ TagManager:
   - Shootable
   - Enemy
   - Interact
-  - GiantHand
   - Spawner
   - Water
   - Projectile
   - Ground
   - Hull
+  - Giant
   layers:
   - Default
   - TransparentFX
@@ -28,7 +28,7 @@ TagManager:
   - Enemy
   - Player
   - PlayerProjectile
-  - 
+  - PlayerBody
   - 
   - 
   - 

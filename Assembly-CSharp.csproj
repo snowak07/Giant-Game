@@ -56,6 +56,7 @@
     <Compile Include="Assets\Scripts\RayInteractorHandler.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\DecalDestroyer.cs" />
     <Compile Include="Assets\Scripts\OmniDirectionForcePullInteractor.cs" />
+    <Compile Include="Assets\Scripts\GiantBody.cs" />
     <Compile Include="Assets\Scripts\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\LineRendererSettings.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Ramps\Runtime\RampAsset.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Assets\Scripts\CannonTurn.cs" />
     <Compile Include="Assets\Scripts\BattleshipEnemy.cs" />
     <Compile Include="Assets\Scripts\Shockwave.cs" />
+    <Compile Include="Assets\Scripts\$PID.cs" />
     <Compile Include="Assets\Scripts\ImpactExplosion.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\GunAim.cs" />
     <Compile Include="Assets\Scripts\PushInteractor.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="Assets\Scripts\RayToggler.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\ProximityActivate.cs" />
     <Compile Include="Assets\Scripts\NewActionBasedXRController.cs" />
+    <Compile Include="Assets\Scripts\PIDTest.cs" />
     <Compile Include="Assets\Scripts\TestExplosion.cs" />
     <Compile Include="Assets\Scripts\SummonShield.cs" />
     <Compile Include="Assets\Scripts\GiantGrabInteractable.cs" />
@@ -100,11 +103,12 @@
     <Compile Include="Assets\Third Party Assets\EffectExamples\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\ParticleExamples.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
-    <Compile Include="Assets\GiantHandInteractor.cs" />
+    <Compile Include="Assets\Scripts\GiantHandInteractor.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\GunShoot.cs" />
     <Compile Include="Assets\Scripts\ReadRotation.cs" />
     <Compile Include="Assets\Scripts\ExplosionHandler.cs" />
     <Compile Include="Assets\Scripts\GrabDirectInteractor.cs" />
+    <Compile Include="Assets\Scripts\CreateBoulder.cs" />
     <Compile Include="Assets\Third Party Assets\IgniteCoders\Simple Water Shader\Resources\WaterReflection.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Misc Effects\Scripts\SpawnEffect.cs" />
     <Compile Include="Assets\Scripts\PunchThrow.cs" />

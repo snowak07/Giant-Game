@@ -252,9 +252,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce09757b336b27b479ded28525c7c293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoredDamageCollisionTags:
+  - Enemy
+  - Water
   playerTransform: {fileID: 0}
-  maxRandomizedOrbitRadius: 225
-  minRandonizedOrbitRadius: 175
+  playerBodyTransform: {fileID: 0}
+  health: 0
+  maxRandomizedOrbitRadius: 250
+  minRandonizedOrbitRadius: 200
   orbitRadiusStepSize: 0.1
   maxRotationalSpeed: 20
   maxTranslationalSpeed: 2

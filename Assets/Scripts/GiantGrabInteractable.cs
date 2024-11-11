@@ -45,4 +45,13 @@ public class GiantGrabInteractable : XRGrabInteractable
         Rigidbody body = GetComponent<Rigidbody>();
         body.useGravity = gravityEnabled;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // Destroy object 20 seconds after contact with water.
+        if (collision.gameObject.transform.root.tag == "Water")
+        {
+            Destroy(this, 20.0f);
+        }
+    }
 }

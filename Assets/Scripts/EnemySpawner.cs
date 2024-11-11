@@ -9,11 +9,12 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public Transform playerTransform = null;
+    public Transform playerBodyTransform = null;
 
-    public int maxHorizontalDistance;
-    public int minHorizontalDistance;
-    public int maxVerticalDistance;
-    public int minVerticalDistance;
+    public float maxHorizontalDistance;
+    public float minHorizontalDistance;
+    public float maxVerticalDistance;
+    public float minVerticalDistance;
     public float spawnCooldownTime = 10.0f;
     public GameObject EnemyPrefab = null;
 
@@ -48,7 +49,9 @@ public class EnemySpawner : MonoBehaviour
 
         // Instantiate Enemy prefab
         GameObject enemyObject = Instantiate(EnemyPrefab, spawnPosition, towardsPlayerRotation);
-        enemyObject.GetComponent<Enemy>().setPlayerTransform(playerTransform);
+        Enemy enemy = enemyObject.GetComponent<Enemy>();
+        enemy.setPlayerTransform(playerTransform);
+        enemy.setPlayerBodyTransform(playerBodyTransform);
 
         // Wait to end spawn cooldown
         yield return new WaitForSeconds(spawnCooldownTime);

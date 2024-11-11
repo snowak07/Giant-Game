@@ -7,7 +7,8 @@ using UnityEngine;
 public class GroundEnemy : Enemy
 {
     public float moveSpeedPerSecond = 1.0f;
-    public float attackRange = 0.5f;
+    public float attackRange = 1.5f;
+    public float projectileSpeed = 3.0f;
     public float velocityGetUpMovementThreshold = 0.05f;
 
     private bool knockedDown = false;
@@ -30,6 +31,16 @@ public class GroundEnemy : Enemy
             if ((targetPosition - transform.position).magnitude < attackRange)
             {
                 // Attack
+                Rigidbody body = GetComponent<Rigidbody>();
+
+                Vector3 projectileVector = calculateFiringDirection(transform.position, playerBodyTransform.position);
+
+                if (projectileVector != Vector3.zero)
+                {
+                    body.AddForce(projectileVector - body.velocity, ForceMode.VelocityChange);
+
+                    knockedDown = true;
+                }
             }
             else
             {
@@ -56,11 +67,9 @@ public class GroundEnemy : Enemy
 
     protected override void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("GroundEnemy collision: " + collision.transform.tag);
         // Disable movement until
-        if (collision.transform.tag == "Player" || collision.transform.root.TryGetComponent(out Shockwave shockwave) || (collision.transform.root.TryGetComponent(out GiantGrabInteractable interactable) && !interactable.ImpactCooldown))
+        if (collision.transform.tag == "Giant" || collision.transform.root.TryGetComponent(out Shockwave shockwave) || (collision.transform.root.TryGetComponent(out GiantGrabInteractable interactable) && !interactable.ImpactCooldown))
         {
-            Debug.Log("GroundEnemy knocked down");
             knockedDown = true;
         }
 
@@ -82,5 +91,77 @@ public class GroundEnemy : Enemy
     protected override void SetStartingHealth()
     {
         health = 10;
+    }
+
+    public Vector3 calculateFiringDirection(Vector3 firingPosition, Vector3 firingTargetLocation)
+    {
+        float t = calculateTimeToImpact(firingPosition, firingTargetLocation);
+
+        if (t != float.PositiveInfinity)
+        {
+            Vector3 directDistanceVector = firingTargetLocation - firingPosition;
+
+            float y = (directDistanceVector.y + (0.5f * Mathf.Abs(Physics.gravity.y) * Mathf.Pow(t, 2))) / t;
+            float x = directDistanceVector.x / t;
+            float z = directDistanceVector.z / t;
+
+            Vector3 projectileVector = new Vector3(x, y, z);
+            return projectileVector;
+        }
+        else
+        {
+            return Vector3.zero;
+        }
+    }
+
+    private float calculateTimeToImpact(Vector3 firingPosition, Vector3 firingTargetLocation)
+    {
+        float t1 = calculateTimeToImpact1(firingPosition, firingTargetLocation);
+        float t2 = -t1;
+        float t3 = calculateTimeToImpact2(firingPosition, firingTargetLocation);
+        float t4 = -t3;
+
+        float t = float.PositiveInfinity;
+        if (!float.IsNaN(t1) && t1 > 0 && t1 < t)
+        {
+            t = t1;
+        }
+
+        if (!float.IsNaN(t2) && t2 > 0 && t2 < t)
+        {
+            t = t2;
+        }
+
+        if (!float.IsNaN(t3) && t3 > 0 && t3 < t)
+        {
+            t = t3;
+        }
+
+        if (!float.IsNaN(t4) && t4 > 0 && t4 < t)
+        {
+            t = t4;
+        }
+
+        return t;
+    }
+
+    private float calculateTimeToImpact1(Vector3 firingPosition, Vector3 firingTargetLocation)
+    {
+        float y = firingTargetLocation.y - firingPosition.y;
+        Vector3 horizontal = firingTargetLocation - firingPosition;
+        horizontal.y = 0;
+        float xz = horizontal.magnitude;
+
+        return Mathf.Sqrt(2 * (Mathf.Pow(projectileSpeed, 2) + Mathf.Sqrt(Mathf.Pow(projectileSpeed, 4) - 2 * Mathf.Pow(projectileSpeed, 2) * y * Physics.gravity.y - Mathf.Pow(xz * Physics.gravity.y, 2)) - y * Physics.gravity.y)) / Physics.gravity.y;
+    }
+
+    private float calculateTimeToImpact2(Vector3 firingPosition, Vector3 firingTargetLocation)
+    {
+        float y = firingTargetLocation.y - firingPosition.y;
+        Vector3 horizontal = firingTargetLocation - firingPosition;
+        horizontal.y = 0;
+        float xz = horizontal.magnitude;
+
+        return Mathf.Sqrt(2 * (Mathf.Pow(projectileSpeed, 2) - Mathf.Sqrt(Mathf.Pow(projectileSpeed, 4) - 2 * Mathf.Pow(projectileSpeed, 2) * y * Physics.gravity.y - Mathf.Pow(xz * Physics.gravity.y, 2)) - y * Physics.gravity.y)) / Physics.gravity.y;
     }
 }

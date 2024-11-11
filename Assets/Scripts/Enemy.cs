@@ -8,6 +8,7 @@ public abstract class Enemy : MonoBehaviour
 {
     public string[] ignoredDamageCollisionTags = { "Enemy", "Water" };
     public Transform playerTransform = null;
+    public Transform playerBodyTransform = null;
     public float health;
 
     public bool IsPickedUp { get; set; }
@@ -85,7 +86,6 @@ public abstract class Enemy : MonoBehaviour
      */
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Enemy damage dealt: " + collision.impulse.magnitude);
         if (!isKilled && !ignoredDamageCollisionTags.Contains(collision.transform.root.gameObject.tag))
         {
             if (collision.transform.TryGetComponent(out GiantGrabInteractable forceGrabPullInteractable))
@@ -131,6 +131,18 @@ public abstract class Enemy : MonoBehaviour
         DismantleEnemy();
 
         Destroy(gameObject, 60); // Destroy parent object and any remaining children
+    }
+
+    /**
+     * Set player body transform so enemies can react to the player's body position
+     * 
+     * @param pbTransform    transform of the player's body
+     * 
+     * @return void
+     */
+    public void setPlayerBodyTransform(Transform pbTransform)
+    {
+        playerBodyTransform = pbTransform;
     }
 
     /**
