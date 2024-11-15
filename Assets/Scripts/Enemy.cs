@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using System.Linq;
+using Unity.VisualScripting;
 
 public abstract class Enemy : MonoBehaviour
 {
@@ -47,34 +48,32 @@ public abstract class Enemy : MonoBehaviour
      *  
      *  @return List<GameObject>    Return List of gameobjects so child functions can manipulate objects in their own ways
      */
-    protected virtual List<GameObject> DismantleEnemy()
+    protected virtual void DismantleEnemy(List<GameObject> children)
     {
+        print("children: " + children.Count);
         // Separate each enemy piece that is visible (rendered)
-        MeshRenderer[] childMeshes = GetComponentsInChildren<MeshRenderer>();
-        List<GameObject> childObjects = new List<GameObject>();
-        foreach (var childMesh in childMeshes) // Get each subobject that has a mesh renderer and set its parent transform to null
+        foreach (var childObject in children) // Get each subobject that has a mesh renderer and set its parent transform to null
         {
-            GameObject childObject = childMesh.gameObject;
-            childObject.transform.parent = null; // Detach enemy part
-
-            Rigidbody childBody;
-            if (!childObject.TryGetComponent(out childBody))
+            if (childObject.TryGetComponent(out MeshRenderer mesh))
             {
-                childBody = childObject.AddComponent<Rigidbody>();
+                print("found mesh");
+                childObject.transform.parent = null; // Detach enemy part
+
+                Rigidbody childBody;
+                if (!childObject.TryGetComponent(out childBody))
+                {
+                    childBody = childObject.AddComponent<Rigidbody>();
+                }
+
+                if (!childObject.TryGetComponent(out Collider collider))
+                {
+                    childObject.AddComponent<BoxCollider>();
+                }
+                print("explosion");
+                // Add small explosion force to separate the objects on death
+                childBody.AddExplosionForce(200.0f, transform.position, 3.0f, 3.0f);
             }
-
-            if (!childObject.TryGetComponent(out Collider collider))
-            {
-                childObject.AddComponent<BoxCollider>();
-            }
-
-            // Add small explosion force to separate the objects on death
-            childBody.AddExplosionForce(200.0f, transform.position, 3.0f, 3.0f);
-
-            childObjects.Add(childObject);
         }
-
-        return childObjects; // Return childObjects so that child functions can act on them.
     }
 
     /**
@@ -82,11 +81,11 @@ public abstract class Enemy : MonoBehaviour
      * 
      * @return IEnumerator
      */
-    IEnumerator EnableSink(List<GameObject> objects)
+    IEnumerator EnableSink(List<GameObject> children)
     {
         yield return new WaitForSeconds(0.1f);
 
-        foreach (var childObject in objects)
+        foreach (var childObject in children)
         {
             Sinkable sinkable = childObject.AddComponent<Sinkable>();
             sinkable.EnableSink();
@@ -133,7 +132,7 @@ public abstract class Enemy : MonoBehaviour
      */
     public virtual void Kill()
     {
-        alive = false;
+        alive = false; // FIXME: is this used anywhere? Parent object gets destroyed right after.
 
         // Increment score
         ScoreManager.Add();
@@ -145,10 +144,26 @@ public abstract class Enemy : MonoBehaviour
 
         GetComponent<Rigidbody>().useGravity = true;
 
-        Destroy(gameObject, 60); // Destroy parent object and any remaining children
+        Transform[] children = gameObject.GetComponentsInChildren<Transform>();
+        List<GameObject> childObjects = new List<GameObject>();
+        foreach (var child in children)
+        {
+            if (!child.TryGetComponent(out MeshRenderer mesh))
+            {
+                // Destroy all non-visible objects
+                print("Destroying: " + child.gameObject.name);
+                Destroy(child.gameObject, 5);
+            }
+            else
+            {
+                childObjects.Add(child.gameObject);
+            }
+        }
 
-        List<GameObject> childObjects = DismantleEnemy();
+        DismantleEnemy(childObjects);
         StartCoroutine(EnableSink(childObjects));
+
+        //Destroy(gameObject, 5); // Destroy parent object
     }
 
     /**

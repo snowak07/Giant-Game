@@ -8,7 +8,7 @@ public class Sinkable : MonoBehaviour
 {
     public bool sinkEnabled = false;
 
-    private bool sinking = false;
+    public bool sinking = false;
     private float sinkingSpeed = 0.002f;
     private float settledVelocityThreshold = 0.01f;
     private float settledAngularVelocityThreshold = 0.005f;
@@ -38,9 +38,7 @@ public class Sinkable : MonoBehaviour
 
         if (sinking)
         {
-            //Rigidbody body = GetComponent<Rigidbody>();
             Vector3 newPosition = new Vector3(transform.position.x, transform.position.y - sinkingSpeed, transform.position.z);
-            //body.MovePosition(newPosition);
             transform.position = newPosition;
         }
     }
@@ -48,6 +46,7 @@ public class Sinkable : MonoBehaviour
     public void EnableSink()
     {
         sinkEnabled = true;
+        Destroy(gameObject, 30); // Failsafe incase the object never settles
     }
 
     protected bool IsSettled(Rigidbody body)

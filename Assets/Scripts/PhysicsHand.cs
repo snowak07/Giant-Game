@@ -35,15 +35,15 @@ public class PhysicsHand : MonoBehaviour
 
         if (distance > minTeleportDistance) // FIXME: Will want to check that the hand isn't carrying anything first before the hand gets teleported away
         {
-            Debug.Log("Distance: " + distance);
-            Debug.Log("teleporting hand to controller");
+            //Debug.Log("Distance: " + distance);
+            //Debug.Log("teleporting hand to controller");
             transform.position = trackedTransform.position;
         }
         else
         {
             //var vel = (lerpTrackedTransformPosition - body.position) * positionStrength; // Scales linearly with scale. Should have an exponential increase the farther away the hand is. (relative distance vector) * (speed per unit length)
             var vel = (lerpTrackedTransformPosition - body.position) * positionStrength * Mathf.Pow(1 + distance, distance);
-            Debug.Log("Exponential factor: " + Mathf.Pow(1 + distance, distance));
+            //Debug.Log("Exponential factor: " + Mathf.Pow(1 + distance, distance));
             body.linearVelocity = vel;
         }
     }
