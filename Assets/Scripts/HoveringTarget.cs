@@ -36,8 +36,8 @@ public class HoveringTarget : MonoBehaviour
     {
         if (oscillateEnabled)
         {
-            Vector3 targetTopBound = startPosition + new Vector3(0, initialPositionOffset, 0);
-            Vector3 targetBottomBound = startPosition + new Vector3(0, -initialPositionOffset, 0);
+            //Vector3 targetTopBound = startPosition + new Vector3(0, initialPositionOffset, 0); // FIXME: Delete. Not used?
+            //Vector3 targetBottomBound = startPosition + new Vector3(0, -initialPositionOffset, 0);
 
             if (transform.position.y >= startPosition.y)
             {

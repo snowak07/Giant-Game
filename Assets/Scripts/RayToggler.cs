@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.XR.Interaction.Toolkit;
 
-[RequireComponent(typeof(XRRayInteractor))]
+
+[RequireComponent(typeof(UnityEngine.XR.Interaction.Toolkit.Interactors.XRRayInteractor))]
 public class RayToggler : MonoBehaviour
 {
     [SerializeField] private InputActionReference activateReference = null;
 
-    private XRRayInteractor rayInteractor = null;
+    private UnityEngine.XR.Interaction.Toolkit.Interactors.XRRayInteractor rayInteractor = null;
     private bool isEnabled = false;
 
     private void Awake()
     {
-        rayInteractor = GetComponent<XRRayInteractor>();
+        rayInteractor = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactors.XRRayInteractor>();
     }
 
     private void OnEnable()

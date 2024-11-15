@@ -13,7 +13,7 @@ public abstract class Enemy : MonoBehaviour
 
     public bool IsPickedUp { get; set; }
 
-    protected bool isKilled = false;
+    protected bool alive = true;
 
     /**
      * Handle when enemy is first created
@@ -36,7 +36,7 @@ public abstract class Enemy : MonoBehaviour
      */
     protected void FixedUpdate()
     {
-        if (!IsPickedUp && !isKilled)
+        if (!IsPickedUp && alive)
         {
             UpdateEnemy();
         }
@@ -78,6 +78,22 @@ public abstract class Enemy : MonoBehaviour
     }
 
     /**
+     * Disable collisions and velocity of objects, slowly sink downward and destroy after some time.
+     * 
+     * @return IEnumerator
+     */
+    IEnumerator EnableSink(List<GameObject> objects)
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        foreach (var childObject in objects)
+        {
+            Sinkable sinkable = childObject.AddComponent<Sinkable>();
+            sinkable.EnableSink();
+        }
+    }
+
+    /**
      *  Handle colliding with objects that could potentially kill the enemy.
      *  
      *  @param collision    collision that can do damage to enemy
@@ -86,7 +102,7 @@ public abstract class Enemy : MonoBehaviour
      */
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        if (!isKilled && !ignoredDamageCollisionTags.Contains(collision.transform.root.gameObject.tag))
+        if (alive && !ignoredDamageCollisionTags.Contains(collision.transform.root.gameObject.tag))
         {
             if (collision.transform.TryGetComponent(out GiantGrabInteractable forceGrabPullInteractable))
             {
@@ -117,7 +133,7 @@ public abstract class Enemy : MonoBehaviour
      */
     public virtual void Kill()
     {
-        isKilled = true;
+        alive = false;
 
         // Increment score
         ScoreManager.Add();
@@ -128,9 +144,11 @@ public abstract class Enemy : MonoBehaviour
         }
 
         GetComponent<Rigidbody>().useGravity = true;
-        DismantleEnemy();
 
         Destroy(gameObject, 60); // Destroy parent object and any remaining children
+
+        List<GameObject> childObjects = DismantleEnemy();
+        StartCoroutine(EnableSink(childObjects));
     }
 
     /**

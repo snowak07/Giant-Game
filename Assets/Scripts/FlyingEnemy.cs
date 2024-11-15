@@ -60,7 +60,7 @@ public class FlyingEnemy : Enemy
             enteredRange = false;
         }
 
-        if (!isKilled && playerTransform != null && !isSelected)
+        if (alive && playerTransform != null && !isSelected)
         {
             bool inRange = (playerTransform.position - transform.position).magnitude < maxRange;
             if (!inRange && !enteredRange) // Make the FlyingEnemy move towards the player before flying around them at a constant orbitSpeed.
@@ -159,7 +159,7 @@ public class FlyingEnemy : Enemy
 
         Vector3 projectileVector = new Vector3(directDistanceVector.x, y, directDistanceVector.z);
 
-        p.AddForce(projectileVector - p.velocity, ForceMode.VelocityChange);
+        p.AddForce(projectileVector - p.linearVelocity, ForceMode.VelocityChange);
     }
 
     IEnumerator ShootProjectileAtPlayer()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BattleshipEnemy : Enemy
 {
@@ -41,12 +42,12 @@ public class BattleshipEnemy : Enemy
     protected override void UpdateEnemy()
     {
         // Check if boat has tipped over and is in water
-        if (!isKilled && inWater && ((transform.rotation.eulerAngles.x > 90 && transform.rotation.eulerAngles.x < 270) || (transform.rotation.eulerAngles.z > 90 && transform.rotation.eulerAngles.z < 270)))
+        if (alive && inWater && ((transform.rotation.eulerAngles.x > 90 && transform.rotation.eulerAngles.x < 270) || (transform.rotation.eulerAngles.z > 90 && transform.rotation.eulerAngles.z < 270)))
         {
             Kill();
         }
 
-        if (!isKilled && playerTransform != null)
+        if (alive && playerTransform != null)
         {
             Vector3 currentPathPosition = (transform.position - playerTransform.position).normalized * orbitRadius; // Assumes that the center is playerTransform
             float timeCountCurrent = Mathf.Atan2(currentPathPosition.z, currentPathPosition.x);
@@ -70,7 +71,7 @@ public class BattleshipEnemy : Enemy
             StartCoroutine(ShootProjectileAtPlayer());
         }
 
-        if (isKilled && EnemySettled(GetComponent<Rigidbody>()))
+        if (!alive && EnemySettled(GetComponent<Rigidbody>()))
         {
             isSinking = true;
         }
@@ -84,7 +85,7 @@ public class BattleshipEnemy : Enemy
             }
 
             Rigidbody body = GetComponent<Rigidbody>();
-            body.velocity = new Vector3(0, 0, 0);
+            body.linearVelocity = new Vector3(0, 0, 0);
             body.angularVelocity = new Vector3(0, 0, 0);
             body.useGravity = false;
 
@@ -93,28 +94,28 @@ public class BattleshipEnemy : Enemy
         }
     }
 
-    protected override List<GameObject> DismantleEnemy()
-    {
-        List<GameObject> childObjects = base.DismantleEnemy();
+    //protected override List<GameObject> DismantleEnemy()
+    //{
+    //    List<GameObject> childObjects = base.DismantleEnemy();
         
-        StartCoroutine(EnableSink(childObjects));
-        return childObjects;
-    }
+    //    StartCoroutine(EnableSink(childObjects));
+    //    return childObjects;
+    //}
 
-    IEnumerator EnableSink(List<GameObject> objects)
-    {
-        yield return new WaitForSeconds(0.1f);
+    //IEnumerator EnableSink(List<GameObject> objects)
+    //{
+    //    yield return new WaitForSeconds(0.1f);
 
-        foreach (var childObject in objects)
-        {
-            Sinkable sinkable = childObject.AddComponent<Sinkable>();
-            sinkable.EnableSink();
-        }
-    }
+    //    foreach (var childObject in objects)
+    //    {
+    //        Sinkable sinkable = childObject.AddComponent<Sinkable>();
+    //        sinkable.EnableSink();
+    //    }
+    //}
 
     protected bool EnemySettled(Rigidbody body)
     {
-        if (body.velocity.magnitude < settledVelocityThreshold && body.angularVelocity.magnitude < settledAngularVelocityThreshold)
+        if (body.linearVelocity.magnitude < settledVelocityThreshold && body.angularVelocity.magnitude < settledAngularVelocityThreshold)
         {
             return true;
         }
@@ -179,7 +180,7 @@ public class BattleshipEnemy : Enemy
 
             // Get rigidbody and add force and torque
             Rigidbody p = projectileObject.GetComponent<Rigidbody>();
-            p.AddForce(projectileVector - p.velocity, ForceMode.VelocityChange);
+            p.AddForce(projectileVector - p.linearVelocity, ForceMode.VelocityChange);
             p.AddTorque(Random.insideUnitSphere * 3.0f);
         }
     }

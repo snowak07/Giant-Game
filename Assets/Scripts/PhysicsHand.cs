@@ -44,7 +44,7 @@ public class PhysicsHand : MonoBehaviour
             //var vel = (lerpTrackedTransformPosition - body.position) * positionStrength; // Scales linearly with scale. Should have an exponential increase the farther away the hand is. (relative distance vector) * (speed per unit length)
             var vel = (lerpTrackedTransformPosition - body.position) * positionStrength * Mathf.Pow(1 + distance, distance);
             Debug.Log("Exponential factor: " + Mathf.Pow(1 + distance, distance));
-            body.velocity = vel;
+            body.linearVelocity = vel;
         }
     }
 

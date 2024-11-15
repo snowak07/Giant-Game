@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 // Handle hands colliding with interactables and connecting a joint to them on select activated.
-public class GrabDirectInteractor : XRDirectInteractor
+public class GrabDirectInteractor : UnityEngine.XR.Interaction.Toolkit.Interactors.XRDirectInteractor
 {
     public float massScaling = 1.0f;
 
@@ -18,9 +18,9 @@ public class GrabDirectInteractor : XRDirectInteractor
 
     protected void AttachBody(SelectEnterEventArgs args)
     {
-        List<IXRInteractable> targets = new List<IXRInteractable>();
+        List<UnityEngine.XR.Interaction.Toolkit.Interactables.IXRInteractable> targets = new List<UnityEngine.XR.Interaction.Toolkit.Interactables.IXRInteractable>();
         GetValidTargets(targets);
-        foreach (IXRInteractable interactable in targets)
+        foreach (UnityEngine.XR.Interaction.Toolkit.Interactables.IXRInteractable interactable in targets)
         {
             AttachJoint(interactable.colliders[0].attachedRigidbody);
         }

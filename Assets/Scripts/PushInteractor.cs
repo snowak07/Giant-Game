@@ -21,7 +21,7 @@ public class PushInteractor : MonoBehaviour
             pastVelocities.RemoveAt(49);
         }
 
-        pastVelocities.Add(r_interactor.velocity);
+        pastVelocities.Add(r_interactor.linearVelocity);
     }
 
     private void OnCollisionExit(Collision collision)

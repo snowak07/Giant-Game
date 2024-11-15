@@ -16,7 +16,7 @@ public class PushInteractable : MonoBehaviour
     {
         if (collision.rigidbody != null)
         {
-            Vector3 otherColliderVelocity = collision.rigidbody.velocity;
+            Vector3 otherColliderVelocity = collision.rigidbody.linearVelocity;
             r_interactable.AddForce(otherColliderVelocity, ForceMode.VelocityChange);
         }
     }

@@ -33,6 +33,6 @@ public class OmniDirectionForcePullInteractor : MonoBehaviour
         
         Vector3 projectileVector = new Vector3(directDistanceVector.x, y, directDistanceVector.z);
         
-        r_forcePullObject.AddForce(projectileVector - r_forcePullObject.velocity, ForceMode.VelocityChange);
+        r_forcePullObject.AddForce(projectileVector - r_forcePullObject.linearVelocity, ForceMode.VelocityChange);
     }
 }

@@ -37,7 +37,7 @@ public class GroundEnemy : Enemy
 
                 if (projectileVector != Vector3.zero)
                 {
-                    body.AddForce(projectileVector - body.velocity, ForceMode.VelocityChange);
+                    body.AddForce(projectileVector - body.linearVelocity, ForceMode.VelocityChange);
 
                     knockedDown = true;
                 }
@@ -80,7 +80,7 @@ public class GroundEnemy : Enemy
     {
         Rigidbody body = GetComponent<Rigidbody>();
 
-        if (body.velocity.magnitude < velocityGetUpMovementThreshold)
+        if (body.linearVelocity.magnitude < velocityGetUpMovementThreshold)
         {
             return true;
         }
