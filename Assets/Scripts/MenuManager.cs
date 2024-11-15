@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
@@ -18,21 +19,22 @@ public class MenuManager : MonoBehaviour
 
     public void Restart()
     {
-        // Stop all spawners
-        GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
-        foreach (GameObject spawner in spawners)
-        {
-            spawner.GetComponent<EnemySpawner>().enabled = true;
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //// Stop all spawners
+        //GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
+        //foreach (GameObject spawner in spawners)
+        //{
+        //    spawner.GetComponent<EnemySpawner>().enabled = true;
+        //}
 
-        // Show Menu
-        menu.enabled = false;
+        //// Show Menu
+        //menu.enabled = false;
 
-        // Enable Ray Interactor
-        rayInteractorHandler.DisableComponents();
+        //// Enable Ray Interactor
+        //rayInteractorHandler.DisableComponents();
 
-        // Reset score
-        ScoreManager.Reset();
+        //// Reset score
+        //ScoreManager.Reset();
     }
 
     public void ShowEndScreen(Vector3 menuPosition, Quaternion menuRotation)

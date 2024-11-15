@@ -94,25 +94,6 @@ public class BattleshipEnemy : Enemy
         }
     }
 
-    //protected override List<GameObject> DismantleEnemy()
-    //{
-    //    List<GameObject> childObjects = base.DismantleEnemy();
-        
-    //    StartCoroutine(EnableSink(childObjects));
-    //    return childObjects;
-    //}
-
-    //IEnumerator EnableSink(List<GameObject> objects)
-    //{
-    //    yield return new WaitForSeconds(0.1f);
-
-    //    foreach (var childObject in objects)
-    //    {
-    //        Sinkable sinkable = childObject.AddComponent<Sinkable>();
-    //        sinkable.EnableSink();
-    //    }
-    //}
-
     protected bool EnemySettled(Rigidbody body)
     {
         if (body.linearVelocity.magnitude < settledVelocityThreshold && body.angularVelocity.magnitude < settledAngularVelocityThreshold)
