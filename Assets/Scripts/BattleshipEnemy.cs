@@ -209,6 +209,7 @@ public class BattleshipEnemy : Enemy
         // Set battleship death explosion force
         explosionForce = 1000.0f;
         explosionRadius = 10.0f;
+        upwardsExplosionModifier = 2.0f;
 
         // Determine random orbit radius that will determine the "desired" path.
         orbitRadius = orbitRadiusStepSize * Random.Range(minRandonizedOrbitRadius, maxRandomizedOrbitRadius);

@@ -17,6 +17,7 @@ public abstract class Enemy : MonoBehaviour
     protected bool alive = true;
     protected float explosionForce = 200.0f;
     protected float explosionRadius = 3.0f;
+    protected float upwardsExplosionModifier = 3.0f;
 
     /**
      * Handle when enemy is first created
@@ -71,7 +72,7 @@ public abstract class Enemy : MonoBehaviour
                 }
                 
                 // Add small explosion force to separate the objects on death
-                childBody.AddExplosionForce(explosionForce, transform.position, explosionRadius, 3.0f, ForceMode.Force);
+                childBody.AddExplosionForce(explosionForce, transform.position, explosionRadius, upwardsExplosionModifier, ForceMode.Force);
             }
         }
     }

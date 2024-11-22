@@ -5291,7 +5291,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_PhysicsTriggerInteraction: 1
-  massScaling: 0.1
+  massScaling: 0.25
 --- !u!114 &639831472
 MonoBehaviour:
   m_ObjectHideFlags: 0
