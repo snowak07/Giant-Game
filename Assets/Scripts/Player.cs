@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
 
     private void EndGame()
     {
-        // Destroy all Enemies
+        // Destroy all Enemies // NOTE: This is accomplished in the Menu Manager
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemies)
         {

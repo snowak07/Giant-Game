@@ -15,6 +15,8 @@ public abstract class Enemy : MonoBehaviour
     public bool IsPickedUp { get; set; }
 
     protected bool alive = true;
+    protected float explosionForce = 200.0f;
+    protected float explosionRadius = 3.0f;
 
     /**
      * Handle when enemy is first created
@@ -50,13 +52,11 @@ public abstract class Enemy : MonoBehaviour
      */
     protected virtual void DismantleEnemy(List<GameObject> children)
     {
-        print("children: " + children.Count);
         // Separate each enemy piece that is visible (rendered)
         foreach (var childObject in children) // Get each subobject that has a mesh renderer and set its parent transform to null
         {
             if (childObject.TryGetComponent(out MeshRenderer mesh))
             {
-                print("found mesh");
                 childObject.transform.parent = null; // Detach enemy part
 
                 Rigidbody childBody;
@@ -67,11 +67,11 @@ public abstract class Enemy : MonoBehaviour
 
                 if (!childObject.TryGetComponent(out Collider collider))
                 {
-                    childObject.AddComponent<BoxCollider>();
+                   collider = childObject.AddComponent<BoxCollider>();
                 }
-                print("explosion");
+                
                 // Add small explosion force to separate the objects on death
-                childBody.AddExplosionForce(200.0f, transform.position, 3.0f, 3.0f);
+                childBody.AddExplosionForce(explosionForce, transform.position, explosionRadius, 3.0f, ForceMode.Force);
             }
         }
     }
@@ -117,9 +117,16 @@ public abstract class Enemy : MonoBehaviour
             {
                 health -= collision.impulse.magnitude;
             }
-             
+
             if (health <= 0)
             {
+                // Disable collision between the killing object and the enemy
+                Collider[] colliders = GetComponentsInChildren<Collider>();
+                foreach (var childCollider in colliders)
+                {
+                    Physics.IgnoreCollision(childCollider, collision.collider);
+                }
+
                 Kill();
             }
         }
@@ -151,7 +158,6 @@ public abstract class Enemy : MonoBehaviour
             if (!child.TryGetComponent(out MeshRenderer mesh))
             {
                 // Destroy all non-visible objects
-                print("Destroying: " + child.gameObject.name);
                 Destroy(child.gameObject, 5);
             }
             else

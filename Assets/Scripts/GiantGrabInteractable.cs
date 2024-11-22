@@ -44,6 +44,12 @@ public class GiantGrabInteractable : UnityEngine.XR.Interaction.Toolkit.Interact
     {
         Rigidbody body = GetComponent<Rigidbody>();
         body.useGravity = gravityEnabled;
+
+        Sinkable sinkable;
+        if (TryGetComponent<Sinkable>(out sinkable))
+        {
+            sinkable.EnableSink();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

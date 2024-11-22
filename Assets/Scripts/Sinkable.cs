@@ -6,9 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Sinkable : MonoBehaviour
 {
-    public bool sinkEnabled = false;
-
-    public bool sinking = false;
+    private bool sinkEnabled = false;
+    private bool sinking = false;
     private float sinkingSpeed = 0.002f;
     private float settledVelocityThreshold = 0.01f;
     private float settledAngularVelocityThreshold = 0.005f;
