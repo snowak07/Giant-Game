@@ -30,7 +30,7 @@ public class PhysicsHand : MonoBehaviour
 
     void SetPosition()
     {
-        Vector3 lerpTrackedTransformPosition = Vector3.LerpUnclamped(transform.position, trackedTransform.position, positionSpeed * Time.deltaTime);
+        Vector3 lerpTrackedTransformPosition = Vector3.Lerp(transform.position, trackedTransform.position, positionSpeed * Time.deltaTime);
         float distance = Vector3.Distance(lerpTrackedTransformPosition, body.position);
 
         if (distance > minTeleportDistance) // FIXME: Will want to check that the hand isn't carrying anything first before the hand gets teleported away
@@ -41,9 +41,7 @@ public class PhysicsHand : MonoBehaviour
         }
         else
         {
-            //var vel = (lerpTrackedTransformPosition - body.position) * positionStrength; // Scales linearly with scale. Should have an exponential increase the farther away the hand is. (relative distance vector) * (speed per unit length)
-            var vel = (lerpTrackedTransformPosition - body.position) * positionStrength * Mathf.Pow(1 + distance, distance);
-            //Debug.Log("Exponential factor: " + Mathf.Pow(1 + distance, distance));
+            var vel = (lerpTrackedTransformPosition - body.position) * positionStrength * Mathf.Pow(1 + distance, distance); // Hand gets exponentially faster the further away it is.
             body.linearVelocity = vel;
         }
     }
@@ -162,6 +160,14 @@ public class PhysicsHand : MonoBehaviour
         torque = body.rotation * torque;
 
         //Debug.Log("torque: " + torque + ", newTorque: " + newTorque);
+
+        // Determine if there are attached objects (joints) and multiply torque based on the mass of the attached object
+        // in order to offset the unwieldyness of handling the additional mass.
+        float torqueModifier = 1.0f;
+        if (gameObject.TryGetComponent<FixedJoint>(out FixedJoint joint))
+        {
+            torqueModifier = 3 * joint.connectedBody.mass;
+        }
 
         body.angularVelocity = Vector3.zero; // TODO caculate new torque based on current angularVelocity
         body.AddTorque(torque, ForceMode.VelocityChange);
