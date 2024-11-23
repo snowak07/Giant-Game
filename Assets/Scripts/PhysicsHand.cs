@@ -161,13 +161,17 @@ public class PhysicsHand : MonoBehaviour
 
         //Debug.Log("torque: " + torque + ", newTorque: " + newTorque);
 
-        // Determine if there are attached objects (joints) and multiply torque based on the mass of the attached object
-        // in order to offset the unwieldyness of handling the additional mass.
-        float torqueModifier = 1.0f;
-        if (gameObject.TryGetComponent<FixedJoint>(out FixedJoint joint))
+        /////// This should maybe be a separate class or at least a separate function.////////
+        // Determine if there are attached objects (joints) and apply the same torque to those objects in order
+        // to offset the unwieldyness of handling the additional mass.
+        FixedJoint[] heldObjectJoints = GetComponents<FixedJoint>();
+        foreach (FixedJoint joint in heldObjectJoints)
         {
-            torqueModifier = 3 * joint.connectedBody.mass;
+            // Add torque to Joints
+            joint.connectedBody.angularVelocity = Vector3.zero;
+            joint.connectedBody.AddTorque(torque, ForceMode.VelocityChange);
         }
+        /////////////////////////////////////////////////////////////////////////////////////
 
         body.angularVelocity = Vector3.zero; // TODO caculate new torque based on current angularVelocity
         body.AddTorque(torque, ForceMode.VelocityChange);
