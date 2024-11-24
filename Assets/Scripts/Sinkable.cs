@@ -23,8 +23,11 @@ public class Sinkable : MonoBehaviour
             Destroy(gameObject, 15);
 
             // Disable all collisions
-            Collider collider = GetComponent<Collider>();
-            collider.enabled = false;
+            Collider[] colliders = GetComponentsInChildren<Collider>();
+            foreach (Collider collider in colliders)
+            {
+                collider.enabled = false;
+            }
 
             // Set velocity to 0 and disable gravity since we are controlling its downward movement manually
             Rigidbody body = GetComponent<Rigidbody>();

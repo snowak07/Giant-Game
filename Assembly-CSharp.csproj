@@ -98,6 +98,7 @@
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\GunShoot.cs" />
     <Compile Include="Assets\Scripts\FlyingEnemy.cs" />
     <Compile Include="Assets\Third Party Assets\IgniteCoders\Simple Water Shader\Resources\WaterReflection.cs" />
+    <Compile Include="Assets\Scripts\TreeSpear.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\SimpleCharacterMotor.cs" />
     <Compile Include="Assets\Scripts\ParticleEffectDestroy.cs" />
     <Compile Include="Assets\Third Party Assets\PeerPlay\Ripple Water\_scripts\CollisionScript.cs" />

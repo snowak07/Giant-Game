@@ -52,7 +52,7 @@ public class GiantGrabInteractable : UnityEngine.XR.Interaction.Toolkit.Interact
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         // Destroy object 20 seconds after contact with water.
         if (collision.gameObject.transform.root.tag == "Water")
