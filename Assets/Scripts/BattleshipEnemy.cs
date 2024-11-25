@@ -47,6 +47,7 @@ public class BattleshipEnemy : Enemy
         }
     }
 
+    // TODO: Move to helper class
     private float CalculateTimeToImpact(Vector3 firingPosition)
     {
         float t1 = CalculateTimeToImpact1(firingPosition);
@@ -78,6 +79,7 @@ public class BattleshipEnemy : Enemy
         return t;
     }
 
+    // TODO: Move to helper class
     private float CalculateTimeToImpact1(Vector3 firingPosition)
     {
         float y = playerTransform.position.y - firingPosition.y;
@@ -88,6 +90,7 @@ public class BattleshipEnemy : Enemy
         return Mathf.Sqrt(2 * (Mathf.Pow(projectileSpeed, 2) + Mathf.Sqrt(Mathf.Pow(projectileSpeed, 4) - 2 * Mathf.Pow(projectileSpeed, 2) * y * Physics.gravity.y - Mathf.Pow(xz * Physics.gravity.y, 2)) - y * Physics.gravity.y)) / Physics.gravity.y;
     }
 
+    // TODO: Move to helper class
     private float CalculateTimeToImpact2(Vector3 firingPosition)
     {
         float y = playerTransform.position.y - firingPosition.y;
@@ -102,25 +105,21 @@ public class BattleshipEnemy : Enemy
     {
         // Find "Hull" child object
         int i = 0;
-        GameObject hull = null;
         while (i < transform.childCount)
         {
             GameObject child = transform.GetChild(i++).gameObject;
             if (child.transform.tag == "Hull")
             {
-                hull = child;
-            }
-        }
+                // Add heavier weight to the shattered Hull piece
+                Rigidbody body;
+                if (!child.TryGetComponent(out body))
+                {
+                    body = child.AddComponent<Rigidbody>();
+                }
 
-        // Add heavier weight to the shattered Hull piece
-        if (hull != null)
-        {
-            Rigidbody body;
-            if (!hull.TryGetComponent(out body))
-            {
-                body = hull.AddComponent<Rigidbody>();
+                body.mass = 3;
+                break;
             }
-            body.mass = 3;
         }
 
         base.Kill();
