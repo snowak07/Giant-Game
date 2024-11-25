@@ -25,11 +25,6 @@ public class BattleshipEnemy : Enemy
     private bool firingCooldown = false;
 
     private bool inWater = false;
-    private bool isSinking = false;
-    private float sinkingSpeed = 0.002f;
-
-    private float settledVelocityThreshold = 0.01f;
-    private float settledAngularVelocityThreshold = 0.005f;
 
     public Vector3 CalculateFiringDirection(Vector3 firingPosition)
     {

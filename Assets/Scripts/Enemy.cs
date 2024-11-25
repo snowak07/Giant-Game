@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Linq;
 using Unity.VisualScripting;
 
+[RequireComponent(typeof(Sinkable))]
 public abstract class Enemy : MonoBehaviour
 {
     /**
