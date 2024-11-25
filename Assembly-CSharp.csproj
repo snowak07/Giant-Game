@@ -116,6 +116,7 @@
     <Compile Include="Assets\Scripts\EnemySpawner.cs" />
     <Compile Include="Assets\Scripts\TestExplosion.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Ramps\Runtime\RampAsset.cs" />
+    <Compile Include="Assets\Scripts\RouteScheduler.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\Punch.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\ExtinguishableFire.cs" />

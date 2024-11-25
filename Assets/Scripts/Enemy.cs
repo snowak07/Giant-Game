@@ -7,6 +7,14 @@ using Unity.VisualScripting;
 
 public abstract class Enemy : MonoBehaviour
 {
+    /**
+     * TODO
+     * 
+     * Create abstract general function for retrieving the position on an enemy at any point in the future given a time
+     * or time range.
+     * - Create sub functions for all existing enemies.
+     */
+
     public string[] ignoredDamageCollisionTags = { "Enemy", "Water" };
     public Transform playerTransform = null;
     public Transform playerBodyTransform = null;

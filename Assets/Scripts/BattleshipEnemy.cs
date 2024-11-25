@@ -103,16 +103,6 @@ public class BattleshipEnemy : Enemy
         return Mathf.Sqrt(2 * (Mathf.Pow(projectileSpeed, 2) - Mathf.Sqrt(Mathf.Pow(projectileSpeed, 4) - 2 * Mathf.Pow(projectileSpeed, 2) * y * Physics.gravity.y - Mathf.Pow(xz * Physics.gravity.y, 2)) - y * Physics.gravity.y)) / Physics.gravity.y;
     }
 
-    protected bool EnemySettled(Rigidbody body)
-    {
-        if (body.linearVelocity.magnitude < settledVelocityThreshold && body.angularVelocity.magnitude < settledAngularVelocityThreshold)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
     public override void Kill()
     {
         // Find "Hull" child object
@@ -232,11 +222,8 @@ public class BattleshipEnemy : Enemy
             Vector3 desiredPosition = new Vector3(orbitRadius * Mathf.Cos(desiredPositionTimeCount) + playerTransform.position.x, transform.position.y, orbitRadius * Mathf.Sin(desiredPositionTimeCount) + playerTransform.position.x);
 
             Vector3 towardsDesiredPosition = desiredPosition - transform.position;
-            Vector3 upwards = new Vector3(0, 1, 0);
-            Quaternion desiredRotation = Quaternion.LookRotation(towardsDesiredPosition, upwards);
+            Quaternion desiredRotation = Quaternion.LookRotation(towardsDesiredPosition, Vector3.up);
             Quaternion newDirection = Quaternion.RotateTowards(transform.rotation, desiredRotation, maxRotationalSpeed * Time.deltaTime);
-
-            Quaternion modelOffset = Quaternion.FromToRotation(new Vector3(-1, 0, 0), new Vector3(0, 0, 1));
 
             GetComponent<Rigidbody>().MoveRotation(newDirection);
 
@@ -245,28 +232,6 @@ public class BattleshipEnemy : Enemy
             GetComponent<Rigidbody>().MovePosition(newPosition);
 
             StartCoroutine(ShootProjectileAtPlayer());
-        }
-
-        if (!alive && EnemySettled(GetComponent<Rigidbody>()))
-        {
-            isSinking = true;
-        }
-
-        if (isSinking)
-        {
-            Collider[] colliders = GetComponentsInChildren<Collider>();
-            foreach (Collider collider in colliders)
-            {
-                collider.isTrigger = true;
-            }
-
-            Rigidbody body = GetComponent<Rigidbody>();
-            body.linearVelocity = new Vector3(0, 0, 0);
-            body.angularVelocity = new Vector3(0, 0, 0);
-            body.useGravity = false;
-
-            Vector3 newPosition = new Vector3(transform.position.x, transform.position.y - sinkingSpeed, transform.position.z);
-            body.MovePosition(newPosition);
         }
     }
 

@@ -9,6 +9,8 @@ public class TreeSpear : GiantGrabInteractable
     {
         base.DisablePickup(args);
         flightAlignmentEnabled = true;
+
+        // Determine flight destination
     }
 
     protected void FixedUpdate()
