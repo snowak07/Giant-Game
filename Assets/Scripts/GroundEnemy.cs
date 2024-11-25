@@ -13,6 +13,13 @@ public class GroundEnemy : Enemy
 
     private bool knockedDown = false;
 
+    /**
+     * Assign starting health
+     * 
+     * @param float         health
+     */
+    protected GroundEnemy() : base(10.0f) { }
+
     protected override void Start()
     {
         base.Start();
@@ -86,11 +93,6 @@ public class GroundEnemy : Enemy
         }
 
         return false;
-    }
-
-    protected override void SetStartingHealth()
-    {
-        health = 10;
     }
 
     public Vector3 calculateFiringDirection(Vector3 firingPosition, Vector3 firingTargetLocation)

@@ -39,6 +39,13 @@ public class FlyingEnemy : Enemy
     private bool firingCooldown;
     private bool enteredRange;
 
+    /**
+     * Assign starting health
+     * 
+     * @param float         health
+     */
+    protected FlyingEnemy() : base(20.0f) { }
+
     protected override void Start()
     {
         base.Start();
@@ -142,11 +149,6 @@ public class FlyingEnemy : Enemy
     public void setIsSelected(bool selected)
     {
         isSelected = selected;
-    }
-
-    protected override void SetStartingHealth()
-    {
-        health = 20;
     }
 
     void Shoot()

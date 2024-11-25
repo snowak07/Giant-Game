@@ -26,6 +26,13 @@ public class BattleshipEnemy : Enemy
 
     private bool inWater = false;
 
+    /**
+     * Assign starting health
+     * 
+     * @param float         health
+     */
+    protected BattleshipEnemy() : base(40.0f) { }
+
     public Vector3 CalculateFiringDirection(Vector3 firingPosition)
     {
         float t = CalculateTimeToImpact(firingPosition);
@@ -145,10 +152,6 @@ public class BattleshipEnemy : Enemy
             ParticleSystem ps = GetComponentInChildren<ParticleSystem>();
             ps.Stop();
         }
-    }
-    protected override void SetStartingHealth()
-    {
-        health = 40;
     }
 
     void Shoot(Vector3 firingPosition, Vector3 projectileVector)

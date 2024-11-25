@@ -19,7 +19,7 @@ public abstract class Enemy : MonoBehaviour
     public string[] ignoredDamageCollisionTags = { "Enemy", "Water" };
     public Transform playerTransform = null;
     public Transform playerBodyTransform = null;
-    public float health;
+    public float _health { get; set; }
 
     public bool IsPickedUp { get; set; }
 
@@ -27,6 +27,11 @@ public abstract class Enemy : MonoBehaviour
     protected float explosionForce = 200.0f;
     protected float explosionRadius = 3.0f;
     protected float upwardsExplosionModifier = 3.0f;
+
+    protected Enemy(float health)
+    {
+        _health = health;
+    }
 
     /**
      * Handle when enemy is first created
@@ -36,8 +41,6 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void Start()
     {
         IsPickedUp = false;
-
-        SetStartingHealth();
     }
 
     /**
@@ -120,15 +123,15 @@ public abstract class Enemy : MonoBehaviour
                 {
                     forceGrabPullInteractable.ImpactCooldown = true;
 
-                    health -= collision.impulse.magnitude;
+                    _health -= collision.impulse.magnitude;
                 }
             }
             else
             {
-                health -= collision.impulse.magnitude;
+                _health -= collision.impulse.magnitude;
             }
 
-            if (health <= 0)
+            if (_health <= 0)
             {
                 // Disable collision between the killing object and the enemy
                 Collider[] colliders = GetComponentsInChildren<Collider>();
@@ -205,13 +208,6 @@ public abstract class Enemy : MonoBehaviour
     {
         playerTransform = pTransform;
     }
-
-    /**
-     * Handle setting starting health
-     * 
-     * @return void
-     */
-    protected abstract void SetStartingHealth();
 
     /**
      * Where subclasses should handle updating the enemy each frame
