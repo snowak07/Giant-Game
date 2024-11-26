@@ -71,9 +71,11 @@
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\ParticleCollision.cs" />
     <Compile Include="Assets\Scripts\LineRendererSettings.cs" />
     <Compile Include="Assets\Scripts\GroundEnemy.cs" />
+    <Compile Include="Assets\Scripts\ProjectileLauncher.cs" />
     <Compile Include="Assets\Scripts\CreateBoulder.cs" />
     <Compile Include="Assets\Scripts\ReadRotation.cs" />
     <Compile Include="Assets\Scripts\PIDTest.cs" />
+    <Compile Include="Assets\Scripts\TrajectoryHelper.cs" />
     <Compile Include="Assets\Scripts\ImpactExplosion.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\Shockwave.cs" />

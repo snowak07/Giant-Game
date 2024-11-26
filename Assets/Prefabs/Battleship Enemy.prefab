@@ -175,6 +175,8 @@ GameObject:
   - component: {fileID: 1035198378715778263}
   - component: {fileID: 1035198378715778261}
   - component: {fileID: 1035198378715778262}
+  - component: {fileID: 2207493555832650013}
+  - component: {fileID: 2942136284965878730}
   m_Layer: 11
   m_Name: Battleship Enemy
   m_TagString: Enemy
@@ -273,7 +275,6 @@ MonoBehaviour:
   - Water
   playerTransform: {fileID: 0}
   playerBodyTransform: {fileID: 0}
-  health: 0
   maxRandomizedOrbitRadius: 250
   minRandonizedOrbitRadius: 200
   orbitRadiusStepSize: 0.1
@@ -285,6 +286,35 @@ MonoBehaviour:
     type: 3}
   projectileSpeed: 20
   firingCooldownTime: 3
+--- !u!114 &2207493555832650013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035198378715778264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a3bbd95d70999943866cd627ae69a27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firingOffset: {fileID: 416608145814586085}
+  projectilePrefab: {fileID: 3648142049155997184, guid: 4419cf91675d77d48b2c8a10f737e544,
+    type: 3}
+  cooldownTime: 3
+  projectileSpeed: 20
+--- !u!114 &2942136284965878730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035198378715778264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8662ff6a6de29004ca98a3411f7ff251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1153403194223884149
 GameObject:
   m_ObjectHideFlags: 0

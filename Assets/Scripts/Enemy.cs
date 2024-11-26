@@ -181,8 +181,6 @@ public abstract class Enemy : MonoBehaviour
 
         DismantleEnemy(childObjects);
         StartCoroutine(EnableSink(childObjects));
-
-        //Destroy(gameObject, 5); // Destroy parent object
     }
 
     /**
