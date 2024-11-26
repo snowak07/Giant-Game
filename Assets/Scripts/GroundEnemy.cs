@@ -72,6 +72,11 @@ public class GroundEnemy : Enemy
         }
     }
 
+    protected override Transform GetNextTransform(float time)
+    {
+        throw new System.NotImplementedException();
+    }
+
     protected override void OnCollisionEnter(Collision collision)
     {
         // Disable movement until

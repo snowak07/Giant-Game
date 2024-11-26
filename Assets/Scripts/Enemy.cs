@@ -19,7 +19,7 @@ public abstract class Enemy : MonoBehaviour
     public string[] ignoredDamageCollisionTags = { "Enemy", "Water" };
     public Transform playerTransform = null;
     public Transform playerBodyTransform = null;
-    public float _health { get; set; }
+    public float health { get; set; }
 
     public bool IsPickedUp { get; set; }
 
@@ -30,7 +30,7 @@ public abstract class Enemy : MonoBehaviour
 
     protected Enemy(float health)
     {
-        _health = health;
+        this.health = health;
     }
 
     /**
@@ -63,7 +63,7 @@ public abstract class Enemy : MonoBehaviour
      *  
      *  @return List<GameObject>    Return List of gameobjects so child functions can manipulate objects in their own ways
      */
-    protected virtual void DismantleEnemy(List<GameObject> children)
+    protected virtual void DismantleEnemy(List<GameObject> children) // FIXME: This could probably be moved to a Dismantleable class
     {
         // Separate each enemy piece that is visible (rendered)
         foreach (var childObject in children) // Get each subobject that has a mesh renderer and set its parent transform to null
@@ -94,7 +94,7 @@ public abstract class Enemy : MonoBehaviour
      * 
      * @return IEnumerator
      */
-    IEnumerator EnableSink(List<GameObject> children)
+    IEnumerator EnableSink(List<GameObject> children) // FIXME: Can this be moved to the Sinkable class?
     {
         yield return new WaitForSeconds(0.1f);
 
@@ -123,15 +123,15 @@ public abstract class Enemy : MonoBehaviour
                 {
                     forceGrabPullInteractable.ImpactCooldown = true;
 
-                    _health -= collision.impulse.magnitude;
+                    health -= collision.impulse.magnitude;
                 }
             }
             else
             {
-                _health -= collision.impulse.magnitude;
+                health -= collision.impulse.magnitude;
             }
 
-            if (_health <= 0)
+            if (health <= 0)
             {
                 // Disable collision between the killing object and the enemy
                 Collider[] colliders = GetComponentsInChildren<Collider>();
@@ -212,5 +212,12 @@ public abstract class Enemy : MonoBehaviour
      * 
      * @return void
      */
-    protected abstract void UpdateEnemy();
+    protected virtual void UpdateEnemy()
+    {
+        Transform nextTransform = GetNextTransform(Time.fixedDeltaTime);
+        GetComponent<Rigidbody>().MoveRotation(nextTransform.rotation);
+        GetComponent<Rigidbody>().MovePosition(nextTransform.position);
+    }
+
+    protected abstract Transform GetNextTransform(float time);
 }

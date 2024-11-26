@@ -8,7 +8,7 @@ public class Sinkable : MonoBehaviour
 {
     private bool sinkEnabled = false;
     private bool sinking = false;
-    private float sinkingSpeed = 0.002f;
+    private float sinkingSpeed = 0.003f;
     private float settledVelocityThreshold = 0.01f;
     private float settledAngularVelocityThreshold = 0.005f;
 

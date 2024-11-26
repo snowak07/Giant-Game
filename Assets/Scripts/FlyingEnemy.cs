@@ -145,6 +145,10 @@ public class FlyingEnemy : Enemy
             }
         }
     }
+    protected override Transform GetNextTransform(float time)
+    {
+        throw new System.NotImplementedException();
+    }
 
     public void setIsSelected(bool selected)
     {

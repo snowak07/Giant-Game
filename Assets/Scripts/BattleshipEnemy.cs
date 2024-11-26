@@ -82,35 +82,49 @@ public class BattleshipEnemy : Enemy
         orbitRadius = orbitRadiusStepSize * Random.Range(minRandonizedOrbitRadius, maxRandomizedOrbitRadius);
     }
 
+    protected override Transform GetNextTransform(float time)
+    {
+        float timeRemainingToSimulate = time;
+        Transform currentTransform = transform;
+
+        while (timeRemainingToSimulate > 0)
+        {
+            Vector3 currentPathPosition = currentTransform.position.normalized * orbitRadius;
+            float timeCountCurrent = Mathf.Atan2(currentPathPosition.z, currentPathPosition.x);
+            float desiredPositionTimeCount = timeCountCurrent + desiredPositionLeadingAngleDegrees * Mathf.PI / 180;
+
+            Vector3 desiredPosition = new Vector3(orbitRadius * Mathf.Cos(desiredPositionTimeCount), currentTransform.position.y, orbitRadius * Mathf.Sin(desiredPositionTimeCount));
+
+            Vector3 towardsDesiredPosition = desiredPosition - currentTransform.position;
+            Quaternion desiredRotation = Quaternion.LookRotation(towardsDesiredPosition, Vector3.up);
+            Quaternion newDirection = Quaternion.RotateTowards(currentTransform.rotation, desiredRotation, maxRotationalSpeed * Time.deltaTime);
+
+            currentTransform.rotation = newDirection;
+
+            Vector3 newPosition = (maxTranslationalSpeed * Time.deltaTime) * currentTransform.forward + currentTransform.position;
+
+            currentTransform.position = newPosition;
+
+            timeRemainingToSimulate -= Time.fixedDeltaTime;
+        }
+
+        return currentTransform;
+    }
+
     protected override void UpdateEnemy()
     {
+        base.UpdateEnemy();
+
         // Check if the boat has tipped over
-        if (alive && ((transform.rotation.eulerAngles.x > 90 && transform.rotation.eulerAngles.x < 270) || (transform.rotation.eulerAngles.z > 90 && transform.rotation.eulerAngles.z < 270)))
+        if ((transform.rotation.eulerAngles.x > 90 && transform.rotation.eulerAngles.x < 270) || (transform.rotation.eulerAngles.z > 90 && transform.rotation.eulerAngles.z < 270))
         {
             Kill();
         }
 
-        if (alive && playerTransform != null)
+        if (playerTransform != null)
         {
-            Vector3 currentPathPosition = (transform.position - playerTransform.position).normalized * orbitRadius; // Assumes that the center is playerTransform
-            float timeCountCurrent = Mathf.Atan2(currentPathPosition.z, currentPathPosition.x);
-            float desiredPositionTimeCount = timeCountCurrent + desiredPositionLeadingAngleDegrees * Mathf.PI / 180;
-
-            Vector3 desiredPosition = new Vector3(orbitRadius * Mathf.Cos(desiredPositionTimeCount) + playerTransform.position.x, transform.position.y, orbitRadius * Mathf.Sin(desiredPositionTimeCount) + playerTransform.position.x);
-
-            Vector3 towardsDesiredPosition = desiredPosition - transform.position;
-            Quaternion desiredRotation = Quaternion.LookRotation(towardsDesiredPosition, Vector3.up);
-            Quaternion newDirection = Quaternion.RotateTowards(transform.rotation, desiredRotation, maxRotationalSpeed * Time.deltaTime);
-
-            GetComponent<Rigidbody>().MoveRotation(newDirection);
-
-            Vector3 newPosition = (maxTranslationalSpeed * Time.deltaTime) * transform.forward + transform.position;
-
-            GetComponent<Rigidbody>().MovePosition(newPosition);
-
             Vector3 firingDirection = GetComponent<ProjectileLauncher>().ShootProjectile(playerTransform.position);
             UpdateCannonPosition(firingDirection);
-
         }
     }
 
