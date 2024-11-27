@@ -214,10 +214,10 @@ public abstract class Enemy : MonoBehaviour
      */
     protected virtual void UpdateEnemy()
     {
-        Transform nextTransform = GetNextTransform(Time.fixedDeltaTime);
-        GetComponent<Rigidbody>().MoveRotation(nextTransform.rotation);
-        GetComponent<Rigidbody>().MovePosition(nextTransform.position);
+        (Vector3, Quaternion) nextPositionRotation = GetNextTransform(Time.fixedDeltaTime);
+        GetComponent<Rigidbody>().MoveRotation(nextPositionRotation.Item2);
+        GetComponent<Rigidbody>().MovePosition(nextPositionRotation.Item1);
     }
 
-    protected abstract Transform GetNextTransform(float time);
+    protected abstract (Vector3, Quaternion) GetNextTransform(float time);
 }

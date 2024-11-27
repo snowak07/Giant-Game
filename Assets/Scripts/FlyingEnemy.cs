@@ -145,7 +145,7 @@ public class FlyingEnemy : Enemy
             }
         }
     }
-    protected override Transform GetNextTransform(float time)
+    protected override (Vector3, Quaternion) GetNextTransform(float time)
     {
         throw new System.NotImplementedException();
     }

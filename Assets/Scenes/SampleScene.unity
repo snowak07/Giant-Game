@@ -6508,6 +6508,11 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 158595763}
+    - target: {fileID: 1035198378715778262, guid: 601d5d5aed7d4f84eaf388e418d8a9ee,
+        type: 3}
+      propertyPath: debugFutureTransform
+      value: 
+      objectReference: {fileID: 1760227275}
     - target: {fileID: 1035198378715778264, guid: 601d5d5aed7d4f84eaf388e418d8a9ee,
         type: 3}
       propertyPath: m_Name
@@ -6896,6 +6901,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Boulder
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323250492134829559, guid: 05f1332c7e8dfb044b232347a7cfa322,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2323250492134829565, guid: 05f1332c7e8dfb044b232347a7cfa322,
         type: 3}
@@ -12603,6 +12613,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1760227274
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1760227275}
+  m_Layer: 0
+  m_Name: DebugFuturePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1760227275
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760227274}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1765008694
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14315,6 +14356,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Battleship Enemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1035198378715778264, guid: 601d5d5aed7d4f84eaf388e418d8a9ee,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15076,3 +15122,4 @@ SceneRoots:
   - {fileID: 781784709}
   - {fileID: 2027802177}
   - {fileID: 803506486}
+  - {fileID: 1760227275}

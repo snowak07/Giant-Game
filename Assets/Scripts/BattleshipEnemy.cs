@@ -17,6 +17,8 @@ public class BattleshipEnemy : Enemy
 
     private float orbitRadius;
 
+    public Transform debugFutureTransform = null;
+
     /**
      * Assign starting health
      * 
@@ -80,35 +82,44 @@ public class BattleshipEnemy : Enemy
 
         // Determine random orbit radius that will determine the "desired" path.
         orbitRadius = orbitRadiusStepSize * Random.Range(minRandonizedOrbitRadius, maxRandomizedOrbitRadius);
+
+        //if (debugFutureTransform != null)
+        //{
+        //    (Vector3, Quaternion) futurePositionRotation = GetNextTransform(30.0f);
+        //    Debug.Log("Future position: " + futurePositionRotation.Item1 + ", rotation: " + futurePositionRotation.Item2);
+        //    debugFutureTransform.position = futurePositionRotation.Item1;
+        //    debugFutureTransform.rotation = futurePositionRotation.Item2;
+        //}
     }
 
-    protected override Transform GetNextTransform(float time)
+    protected override (Vector3, Quaternion) GetNextTransform(float time)
     {
         float timeRemainingToSimulate = time;
-        Transform currentTransform = transform;
+        Vector3 currentPosition = transform.position;
+        Quaternion currentRotation = transform.rotation;
 
         while (timeRemainingToSimulate > 0)
         {
-            Vector3 currentPathPosition = currentTransform.position.normalized * orbitRadius;
+            Vector3 currentPathPosition = currentPosition.normalized * orbitRadius;
             float timeCountCurrent = Mathf.Atan2(currentPathPosition.z, currentPathPosition.x);
             float desiredPositionTimeCount = timeCountCurrent + desiredPositionLeadingAngleDegrees * Mathf.PI / 180;
 
-            Vector3 desiredPosition = new Vector3(orbitRadius * Mathf.Cos(desiredPositionTimeCount), currentTransform.position.y, orbitRadius * Mathf.Sin(desiredPositionTimeCount));
+            Vector3 desiredPosition = new Vector3(orbitRadius * Mathf.Cos(desiredPositionTimeCount), currentPosition.y, orbitRadius * Mathf.Sin(desiredPositionTimeCount));
 
-            Vector3 towardsDesiredPosition = desiredPosition - currentTransform.position;
+            Vector3 towardsDesiredPosition = desiredPosition - currentPosition;
             Quaternion desiredRotation = Quaternion.LookRotation(towardsDesiredPosition, Vector3.up);
-            Quaternion newDirection = Quaternion.RotateTowards(currentTransform.rotation, desiredRotation, maxRotationalSpeed * Time.deltaTime);
+            Quaternion newDirection = Quaternion.RotateTowards(currentRotation, desiredRotation, maxRotationalSpeed * Time.deltaTime);
 
-            currentTransform.rotation = newDirection;
+            currentRotation = newDirection;
 
-            Vector3 newPosition = (maxTranslationalSpeed * Time.deltaTime) * currentTransform.forward + currentTransform.position;
+            Vector3 newPosition = (maxTranslationalSpeed * Time.deltaTime) * (currentRotation * Vector3.forward) + currentPosition;
 
-            currentTransform.position = newPosition;
+            currentPosition = newPosition;
 
             timeRemainingToSimulate -= Time.fixedDeltaTime;
         }
 
-        return currentTransform;
+        return (currentPosition, currentRotation);
     }
 
     protected override void UpdateEnemy()
