@@ -16,7 +16,7 @@ public class PhysicsHand : MonoBehaviour
     public float rotationThreshold = 10f;
     public float force = 10f;
 
-    private float speedLimit = 60.0f;
+    private float speedLimit = 90.0f;
 
     void FixedUpdate()
     {

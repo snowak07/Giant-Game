@@ -8,14 +8,6 @@ using Unity.VisualScripting;
 [RequireComponent(typeof(Sinkable))]
 public abstract class Enemy : MonoBehaviour
 {
-    /**
-     * TODO
-     * 
-     * Create abstract general function for retrieving the position on an enemy at any point in the future given a time
-     * or time range.
-     * - Create sub functions for all existing enemies.
-     */
-
     public string[] ignoredDamageCollisionTags = { "Enemy", "Water" };
     public Transform playerTransform = null;
     public Transform playerBodyTransform = null;
@@ -168,6 +160,7 @@ public abstract class Enemy : MonoBehaviour
         List<GameObject> childObjects = new List<GameObject>();
         foreach (var child in children)
         {
+            //Destroy(child.gameObject);
             if (!child.TryGetComponent(out MeshRenderer mesh))
             {
                 // Destroy all non-visible objects
@@ -181,6 +174,7 @@ public abstract class Enemy : MonoBehaviour
 
         DismantleEnemy(childObjects);
         StartCoroutine(EnableSink(childObjects));
+        //Destroy(gameObject); // FIXME: this might cause issues with the EnableSink coroutine
     }
 
     /**
@@ -219,5 +213,5 @@ public abstract class Enemy : MonoBehaviour
         GetComponent<Rigidbody>().MovePosition(nextPositionRotation.Item1);
     }
 
-    protected abstract (Vector3, Quaternion) GetNextTransform(float time);
+    public abstract (Vector3, Quaternion) GetNextTransform(float time, bool applyTargetingOffset = false);
 }

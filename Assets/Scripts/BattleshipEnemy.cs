@@ -15,6 +15,8 @@ public class BattleshipEnemy : Enemy
 
     public float desiredPositionLeadingAngleDegrees = 10;
 
+    public Transform targetingOffset = null;
+
     private float orbitRadius;
 
     public Transform debugFutureTransform = null;
@@ -92,7 +94,7 @@ public class BattleshipEnemy : Enemy
         //}
     }
 
-    protected override (Vector3, Quaternion) GetNextTransform(float time)
+    public override (Vector3, Quaternion) GetNextTransform(float time, bool applyTargetingOffset = false)
     {
         float timeRemainingToSimulate = time;
         Vector3 currentPosition = transform.position;
@@ -117,6 +119,11 @@ public class BattleshipEnemy : Enemy
             currentPosition = newPosition;
 
             timeRemainingToSimulate -= Time.fixedDeltaTime;
+        }
+
+        if (applyTargetingOffset && targetingOffset != null)
+        {
+            currentPosition += targetingOffset.position; // Add targeting offset so its in the center of mass
         }
 
         return (currentPosition, currentRotation);

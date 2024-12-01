@@ -1,5 +1,7 @@
 using UnityEngine;
 
+public delegate (Vector3, Quaternion) GetNextTransformCallback(float time, bool applyTargetOffset = false);
+
 public static class TrajectoryHelper
 {
     /**
@@ -79,5 +81,47 @@ public static class TrajectoryHelper
         float xz = horizontal.magnitude;
 
         return Mathf.Sqrt(2 * (Mathf.Pow(projectileSpeed, 2) - Mathf.Sqrt(Mathf.Pow(projectileSpeed, 4) - 2 * Mathf.Pow(projectileSpeed, 2) * y * Physics.gravity.y - Mathf.Pow(xz * Physics.gravity.y, 2)) - y * Physics.gravity.y)) / Physics.gravity.y;
+    }
+
+    public static Vector3 CalculateInterceptionDirection(Vector3 pursuerPosition, float pursuerSpeed, GetNextTransformCallback getNextTransformCallback)
+    {
+        // Initial guess for the time of interception
+        float time = 0;
+        (Vector3, Quaternion) evaderTransform = getNextTransformCallback(time);
+
+        // Calculate the relative position
+        Vector3 relativePosition = evaderTransform.Item1 - pursuerPosition; // FIXME: No longer needed I think
+
+        // Loop to find the interception time
+        float tIncrement = 0.1f; // Time increment for the loop
+        float tolerance = 0.1f; // Tolerance for stopping the loop
+
+        while (true)
+        {
+            // Calculate the evader's position at the current time
+            evaderTransform = getNextTransformCallback(time);
+
+            float tPursuer = CalculateTimeToImpact(pursuerPosition, evaderTransform.Item1, pursuerSpeed);
+
+            // Check if the difference between the current time and the calculated time is within the tolerance
+            if (Mathf.Abs(tPursuer - time) < tolerance)
+            {
+                break;
+            }
+
+            if (pursuerPosition.y < -10)
+            {
+                return Vector3.zero;
+            }
+
+            // Increment the time
+            time += tIncrement;
+        }
+
+        // Calculate the required direction
+        Vector3 interceptPoint = getNextTransformCallback(time).Item1;
+        Vector3 direction = CalculateFiringDirection(pursuerPosition, interceptPoint, pursuerSpeed).normalized;
+
+        return direction;
     }
 }

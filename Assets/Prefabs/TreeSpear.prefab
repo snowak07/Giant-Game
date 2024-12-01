@@ -184,6 +184,8 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+  targetChecker: {fileID: 8309660625704906098, guid: ef5b6894e593ef84ea04f55fa2a8c788,
+    type: 3}
 --- !u!114 &-1936603701630246294
 MonoBehaviour:
   m_ObjectHideFlags: 0

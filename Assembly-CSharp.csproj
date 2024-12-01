@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\ProximityActivate.cs" />
+    <Compile Include="Assets\Scripts\TargetEnemy.cs" />
     <Compile Include="Assets\Scripts\PushInteractor.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\DecalDestroyer.cs" />
     <Compile Include="Assets\Scripts\NewActionBasedXRController.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\AdjustTimeScale.cs" />
     <Compile Include="Assets\Scripts\BreakableInteractable.cs" />
     <Compile Include="Assets\Scripts\BattleshipEnemy.cs" />
+    <Compile Include="Assets\Scripts\TargetChecker.cs" />
     <Compile Include="Assets\Scripts\ExplosionHandler.cs" />
     <Compile Include="Assets\Scripts\ShockwaveAbility.cs" />
     <Compile Include="Assets\Scripts\GiantHandInteractor.cs" />

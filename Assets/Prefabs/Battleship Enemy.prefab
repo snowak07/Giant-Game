@@ -207,6 +207,7 @@ Transform:
   - {fileID: 3972310577225645068}
   - {fileID: 416608145814371934}
   - {fileID: 4892482925266294810}
+  - {fileID: 6935501062853898052}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1035198378715778263
@@ -281,11 +282,8 @@ MonoBehaviour:
   maxRotationalSpeed: 20
   maxTranslationalSpeed: 2
   desiredPositionLeadingAngleDegrees: 10
-  firingOffset: {fileID: 416608145814586085}
-  projectile: {fileID: 3648142049155997184, guid: 4419cf91675d77d48b2c8a10f737e544,
-    type: 3}
-  projectileSpeed: 20
-  firingCooldownTime: 3
+  targetingOffset: {fileID: 6935501062853898052}
+  debugFutureTransform: {fileID: 0}
 --- !u!114 &2207493555832650013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,6 +313,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8662ff6a6de29004ca98a3411f7ff251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1145500891456171626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6935501062853898052}
+  m_Layer: 11
+  m_Name: TargetingOffset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6935501062853898052
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145500891456171626}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 366502256530052706}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1153403194223884149
 GameObject:
   m_ObjectHideFlags: 0
