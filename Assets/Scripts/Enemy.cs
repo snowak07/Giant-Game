@@ -157,23 +157,26 @@ public abstract class Enemy : MonoBehaviour
         GetComponent<Rigidbody>().useGravity = true;
 
         Transform[] children = gameObject.GetComponentsInChildren<Transform>();
-        List<GameObject> childObjects = new List<GameObject>();
+        List<GameObject> renderedChildObjects = new List<GameObject>();
         foreach (var child in children)
         {
+            // Remove from Enemy layer and set to Default layer to avoid further interactions as a result of being an Enemy
+            child.gameObject.layer = LayerMask.NameToLayer("Default");
+
             //Destroy(child.gameObject);
             if (!child.TryGetComponent(out MeshRenderer mesh))
             {
                 // Destroy all non-visible objects
-                Destroy(child.gameObject, 5);
+                Destroy(child.gameObject, 5); // FIXME: Why is this not immediate?
             }
             else
             {
-                childObjects.Add(child.gameObject);
+                renderedChildObjects.Add(child.gameObject);
             }
         }
 
-        DismantleEnemy(childObjects);
-        StartCoroutine(EnableSink(childObjects));
+        DismantleEnemy(renderedChildObjects);
+        StartCoroutine(EnableSink(renderedChildObjects));
         //Destroy(gameObject); // FIXME: this might cause issues with the EnableSink coroutine
     }
 

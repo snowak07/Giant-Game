@@ -280,7 +280,7 @@ MonoBehaviour:
   minRandonizedOrbitRadius: 200
   orbitRadiusStepSize: 0.1
   maxRotationalSpeed: 20
-  maxTranslationalSpeed: 2
+  maxTranslationalSpeed: 4
   desiredPositionLeadingAngleDegrees: 10
   targetingOffset: {fileID: 6935501062853898052}
   debugFutureTransform: {fileID: 0}
