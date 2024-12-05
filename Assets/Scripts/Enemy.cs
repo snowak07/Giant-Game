@@ -75,7 +75,7 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    private void HandlePhysicsPartsOnKill(GameObject killer, GameObject child)
+    private void HandlePhysicsPartOnKill(GameObject killer, GameObject child)
     {
         // Remove from Enemy layer and set to Default layer to avoid further interactions of child parts as a result of being on the Enemy layer
         child.layer = LayerMask.NameToLayer("Default");
@@ -108,18 +108,20 @@ public abstract class Enemy : MonoBehaviour
      */
     public virtual void Kill(GameObject killer)
     {
-        ScoreManager.Add();
+        OnKill(); // Handle child OnKill functions. // TODO: Add below calls to OnKill?
 
-        if (GetComponent<Animator>())
+        ScoreManager.Add(); // FIXME: Scoreable component?
+
+        if (GetComponent<Animator>()) // FIXME: AnimationHandler component?
         {
             GetComponent<Animator>().enabled = false;
         }
 
-        GetComponent<Rigidbody>().useGravity = true;
+        GetComponent<Rigidbody>().useGravity = true; // FIXME: Destructible component
 
-        foreach (var child in gameObject.GetComponentsInChildren<Transform>().Select(element => element.gameObject))
+        foreach (var child in gameObject.GetComponentsInChildren<Transform>().Select(element => element.gameObject)) // FIXME: Destructible component
         {
-            HandlePhysicsPartsOnKill(killer, child);
+            HandlePhysicsPartOnKill(killer, child);
         }
     }
 
@@ -137,7 +139,7 @@ public abstract class Enemy : MonoBehaviour
             if (collision.transform.TryGetComponent(out GiantGrabInteractable forceGrabPullInteractable))
             {
                 // Check for impact cooldown so that an Enemy can only be hit once by an object after leaving the player's hand
-                if (!forceGrabPullInteractable.ImpactCooldown)
+                if (!forceGrabPullInteractable.ImpactCooldown) // FIXME: Move this to its own component
                 {
                     forceGrabPullInteractable.ImpactCooldown = true;
 
@@ -155,6 +157,8 @@ public abstract class Enemy : MonoBehaviour
             }
         }
     }
+
+    protected virtual void OnKill() { }
 
     /**
      * Set player body transform so enemies can react to the player's body position

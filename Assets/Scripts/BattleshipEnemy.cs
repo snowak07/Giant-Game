@@ -34,8 +34,10 @@ public class BattleshipEnemy : Enemy
         upwardsExplosionModifier = 2.0f;
     }
 
-    public override void Kill(GameObject killer)
+    protected override void OnKill()
     {
+        base.OnKill();
+
         // Find "Hull" child object
         int i = 0;
         while (i < transform.childCount)
@@ -54,8 +56,6 @@ public class BattleshipEnemy : Enemy
                 break;
             }
         }
-
-        base.Kill(killer);
     }
 
     protected override void OnCollisionEnter(Collision collision)
