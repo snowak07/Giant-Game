@@ -47,8 +47,7 @@ public class Sinkable : MonoBehaviour
 
     public void EnableSink()
     {
-        sinkEnabled = true;
-        Destroy(gameObject, 30); // Failsafe incase the object never settles
+        StartCoroutine(StartSink());
     }
 
     protected bool IsSettled(Rigidbody body)
@@ -59,5 +58,13 @@ public class Sinkable : MonoBehaviour
         }
 
         return false;
+    }
+
+    protected IEnumerator StartSink()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        sinkEnabled = true;
+        Destroy(gameObject, 30); // Failsafe incase the object never settles
     }
 }

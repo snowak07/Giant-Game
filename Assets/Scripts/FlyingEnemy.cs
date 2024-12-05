@@ -67,7 +67,7 @@ public class FlyingEnemy : Enemy
             enteredRange = false;
         }
 
-        if (alive && playerTransform != null && !isSelected)
+        if (playerTransform != null && !isSelected)
         {
             bool inRange = (playerTransform.position - transform.position).magnitude < maxRange;
             if (!inRange && !enteredRange) // Make the FlyingEnemy move towards the player before flying around them at a constant orbitSpeed.

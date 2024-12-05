@@ -34,7 +34,7 @@ public class BattleshipEnemy : Enemy
         upwardsExplosionModifier = 2.0f;
     }
 
-    public override void Kill()
+    public override void Kill(GameObject killer)
     {
         // Find "Hull" child object
         int i = 0;
@@ -55,7 +55,7 @@ public class BattleshipEnemy : Enemy
             }
         }
 
-        base.Kill();
+        base.Kill(killer);
     }
 
     protected override void OnCollisionEnter(Collision collision)
@@ -136,7 +136,7 @@ public class BattleshipEnemy : Enemy
         // Check if the boat has tipped over
         if ((transform.rotation.eulerAngles.x > 90 && transform.rotation.eulerAngles.x < 270) || (transform.rotation.eulerAngles.z > 90 && transform.rotation.eulerAngles.z < 270))
         {
-            Kill();
+            Kill(null);
         }
 
         if (playerTransform != null)

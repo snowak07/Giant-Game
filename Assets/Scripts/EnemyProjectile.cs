@@ -41,7 +41,7 @@ public class EnemyProjectile : MonoBehaviour
             {
                 if (explosionHit.transform.root.gameObject.TryGetComponent(out Enemy enemy))
                 {
-                    enemy.Kill();
+                    enemy.Kill(gameObject);
                 }
             }
 

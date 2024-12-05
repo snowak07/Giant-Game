@@ -5,7 +5,6 @@ using UnityEngine;
 using System.Linq;
 using Unity.VisualScripting;
 
-[RequireComponent(typeof(Sinkable))]
 public abstract class Enemy : MonoBehaviour
 {
     public string[] ignoredDamageCollisionTags = { "Enemy", "Water" };
@@ -15,7 +14,6 @@ public abstract class Enemy : MonoBehaviour
 
     public bool IsPickedUp { get; set; }
 
-    protected bool alive = true;
     protected float explosionForce = 200.0f;
     protected float explosionRadius = 3.0f;
     protected float upwardsExplosionModifier = 3.0f;
@@ -44,56 +42,84 @@ public abstract class Enemy : MonoBehaviour
      */
     protected void FixedUpdate()
     {
-        if (!IsPickedUp && alive)
+        if (!IsPickedUp)
         {
             UpdateEnemy();
         }
     }
 
     /**
-     *  Handle breaking enemy into pieces.
+     *  Handle breaking off Enemy piece.
      *  
      *  @return List<GameObject>    Return List of gameobjects so child functions can manipulate objects in their own ways
      */
-    protected virtual void DismantleEnemy(List<GameObject> children) // FIXME: This could probably be moved to a Dismantleable class
+    protected virtual void DismantleEnemyPart(GameObject part) // FIXME: This could probably be moved to a Dismantleable class
     {
-        // Separate each enemy piece that is visible (rendered)
-        foreach (var childObject in children) // Get each subobject that has a mesh renderer and set its parent transform to null
+        if (part.TryGetComponent(out MeshRenderer mesh))
         {
-            if (childObject.TryGetComponent(out MeshRenderer mesh))
+            part.transform.parent = null; // Detach enemy part
+            
+            Rigidbody childBody;
+            if (!part.TryGetComponent(out childBody))
             {
-                childObject.transform.parent = null; // Detach enemy part
-
-                Rigidbody childBody;
-                if (!childObject.TryGetComponent(out childBody))
-                {
-                    childBody = childObject.AddComponent<Rigidbody>();
-                }
-
-                if (!childObject.TryGetComponent(out Collider collider))
-                {
-                   collider = childObject.AddComponent<BoxCollider>();
-                }
-                
-                // Add small explosion force to separate the objects on death
-                childBody.AddExplosionForce(explosionForce, transform.position, explosionRadius, upwardsExplosionModifier, ForceMode.Force);
+                childBody = part.AddComponent<Rigidbody>();
             }
+
+            if (!part.TryGetComponent(out Collider collider))
+            {
+                collider = part.AddComponent<BoxCollider>();
+            }
+
+            // Add small explosion force to separate the objects on death
+            childBody.AddExplosionForce(explosionForce, transform.position, explosionRadius, upwardsExplosionModifier, ForceMode.Force);
+        }
+    }
+
+    private void HandlePhysicsPartsOnKill(GameObject killer, GameObject child)
+    {
+        // Remove from Enemy layer and set to Default layer to avoid further interactions of child parts as a result of being on the Enemy layer
+        child.layer = LayerMask.NameToLayer("Default");
+
+        if (killer != null && child.TryGetComponent(out Collider childCollider))
+        {
+            // Disable collisions between Enemy part and the collider that killed it
+            Physics.IgnoreCollision(childCollider, killer.GetComponent<Collider>());
+        }
+
+        if (!child.TryGetComponent(out MeshRenderer mesh))
+        {
+            Debug.Log(child.gameObject.name);
+            // Destroy all non-visible parts and the Parent gameobject
+            Destroy(child);
+        }
+        else
+        {
+            // Start sink and dismantle visual to rendered parts
+            Sinkable sinkable = child.AddComponent<Sinkable>();
+            sinkable.EnableSink();
+            DismantleEnemyPart(child);
         }
     }
 
     /**
-     * Disable collisions and velocity of objects, slowly sink downward and destroy after some time.
-     * 
-     * @return IEnumerator
+     *  Handle killing enemy including disabling animations, breaking them apart, disabling gravity, and setting destroy timer
+     *  
+     *  @return void
      */
-    IEnumerator EnableSink(List<GameObject> children) // FIXME: Can this be moved to the Sinkable class?
+    public virtual void Kill(GameObject killer)
     {
-        yield return new WaitForSeconds(0.1f);
+        ScoreManager.Add();
 
-        foreach (var childObject in children)
+        if (GetComponent<Animator>())
         {
-            Sinkable sinkable = childObject.AddComponent<Sinkable>();
-            sinkable.EnableSink();
+            GetComponent<Animator>().enabled = false;
+        }
+
+        GetComponent<Rigidbody>().useGravity = true;
+
+        foreach (var child in gameObject.GetComponentsInChildren<Transform>().Select(element => element.gameObject))
+        {
+            HandlePhysicsPartsOnKill(killer, child);
         }
     }
 
@@ -106,7 +132,7 @@ public abstract class Enemy : MonoBehaviour
      */
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        if (alive && !ignoredDamageCollisionTags.Contains(collision.transform.root.gameObject.tag))
+        if (!ignoredDamageCollisionTags.Contains(collision.transform.root.gameObject.tag))
         {
             if (collision.transform.TryGetComponent(out GiantGrabInteractable forceGrabPullInteractable))
             {
@@ -125,59 +151,9 @@ public abstract class Enemy : MonoBehaviour
 
             if (health <= 0)
             {
-                // Disable collision between the killing object and the enemy
-                Collider[] colliders = GetComponentsInChildren<Collider>();
-                foreach (var childCollider in colliders)
-                {
-                    Physics.IgnoreCollision(childCollider, collision.collider);
-                }
-
-                Kill();
+                Kill(collision.gameObject);
             }
         }
-    }
-
-    /**
-     *  Handle killing enemy including disabling animations, breaking them apart, disabling gravity, and setting destroy timer
-     *  
-     *  @return void
-     */
-    public virtual void Kill()
-    {
-        alive = false; // FIXME: is this used anywhere? Parent object gets destroyed right after.
-
-        // Increment score
-        ScoreManager.Add();
-
-        if (GetComponent<Animator>())
-        {
-            GetComponent<Animator>().enabled = false;
-        }
-
-        GetComponent<Rigidbody>().useGravity = true;
-
-        Transform[] children = gameObject.GetComponentsInChildren<Transform>();
-        List<GameObject> renderedChildObjects = new List<GameObject>();
-        foreach (var child in children)
-        {
-            // Remove from Enemy layer and set to Default layer to avoid further interactions as a result of being an Enemy
-            child.gameObject.layer = LayerMask.NameToLayer("Default");
-
-            //Destroy(child.gameObject);
-            if (!child.TryGetComponent(out MeshRenderer mesh))
-            {
-                // Destroy all non-visible objects
-                Destroy(child.gameObject, 5); // FIXME: Why is this not immediate?
-            }
-            else
-            {
-                renderedChildObjects.Add(child.gameObject);
-            }
-        }
-
-        DismantleEnemy(renderedChildObjects);
-        StartCoroutine(EnableSink(renderedChildObjects));
-        //Destroy(gameObject); // FIXME: this might cause issues with the EnableSink coroutine
     }
 
     /**

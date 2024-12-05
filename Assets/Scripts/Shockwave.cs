@@ -31,7 +31,7 @@ public class Shockwave : MonoBehaviour
                 enemyParts.Add(mesh.gameObject);
             }
 
-            enemy.Kill();
+            enemy.Kill(gameObject);
 
             // Apply explosion force to each piece of enemy with a rigidbody.
             foreach (GameObject enemyPart in enemyParts)
