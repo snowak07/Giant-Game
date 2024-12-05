@@ -4,23 +4,26 @@ using System;
 using UnityEngine;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEngine.InputSystem.HID;
 
 public abstract class Enemy : MonoBehaviour
 {
     public string[] ignoredDamageCollisionTags = { "Enemy", "Water" };
     public Transform playerTransform = null;
     public Transform playerBodyTransform = null;
-    public float health { get; set; }
+    public float health { get; set; } // TODO: Make this viewable but not editable in editor?
 
     public bool IsPickedUp { get; set; }
 
+    protected bool killInstantly;
     protected float explosionForce = 200.0f;
     protected float explosionRadius = 3.0f;
     protected float upwardsExplosionModifier = 3.0f;
 
-    protected Enemy(float health)
+    protected Enemy(float health, bool killInstantly = false)
     {
         this.health = health;
+        this.killInstantly = killInstantly;
     }
 
     /**
@@ -106,8 +109,18 @@ public abstract class Enemy : MonoBehaviour
      *  
      *  @return void
      */
-    public virtual void Kill(GameObject killer)
+    public virtual void Kill(GameObject killer = null)
     {
+        if (killInstantly)
+        {
+            foreach (GameObject child in gameObject.GetComponentsInChildren<Transform>().Select(element => element.gameObject))
+            {
+                Destroy(child);
+            }
+
+            return;
+        }
+
         OnKill(); // Handle child OnKill functions. // TODO: Add below calls to OnKill?
 
         ScoreManager.Add(); // FIXME: Scoreable component?
@@ -136,6 +149,11 @@ public abstract class Enemy : MonoBehaviour
     {
         if (!ignoredDamageCollisionTags.Contains(collision.transform.root.gameObject.tag))
         {
+            if (killInstantly)
+            {
+                Kill(collision.gameObject);
+            }
+
             if (collision.transform.TryGetComponent(out GiantGrabInteractable forceGrabPullInteractable))
             {
                 // Check for impact cooldown so that an Enemy can only be hit once by an object after leaving the player's hand

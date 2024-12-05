@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TargetEnemy : Enemy
 {
-    protected TargetEnemy() : base(0.01f)
+    protected TargetEnemy() : base(0.01f, true)
     {
 
     }

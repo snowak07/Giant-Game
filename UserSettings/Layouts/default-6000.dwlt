@@ -846,9 +846,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -15.436905, y: -0.79525757, z: 14.3479}
+    m_Target: {x: -63.7147, y: -32.81024, z: 21.363747}
     speed: 2
-    m_Value: {x: -15.436905, y: -0.79525757, z: 14.3479}
+    m_Value: {x: -63.7147, y: -32.81024, z: 21.363747}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -894,13 +894,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.40378606, y: -0.24219766, z: 0.11174945, w: 0.8750948}
+    m_Target: {x: 0.335506, y: -0.22443622, z: 0.0826301, w: 0.91116273}
     speed: 2
-    m_Value: {x: -0.40378606, y: 0.24219768, z: -0.11174945, w: -0.87509483}
+    m_Value: {x: -0.33550596, y: 0.22443622, z: -0.0826301, w: -0.91116273}
   m_Size:
-    m_Target: 56.127922
+    m_Target: 48.533966
     speed: 2
-    m_Value: 56.127922
+    m_Value: 48.533966
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1275,7 +1275,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: d0c20000
     m_LastClickedID: 49872
-    m_ExpandedIDs: 00000000a2c20000a4c20000a6c20000a8c20000aac20000acc20000aec20000b0c20000b2c20000b4c20000b6c20000b8c20000bac20000bcc20000bec20000c0c20000c2c20000c4c20000c6c20000c8c20000cac20000ccc20000cec20000
+    m_ExpandedIDs: 00000000a4c20000a6c20000a8c20000aac20000acc20000aec20000b0c20000b2c20000b4c20000b6c20000b8c20000bac20000bcc20000bec20000c0c20000c2c20000c4c20000c6c20000c8c20000cac20000ccc20000cec20000d0c20000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1304,7 +1304,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000a2c20000a4c20000a6c20000a8c20000aac20000acc20000aec20000b0c20000b2c20000b4c20000b6c20000b8c20000bac20000bcc20000bec20000c0c20000c2c20000c4c20000c6c20000c8c20000cac20000ccc20000cec20000
+    m_ExpandedIDs: 00000000a4c20000a6c20000a8c20000aac20000acc20000aec20000b0c20000b2c20000b4c20000b6c20000b8c20000bac20000bcc20000bec20000c0c20000c2c20000c4c20000c6c20000c8c20000cac20000ccc20000cec20000d0c20000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

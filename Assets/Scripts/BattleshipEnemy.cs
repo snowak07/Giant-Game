@@ -136,7 +136,7 @@ public class BattleshipEnemy : Enemy
         // Check if the boat has tipped over
         if ((transform.rotation.eulerAngles.x > 90 && transform.rotation.eulerAngles.x < 270) || (transform.rotation.eulerAngles.z > 90 && transform.rotation.eulerAngles.z < 270))
         {
-            Kill(null);
+            Kill();
         }
 
         if (playerTransform != null)
