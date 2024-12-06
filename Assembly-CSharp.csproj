@@ -99,7 +99,6 @@
     <Compile Include="Assets\Scripts\ExplosionHandler.cs" />
     <Compile Include="Assets\Scripts\ShockwaveAbility.cs" />
     <Compile Include="Assets\Scripts\GiantHandInteractor.cs" />
-    <Compile Include="Assets\Scripts\PathPoint.cs" />
     <Compile Include="Assets\Scripts\RayToggler.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\GunShoot.cs" />
     <Compile Include="Assets\Scripts\FlyingEnemy.cs" />
