@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(ProjectileLauncher))]
+[RequireComponent(typeof(PathFollower))]
 public class BattleshipEnemy : Enemy
 {
     public int maxRandomizedOrbitRadius = 300;
@@ -94,36 +95,59 @@ public class BattleshipEnemy : Enemy
         //}
     }
 
+    //public override (Vector3, Quaternion) GetNextTransform(float time, bool applyTargetingOffset = false)
+    //{
+    //    float timeRemainingToSimulate = time;
+    //    Vector3 currentPosition = transform.position;
+    //    Quaternion currentRotation = transform.rotation;
+
+    //    while (timeRemainingToSimulate > 0)
+    //    {
+    //        Vector3 currentPathPosition = currentPosition.normalized * orbitRadius;
+    //        float timeCountCurrent = Mathf.Atan2(currentPathPosition.z, currentPathPosition.x);
+    //        float desiredPositionTimeCount = timeCountCurrent + desiredPositionLeadingAngleDegrees * Mathf.PI / 180;
+
+    //        Vector3 desiredPosition = new Vector3(orbitRadius * Mathf.Cos(desiredPositionTimeCount), currentPosition.y, orbitRadius * Mathf.Sin(desiredPositionTimeCount));
+
+    //        Vector3 towardsDesiredPosition = desiredPosition - currentPosition;
+    //        Quaternion desiredRotation = Quaternion.LookRotation(towardsDesiredPosition, Vector3.up);
+    //        Quaternion newDirection = Quaternion.RotateTowards(currentRotation, desiredRotation, maxRotationalSpeed * Time.deltaTime);
+
+    //        currentRotation = newDirection;
+
+    //        Vector3 newPosition = (maxTranslationalSpeed * Time.deltaTime) * (currentRotation * Vector3.forward) + currentPosition;
+
+    //        currentPosition = newPosition;
+
+    //        timeRemainingToSimulate -= Time.fixedDeltaTime;
+    //    }
+
+    //    if (applyTargetingOffset && targetingOffset != null)
+    //    {
+    //        currentPosition += targetingOffset.position; // Add targeting offset so its in the center of mass
+    //    }
+
+    //    return (currentPosition, currentRotation);
+    //}
+
     public override (Vector3, Quaternion) GetNextTransform(float time, bool applyTargetingOffset = false)
     {
         float timeRemainingToSimulate = time;
         Vector3 currentPosition = transform.position;
         Quaternion currentRotation = transform.rotation;
+        PathFollower pathFollower = GetComponent<PathFollower>();
 
         while (timeRemainingToSimulate > 0)
         {
-            Vector3 currentPathPosition = currentPosition.normalized * orbitRadius;
-            float timeCountCurrent = Mathf.Atan2(currentPathPosition.z, currentPathPosition.x);
-            float desiredPositionTimeCount = timeCountCurrent + desiredPositionLeadingAngleDegrees * Mathf.PI / 180;
+            (Vector3, Quaternion) waypoint = pathFollower.getNextPathPoint(currentPosition);
 
-            Vector3 desiredPosition = new Vector3(orbitRadius * Mathf.Cos(desiredPositionTimeCount), currentPosition.y, orbitRadius * Mathf.Sin(desiredPositionTimeCount));
-
-            Vector3 towardsDesiredPosition = desiredPosition - currentPosition;
+            Vector3 towardsDesiredPosition = waypoint.Item1 - currentPosition;
+            towardsDesiredPosition.y = 0; // Correct unintended vertical movement type for this enemy type
             Quaternion desiredRotation = Quaternion.LookRotation(towardsDesiredPosition, Vector3.up);
-            Quaternion newDirection = Quaternion.RotateTowards(currentRotation, desiredRotation, maxRotationalSpeed * Time.deltaTime);
-
-            currentRotation = newDirection;
-
-            Vector3 newPosition = (maxTranslationalSpeed * Time.deltaTime) * (currentRotation * Vector3.forward) + currentPosition;
-
-            currentPosition = newPosition;
+            currentRotation = Quaternion.RotateTowards(currentRotation, desiredRotation, maxRotationalSpeed * Time.deltaTime);
+            currentPosition = (maxTranslationalSpeed * Time.deltaTime) * (currentRotation * Vector3.forward) + currentPosition;
 
             timeRemainingToSimulate -= Time.fixedDeltaTime;
-        }
-
-        if (applyTargetingOffset && targetingOffset != null)
-        {
-            currentPosition += targetingOffset.position; // Add targeting offset so its in the center of mass
         }
 
         return (currentPosition, currentRotation);

@@ -8,14 +8,16 @@ public class PathFollower : MonoBehaviour
     protected int lastPointIndex = -1;
     protected float arrivedThreshold = 0.25f;
 
-    protected int getClosestPathPointIndex()
+    // TODO: Handle getting future position calls by not changing lastPointIndex or setting to a temp lastPointIndex value
+    // TODO: Correct for a PathFollowers max rotational speed so that it doesn't try to loop around when it doesn't quite hit a waypoint
+    protected int getClosestPathPointIndex(Vector3 currentPosition)
     {
         int closestPointIndex = 0;
         float closestDistance = float.MaxValue;
         for (int i = 0; i < pathPoints.Length; i++)
         {
             Transform point = pathPoints[i];
-            float distance = (point.position - transform.position).magnitude;
+            float distance = (point.position - currentPosition).magnitude;
             if (distance < closestDistance)
             {
                 closestPointIndex = i;
@@ -28,13 +30,14 @@ public class PathFollower : MonoBehaviour
         return closestPointIndex;
     }
 
-    public (Vector3, Quaternion) getNextPathPoint()
+    public (Vector3, Quaternion) getNextPathPoint(Vector3 currentPosition)
     {
-        int closestPointIndex = getClosestPathPointIndex();
+        int closestPointIndex = getClosestPathPointIndex(currentPosition);
         if (closestPointIndex == lastPointIndex)
         {
             // Return next point if the current closest has already been passed through
-            return (pathPoints[closestPointIndex + 1].position, pathPoints[closestPointIndex + 1].rotation);
+            int nextPointIndex = (closestPointIndex + 1) % pathPoints.Length;
+            return (pathPoints[nextPointIndex].position, pathPoints[nextPointIndex].rotation);
         }
 
         return (pathPoints[closestPointIndex].position, pathPoints[closestPointIndex].rotation);
