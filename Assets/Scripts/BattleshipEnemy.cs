@@ -95,6 +95,7 @@ public class BattleshipEnemy : Enemy
         //}
     }
 
+    /////////////////////////////////////// Old Movement ///////////////////////////////////////
     //public override (Vector3, Quaternion) GetNextTransform(float time, bool applyTargetingOffset = false)
     //{
     //    float timeRemainingToSimulate = time;
@@ -129,6 +130,7 @@ public class BattleshipEnemy : Enemy
 
     //    return (currentPosition, currentRotation);
     //}
+    ////////////////////////////////////////////////////////////////////////////////////////////
 
     public override (Vector3, Quaternion) GetNextTransform(float time, bool applyTargetingOffset = false)
     {
