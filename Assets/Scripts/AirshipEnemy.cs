@@ -21,18 +21,14 @@ public class AirshipEnemy : Enemy
             (Vector3, Quaternion) waypoint = pathFollower.getNextPathPoint(currentPosition);
 
             Vector3 towardsDesiredPosition = waypoint.Item1 - currentPosition;
-            Vector3 horizontalTowardsDesiredPosition = towardsDesiredPosition;
-            horizontalTowardsDesiredPosition.y = 0; // Remove vertical component for rotation so airship doesn't pitch up
+            Vector3 horizontalTowardsDesiredPosition = new Vector3(towardsDesiredPosition.x, 0, towardsDesiredPosition.z);
             Quaternion desiredRotation = Quaternion.LookRotation(horizontalTowardsDesiredPosition, Vector3.up);
             currentRotation = Quaternion.RotateTowards(currentRotation, desiredRotation, maxRotationalSpeed * Time.deltaTime);
 
             // Add independant vertical velocity from the horizontal velocity since it always travels forward without pitching up
-            Vector3 horizontalTowardsDesiredPositionNormalized = towardsDesiredPosition.normalized;
-            horizontalTowardsDesiredPositionNormalized.y = 0;
-            Vector3 verticalTowardsDesiredPositionNormalized = towardsDesiredPosition.normalized;
-            verticalTowardsDesiredPositionNormalized.x = 0;
-            verticalTowardsDesiredPositionNormalized.z = 0;
-            Vector3 movementDirection = horizontalTowardsDesiredPositionNormalized.magnitude * Vector3.forward + verticalTowardsDesiredPositionNormalized;
+            Vector3 horizontalMovementComponent = new Vector3(towardsDesiredPosition.normalized.x, 0, towardsDesiredPosition.normalized.z);
+            Vector3 verticalMovementComponent = new Vector3(0, towardsDesiredPosition.normalized.y, 0);
+            Vector3 movementDirection = horizontalMovementComponent.magnitude * Vector3.forward + verticalMovementComponent;
             currentPosition = (maxTranslationalSpeed * Time.deltaTime) * (currentRotation * movementDirection) + currentPosition;
 
             timeRemainingToSimulate -= Time.fixedDeltaTime;
