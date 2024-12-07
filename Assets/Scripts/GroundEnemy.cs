@@ -13,16 +13,10 @@ public class GroundEnemy : Enemy
 
     private bool knockedDown = false;
 
-    /**
-     * Assign starting health
-     * 
-     * @param float         health
-     */
-    protected GroundEnemy() : base(10.0f) { }
-
     protected override void Start()
     {
         base.Start();
+        Initialize(10.0f, 2, 20);
     }
 
     protected override void UpdateEnemy()

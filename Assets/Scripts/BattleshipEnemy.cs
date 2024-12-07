@@ -7,33 +7,8 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(PathFollower))]
 public class BattleshipEnemy : Enemy
 {
-    public int maxRandomizedOrbitRadius = 300;
-    public int minRandonizedOrbitRadius = 150;
-    public float orbitRadiusStepSize = 0.1f;
-
-    public float maxRotationalSpeed = 20; // Measured in units/s
-    public float maxTranslationalSpeed = 4; // Measured in units/s
-
-    public float desiredPositionLeadingAngleDegrees = 10;
-
     public Transform targetingOffset = null;
-
-    private float orbitRadius;
-
     public Transform debugFutureTransform = null;
-
-    /**
-     * Assign starting health
-     * 
-     * @param float         health
-     */
-    protected BattleshipEnemy() : base(40.0f) 
-    {
-        // Set battleship death explosion force
-        explosionForce = 1000.0f;
-        explosionRadius = 10.0f;
-        upwardsExplosionModifier = 2.0f;
-    }
 
     protected override void OnKill()
     {
@@ -83,8 +58,12 @@ public class BattleshipEnemy : Enemy
     {
         base.Start();
 
-        // Determine random orbit radius that will determine the "desired" path.
-        orbitRadius = orbitRadiusStepSize * Random.Range(minRandonizedOrbitRadius, maxRandomizedOrbitRadius);
+        Initialize(40.0f, 4, 20);
+
+        // Set battleship death explosion force
+        explosionForce = 1000.0f;
+        explosionRadius = 10.0f;
+        upwardsExplosionModifier = 2.0f;
 
         //if (debugFutureTransform != null)
         //{
@@ -93,66 +72,6 @@ public class BattleshipEnemy : Enemy
         //    debugFutureTransform.position = futurePositionRotation.Item1;
         //    debugFutureTransform.rotation = futurePositionRotation.Item2;
         //}
-    }
-
-    /////////////////////////////////////// Old Movement ///////////////////////////////////////
-    //public override (Vector3, Quaternion) GetNextTransform(float time, bool applyTargetingOffset = false)
-    //{
-    //    float timeRemainingToSimulate = time;
-    //    Vector3 currentPosition = transform.position;
-    //    Quaternion currentRotation = transform.rotation;
-
-    //    while (timeRemainingToSimulate > 0)
-    //    {
-    //        Vector3 currentPathPosition = currentPosition.normalized * orbitRadius;
-    //        float timeCountCurrent = Mathf.Atan2(currentPathPosition.z, currentPathPosition.x);
-    //        float desiredPositionTimeCount = timeCountCurrent + desiredPositionLeadingAngleDegrees * Mathf.PI / 180;
-
-    //        Vector3 desiredPosition = new Vector3(orbitRadius * Mathf.Cos(desiredPositionTimeCount), currentPosition.y, orbitRadius * Mathf.Sin(desiredPositionTimeCount));
-
-    //        Vector3 towardsDesiredPosition = desiredPosition - currentPosition;
-    //        Quaternion desiredRotation = Quaternion.LookRotation(towardsDesiredPosition, Vector3.up);
-    //        Quaternion newDirection = Quaternion.RotateTowards(currentRotation, desiredRotation, maxRotationalSpeed * Time.deltaTime);
-
-    //        currentRotation = newDirection;
-
-    //        Vector3 newPosition = (maxTranslationalSpeed * Time.deltaTime) * (currentRotation * Vector3.forward) + currentPosition;
-
-    //        currentPosition = newPosition;
-
-    //        timeRemainingToSimulate -= Time.fixedDeltaTime;
-    //    }
-
-    //    if (applyTargetingOffset && targetingOffset != null)
-    //    {
-    //        currentPosition += targetingOffset.position; // Add targeting offset so its in the center of mass
-    //    }
-
-    //    return (currentPosition, currentRotation);
-    //}
-    ////////////////////////////////////////////////////////////////////////////////////////////
-
-    public override (Vector3, Quaternion) GetNextTransform(float time, bool applyTargetingOffset = false)
-    {
-        float timeRemainingToSimulate = time;
-        Vector3 currentPosition = transform.position;
-        Quaternion currentRotation = transform.rotation;
-        PathFollower pathFollower = GetComponent<PathFollower>();
-
-        while (timeRemainingToSimulate > 0)
-        {
-            (Vector3, Quaternion) waypoint = pathFollower.getNextPathPoint(currentPosition);
-
-            Vector3 towardsDesiredPosition = waypoint.Item1 - currentPosition;
-            towardsDesiredPosition.y = 0; // Remove vertical component for rotation
-            Quaternion desiredRotation = Quaternion.LookRotation(towardsDesiredPosition, Vector3.up);
-            currentRotation = Quaternion.RotateTowards(currentRotation, desiredRotation, maxRotationalSpeed * Time.deltaTime);
-            currentPosition = (maxTranslationalSpeed * Time.deltaTime) * (currentRotation * Vector3.forward) + currentPosition;
-
-            timeRemainingToSimulate -= Time.fixedDeltaTime;
-        }
-
-        return (currentPosition, currentRotation);
     }
 
     protected override void UpdateEnemy()

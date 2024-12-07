@@ -39,16 +39,10 @@ public class FlyingEnemy : Enemy
     private bool firingCooldown;
     private bool enteredRange;
 
-    /**
-     * Assign starting health
-     * 
-     * @param float         health
-     */
-    protected FlyingEnemy() : base(20.0f) { }
-
     protected override void Start()
     {
         base.Start();
+        Initialize(20.0f, 4, 25);
 
         maxRange = Random.Range(0, 5) + 10;
         clockwiseOrbit = Random.Range(0, 2) == 0;
