@@ -6,7 +6,7 @@ public class PathFollower : MonoBehaviour
 
     // Used to keep the PathFollower going to each point instead of getting stuck at one path point
     protected int lastPointIndex = -1;
-    protected float arrivedThreshold = 0.25f;
+    protected float arrivedThreshold = 1f;
 
     // TODO: Handle getting future position calls by not changing lastPointIndex or setting to a temp lastPointIndex value
     // TODO: Correct for a PathFollowers max rotational speed so that it doesn't try to loop around when it doesn't quite hit a waypoint

@@ -12,7 +12,7 @@ public class BattleshipEnemy : Enemy
     public float orbitRadiusStepSize = 0.1f;
 
     public float maxRotationalSpeed = 20; // Measured in units/s
-    public float maxTranslationalSpeed = 2; // Measured in units/s
+    public float maxTranslationalSpeed = 4; // Measured in units/s
 
     public float desiredPositionLeadingAngleDegrees = 10;
 
@@ -142,7 +142,7 @@ public class BattleshipEnemy : Enemy
             (Vector3, Quaternion) waypoint = pathFollower.getNextPathPoint(currentPosition);
 
             Vector3 towardsDesiredPosition = waypoint.Item1 - currentPosition;
-            towardsDesiredPosition.y = 0; // Correct unintended vertical movement type for this enemy type
+            towardsDesiredPosition.y = 0; // Remove vertical component for rotation
             Quaternion desiredRotation = Quaternion.LookRotation(towardsDesiredPosition, Vector3.up);
             currentRotation = Quaternion.RotateTowards(currentRotation, desiredRotation, maxRotationalSpeed * Time.deltaTime);
             currentPosition = (maxTranslationalSpeed * Time.deltaTime) * (currentRotation * Vector3.forward) + currentPosition;

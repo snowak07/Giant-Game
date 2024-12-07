@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
+[RequireComponent(typeof(FlightAlignment))]
 public class TreeSpear : GiantGrabInteractable
 {
     public GameObject targetChecker = null;
@@ -15,7 +16,7 @@ public class TreeSpear : GiantGrabInteractable
     {
         base.DisablePickup(args);
 
-        flightAlignmentEnabled = true;
+        GetComponent<FlightAlignment>().Enable();
     }
 
     /**
@@ -44,10 +45,12 @@ public class TreeSpear : GiantGrabInteractable
         //    flightAlignmentEnabled = true;
         //}
 
-        if (detached && detectedEnemyCollider != null)
+        if (detached && detectedEnemyCollider != null && Helpers.TryGetComponentInParent(detectedEnemyCollider.gameObject, out Enemy detectedEnemy)) //(detectedEnemyCollider.gameObject.TryGetComponent(out Enemy detectedEnemy) || detectedEnemyCollider.transform.parent.gameObject.TryGetComponent(out Enemy detectedEnemy))
         {
-            GameObject detectedEnemyObject = detectedEnemyCollider.gameObject;
-            Vector3 interceptDirection = TrajectoryHelper.CalculateInterceptionDirection(transform.position, GetComponent<Rigidbody>().linearVelocity.magnitude, detectedEnemyObject.GetComponentInParent<Enemy>().GetNextTransform);
+            Debug.Log("Got TryGetComponentInParent");
+            //GameObject detectedEnemyObject = detectedEnemyCollider.gameObject;
+            //Vector3 interceptDirection = TrajectoryHelper.CalculateInterceptionDirection(transform.position, GetComponent<Rigidbody>().linearVelocity.magnitude, detectedEnemyObject.GetComponentInParent<Enemy>().GetNextTransform);
+            Vector3 interceptDirection = TrajectoryHelper.CalculateInterceptionDirection(transform.position, GetComponent<Rigidbody>().linearVelocity.magnitude, detectedEnemy.GetNextTransform);
 
             if (interceptDirection != Vector3.zero)
             {
@@ -57,18 +60,6 @@ public class TreeSpear : GiantGrabInteractable
             
             detached = false;
             detectedEnemyCollider = null;
-        }
-
-        if (flightAlignmentEnabled)
-        {
-            if (gameObject.TryGetComponent<Rigidbody>(out Rigidbody body))
-            {
-                Vector3 newOrientation = body.linearVelocity.normalized;
-                if (newOrientation != Vector3.zero)
-                {
-                    transform.rotation = Quaternion.LookRotation(newOrientation);
-                }
-            }
         }
     }
 
@@ -87,7 +78,7 @@ public class TreeSpear : GiantGrabInteractable
 
         if (collision.collider.gameObject.tag == "Water" || collision.collider.gameObject.tag == "Ground")
         {
-            flightAlignmentEnabled = false;
+            GetComponent<FlightAlignment>().Disable();
         }
     }
 }

@@ -67,15 +67,18 @@
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\DecalDestroyer.cs" />
     <Compile Include="Assets\Scripts\NewActionBasedXRController.cs" />
     <Compile Include="Assets\Scripts\CannonTurn.cs" />
+    <Compile Include="Assets\Scripts\ScrapeArrows.cs" />
     <Compile Include="Assets\Scripts\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\PunchThrow.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\ParticleCollision.cs" />
     <Compile Include="Assets\Scripts\LineRendererSettings.cs" />
+    <Compile Include="Assets\Scripts\AirshipEnemy.cs" />
     <Compile Include="Assets\Scripts\GroundEnemy.cs" />
     <Compile Include="Assets\Scripts\ProjectileLauncher.cs" />
     <Compile Include="Assets\Scripts\CreateBoulder.cs" />
     <Compile Include="Assets\Scripts\ReadRotation.cs" />
     <Compile Include="Assets\Scripts\PIDTest.cs" />
+    <Compile Include="Assets\Scripts\Helpers.cs" />
     <Compile Include="Assets\Scripts\TrajectoryHelper.cs" />
     <Compile Include="Assets\Scripts\ImpactExplosion.cs" />
     <Compile Include="Assets\Scripts\PathFollower.cs" />
@@ -92,6 +95,7 @@
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\ParticleMenu.cs" />
     <Compile Include="Assets\Scripts\GrabDirectInteractor.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Misc Effects\Scripts\SpawnEffect.cs" />
+    <Compile Include="Assets\Scripts\FlightAlignment.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\AdjustTimeScale.cs" />
     <Compile Include="Assets\Scripts\BreakableInteractable.cs" />
     <Compile Include="Assets\Scripts\BattleshipEnemy.cs" />
@@ -122,11 +126,13 @@
     <Compile Include="Assets\Scripts\TestExplosion.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Ramps\Runtime\RampAsset.cs" />
     <Compile Include="Assets\Scripts\RouteScheduler.cs" />
+    <Compile Include="Assets\Scripts\StickOnHit.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\Punch.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\ExtinguishableFire.cs" />
     <Compile Include="Assets\Scripts\ImpactAudio.cs" />
     <Compile Include="Assets\Scripts\GiantBody.cs" />
+    <Compile Include="Assets\Scripts\EnemyArrow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

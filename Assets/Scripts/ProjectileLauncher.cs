@@ -24,8 +24,10 @@ public class ProjectileLauncher : MonoBehaviour
             GameObject projectileObject = Instantiate(projectilePrefab, firingPosition, transform.rotation);
 
             // Enable impact cooldown so the projecile doesn't collide with the Enemy
-            GiantGrabInteractable enemyProjectile = projectileObject.GetComponent<GiantGrabInteractable>();
-            enemyProjectile.ImpactCooldown = true;
+            if (projectileObject.TryGetComponent(out GiantGrabInteractable enemyProjectile))
+            {
+                enemyProjectile.ImpactCooldown = true;
+            }
 
             // Get rigidbody and add force and torque
             Rigidbody projectile = projectileObject.GetComponent<Rigidbody>();

@@ -83,15 +83,14 @@ public abstract class Enemy : MonoBehaviour
         // Remove from Enemy layer and set to Default layer to avoid further interactions of child parts as a result of being on the Enemy layer
         child.layer = LayerMask.NameToLayer("Default");
 
-        if (killer != null && child.TryGetComponent(out Collider childCollider))
+        if (killer != null && child.TryGetComponent(out Collider childCollider) && killer.TryGetComponent(out Collider killerCollider))
         {
             // Disable collisions between Enemy part and the collider that killed it
-            Physics.IgnoreCollision(childCollider, killer.GetComponent<Collider>());
+            Physics.IgnoreCollision(childCollider, killerCollider);
         }
 
         if (!child.TryGetComponent(out MeshRenderer mesh))
         {
-            Debug.Log(child.gameObject.name);
             // Destroy all non-visible parts and the Parent gameobject
             Destroy(child);
         }
