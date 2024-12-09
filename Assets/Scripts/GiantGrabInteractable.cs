@@ -57,7 +57,7 @@ public class GiantGrabInteractable : UnityEngine.XR.Interaction.Toolkit.Interact
         // Destroy object 20 seconds after contact with water.
         if (collision.gameObject.transform.root.tag == "Water")
         {
-            Destroy(this, 20.0f);
+            Destroy(gameObject, 20.0f);
         }
     }
 }

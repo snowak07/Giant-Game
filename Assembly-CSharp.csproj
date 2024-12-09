@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\PathFollower.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\Shockwave.cs" />
+    <Compile Include="Assets\Scripts\TreePuller.cs" />
     <Compile Include="Assets\Scripts\PhysicsHand.cs" />
     <Compile Include="Assets\Scripts\EnemyGrabInteractable.cs" />
     <Compile Include="Assets\Scripts\GlobalPhysicsSetup.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\AdjustTimeScale.cs" />
     <Compile Include="Assets\Scripts\BreakableInteractable.cs" />
     <Compile Include="Assets\Scripts\BattleshipEnemy.cs" />
+    <Compile Include="Assets\Scripts\TreeSpearGrower.cs" />
     <Compile Include="Assets\Scripts\TargetChecker.cs" />
     <Compile Include="Assets\Scripts\ExplosionHandler.cs" />
     <Compile Include="Assets\Scripts\ShockwaveAbility.cs" />
@@ -133,6 +135,7 @@
     <Compile Include="Assets\Scripts\ImpactAudio.cs" />
     <Compile Include="Assets\Scripts\GiantBody.cs" />
     <Compile Include="Assets\Scripts\EnemyArrow.cs" />
+    <Compile Include="Assets\Scripts\TreeSpearRoot.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

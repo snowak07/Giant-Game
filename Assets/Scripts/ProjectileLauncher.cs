@@ -53,7 +53,6 @@ public class ProjectileLauncher : MonoBehaviour
     public Vector3 ShootProjectile(Vector3 targetPosition)
     {
         Vector3 projectileVector = TrajectoryHelper.CalculateFiringDirection(firingOffset.position, targetPosition, projectileSpeed);
-        //UpdateCannonPosition(projectileVector);
 
         StartCoroutine(ShootProjectileWorker(targetPosition, projectileVector));
         return projectileVector.normalized; // Return firing direction

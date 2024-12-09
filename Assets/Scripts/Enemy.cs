@@ -242,11 +242,10 @@ public abstract class Enemy : MonoBehaviour
             }
             Quaternion desiredRotation = Quaternion.LookRotation(rotationDirection, Vector3.up);
             currentRotation = Quaternion.RotateTowards(currentRotation, desiredRotation, maxRotationalSpeed * Time.deltaTime);
-            //Debug.Log(gameObject.name + ": " + flying + ", " + pitch);
+
             Vector3 movementDirection = Vector3.forward;
             if (flying && !pitch)
             {
-                //Debug.Log("Flying no Pitch");
                 Vector3 horizontalMovementComponent = new Vector3(towardsDesiredPosition.normalized.x, 0, towardsDesiredPosition.normalized.z);
                 Vector3 verticalMovementComponent = new Vector3(0, towardsDesiredPosition.normalized.y, 0);
                 movementDirection = horizontalMovementComponent.magnitude * Vector3.forward + verticalMovementComponent;
