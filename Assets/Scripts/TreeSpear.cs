@@ -12,6 +12,24 @@ public class TreeSpear : GiantGrabInteractable
 
     //public bool debugThrowTreeSpear = false;
 
+    //protected void Start()
+    //{
+    //    if (TryGetComponent(out TreeSpearRoot root))
+    //    {
+    //        selectEntered.AddListener(root.DisableReturnForce);
+    //        selectExited.AddListener(root.EnableReturnForce);
+    //    }
+    //}
+
+    //protected void Disable()
+    //{
+    //    if (TryGetComponent(out TreeSpearRoot root))
+    //    {
+    //        selectEntered.RemoveListener(root.DisableReturnForce);
+    //        selectExited.RemoveListener(root.EnableReturnForce);
+    //    }
+    //}
+
     protected override void DisablePickup(SelectExitEventArgs args)
     {
         base.DisablePickup(args);

@@ -44,7 +44,7 @@ public class TreeSpearGrower : MonoBehaviour
         spawnedTreeSpear.GetComponent<Rigidbody>().isKinematic = false;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (!fullyGrown)
         {
@@ -74,10 +74,9 @@ public class TreeSpearGrower : MonoBehaviour
         spawnedTreeSpear.transform.localScale += new Vector3(scaleIncrement, scaleIncrement, scaleIncrement);
         spawnedTreeSpear.transform.position += scaleIncrement * groundOffset;
 
-        if (spawnedTreeSpear.transform.localScale.x >= 1)
+        if (spawnedTreeSpear.transform.localScale.x >= 0.98f) // Not one because it stops before sometimes for some reason
         {
             spawnedTreeSpear.transform.localScale = Vector3.one; // Round off scale values to 1
-            //AddSpringJoint();
             spawnedTreeSpear.GetComponent<TreeSpearRoot>().AddRoot();
         }
     }
