@@ -10,9 +10,6 @@ public class TreeSpearGrower : MonoBehaviour
     protected bool fullyGrown = false;
     protected Vector3 groundOffset = new Vector3(0, 2.5f, 0);
 
-    //protected float uprightForce = 10.0f;
-    //protected float uprightDampening = 2.0f;
-
     void Start()
     {
         GrowTreeSpear();
@@ -60,7 +57,12 @@ public class TreeSpearGrower : MonoBehaviour
             }
         }
 
-        if (fullyGrown && spawnedTreeSpear.TryGetComponent(out TreeSpearRoot root) && root.broken)
+        if (
+            fullyGrown && 
+            spawnedTreeSpear != null && 
+            spawnedTreeSpear.TryGetComponent(out TreeSpearRoot root) && 
+            root.broken
+           )
         {
             GrowTreeSpear(); // Loop tree spear growth
         }
