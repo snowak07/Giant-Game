@@ -53,13 +53,13 @@ public class TreeSpearRoot : MonoBehaviour
     public void DisableReturnForce(SelectEnterEventArgs args)
     {
         Debug.Log("DisableReturnForce");
-        //// Disabled on Select so that it doesn't interfere with PhysicsHand joint update
-        //applyReturnForce = false;
+        // Disabled on Select so that it doesn't interfere with PhysicsHand joint update
+        applyReturnForce = false;
     }
 
     public void EnableReturnForce(SelectExitEventArgs args)
     {
         Debug.Log("EnableReturnForce");
-        //applyReturnForce = true;
+        applyReturnForce = true;
     }
 }

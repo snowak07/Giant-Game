@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-//[RequireComponent(typeof(FlightAlignment))]
+[RequireComponent(typeof(FlightAlignment))]
 public class TreeSpear : GiantGrabInteractable
 {
     public GameObject targetChecker = null;
@@ -11,15 +11,6 @@ public class TreeSpear : GiantGrabInteractable
     protected bool flightAlignmentEnabled = false;
 
     //public bool debugThrowTreeSpear = false;
-
-    //protected void Start()
-    //{
-    //    //if (TryGetComponent(out TreeSpearRoot root))
-    //    //{
-    //        //selectEntered.AddListener(root.DisableReturnForce);
-    //        //selectExited.AddListener(root.EnableReturnForce);
-    //    //}
-    //}
 
     protected override void OnEnable()
     {
@@ -47,7 +38,7 @@ public class TreeSpear : GiantGrabInteractable
     {
         base.DisablePickup(args);
 
-        //GetComponent<FlightAlignment>().Enable();
+        GetComponent<FlightAlignment>().Enable();
     }
 
     /**
@@ -104,9 +95,9 @@ public class TreeSpear : GiantGrabInteractable
     {
         base.OnCollisionEnter(collision);
 
-        //if (collision.collider.gameObject.tag == "Water" || collision.collider.gameObject.tag == "Ground")
-        //{
-        //    GetComponent<FlightAlignment>().Disable();
-        //}
+        if (collision.collider.gameObject.tag == "Water" || collision.collider.gameObject.tag == "Ground")
+        {
+            GetComponent<FlightAlignment>().Disable();
+        }
     }
 }
