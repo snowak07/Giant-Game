@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-[RequireComponent(typeof(FlightAlignment))]
+//[RequireComponent(typeof(FlightAlignment))]
 public class TreeSpear : GiantGrabInteractable
 {
     public GameObject targetChecker = null;
@@ -14,27 +14,40 @@ public class TreeSpear : GiantGrabInteractable
 
     //protected void Start()
     //{
-    //    if (TryGetComponent(out TreeSpearRoot root))
-    //    {
-    //        selectEntered.AddListener(root.DisableReturnForce);
-    //        selectExited.AddListener(root.EnableReturnForce);
-    //    }
+    //    //if (TryGetComponent(out TreeSpearRoot root))
+    //    //{
+    //        //selectEntered.AddListener(root.DisableReturnForce);
+    //        //selectExited.AddListener(root.EnableReturnForce);
+    //    //}
     //}
 
-    //protected void Disable()
-    //{
-    //    if (TryGetComponent(out TreeSpearRoot root))
-    //    {
-    //        selectEntered.RemoveListener(root.DisableReturnForce);
-    //        selectExited.RemoveListener(root.EnableReturnForce);
-    //    }
-    //}
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+
+        if (TryGetComponent(out TreeSpearRoot root))
+        {
+            selectEntered.AddListener(root.DisableReturnForce);
+            selectExited.AddListener(root.EnableReturnForce);
+        }
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+
+        if (TryGetComponent(out TreeSpearRoot root))
+        {
+            selectEntered.RemoveListener(root.DisableReturnForce);
+            selectExited.RemoveListener(root.EnableReturnForce);
+        }
+    }
 
     protected override void DisablePickup(SelectExitEventArgs args)
     {
         base.DisablePickup(args);
 
-        GetComponent<FlightAlignment>().Enable();
+        //GetComponent<FlightAlignment>().Enable();
     }
 
     /**
@@ -91,9 +104,9 @@ public class TreeSpear : GiantGrabInteractable
     {
         base.OnCollisionEnter(collision);
 
-        if (collision.collider.gameObject.tag == "Water" || collision.collider.gameObject.tag == "Ground")
-        {
-            GetComponent<FlightAlignment>().Disable();
-        }
+        //if (collision.collider.gameObject.tag == "Water" || collision.collider.gameObject.tag == "Ground")
+        //{
+        //    GetComponent<FlightAlignment>().Disable();
+        //}
     }
 }

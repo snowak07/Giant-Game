@@ -74,6 +74,7 @@ public class TreeSpearGrower : MonoBehaviour
         spawnedTreeSpear.transform.localScale += new Vector3(scaleIncrement, scaleIncrement, scaleIncrement);
         spawnedTreeSpear.transform.position += scaleIncrement * groundOffset;
 
+        // FIXME: I think using FixedUpdate is causing this issue?
         if (spawnedTreeSpear.transform.localScale.x >= 0.98f) // Not one because it stops before sometimes for some reason
         {
             spawnedTreeSpear.transform.localScale = Vector3.one; // Round off scale values to 1

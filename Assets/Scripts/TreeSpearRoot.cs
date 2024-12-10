@@ -36,7 +36,7 @@ public class TreeSpearRoot : MonoBehaviour
 
     protected void FixedUpdate()
     {
-        if (!broken && TryGetComponent(out ConfigurableJoint joint) && TryGetComponent(out Rigidbody treeSpearBody))
+        if (applyReturnForce && !broken && TryGetComponent(out ConfigurableJoint joint) && TryGetComponent(out Rigidbody treeSpearBody))
         {
             Debug.Log("TreeSpearRoot Realign");
             Vector3 uprightTorque = Vector3.Cross(transform.forward, Vector3.up) * uprightForce;
@@ -50,16 +50,16 @@ public class TreeSpearRoot : MonoBehaviour
         broken = true;
     }
 
-    //public void DisableReturnForce(SelectEnterEventArgs args)
-    //{
-    //    Debug.Log("DisableReturnForce");
-    //    // Disabled on Select so that it doesn't interfere with PhysicsHand joint update
-    //    applyReturnForce = false;
-    //}
+    public void DisableReturnForce(SelectEnterEventArgs args)
+    {
+        Debug.Log("DisableReturnForce");
+        //// Disabled on Select so that it doesn't interfere with PhysicsHand joint update
+        //applyReturnForce = false;
+    }
 
-    //public void EnableReturnForce(SelectExitEventArgs args)
-    //{
-    //    Debug.Log("EnableReturnForce");
-    //    applyReturnForce = true;
-    //}
+    public void EnableReturnForce(SelectExitEventArgs args)
+    {
+        Debug.Log("EnableReturnForce");
+        //applyReturnForce = true;
+    }
 }
