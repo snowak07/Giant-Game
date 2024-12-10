@@ -16,7 +16,6 @@ public class TreeSpearRoot : MonoBehaviour
 
     public void AddRoot()
     {
-        Debug.Log("AddRoot");
         applyReturnForce = true;
 
         ConfigurableJoint joint = gameObject.AddComponent<ConfigurableJoint>();
@@ -38,7 +37,6 @@ public class TreeSpearRoot : MonoBehaviour
     {
         if (applyReturnForce && !broken && TryGetComponent(out ConfigurableJoint joint) && TryGetComponent(out Rigidbody treeSpearBody))
         {
-            Debug.Log("TreeSpearRoot Realign");
             Vector3 uprightTorque = Vector3.Cross(transform.forward, Vector3.up) * uprightForce;
             treeSpearBody.AddTorque(uprightTorque - treeSpearBody.angularVelocity * uprightDampening);
         }
@@ -46,20 +44,17 @@ public class TreeSpearRoot : MonoBehaviour
 
     protected void OnJointBreak(float breakForce)
     {
-        Debug.Log("Joint Broken");
         broken = true;
     }
 
     public void DisableReturnForce(SelectEnterEventArgs args)
     {
-        Debug.Log("DisableReturnForce");
         // Disabled on Select so that it doesn't interfere with PhysicsHand joint update
         applyReturnForce = false;
     }
 
     public void EnableReturnForce(SelectExitEventArgs args)
     {
-        Debug.Log("EnableReturnForce");
         applyReturnForce = true;
     }
 }

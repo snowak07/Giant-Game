@@ -18,7 +18,6 @@ public class GrabDirectInteractor : UnityEngine.XR.Interaction.Toolkit.Interacto
 
     protected void AttachBody(SelectEnterEventArgs args)
     {
-        Debug.Log("[GrabDirectInteractor] AttachBody");
         List<UnityEngine.XR.Interaction.Toolkit.Interactables.IXRInteractable> targets = new List<UnityEngine.XR.Interaction.Toolkit.Interactables.IXRInteractable>();
         GetValidTargets(targets);
         foreach (UnityEngine.XR.Interaction.Toolkit.Interactables.IXRInteractable interactable in targets)
@@ -29,13 +28,11 @@ public class GrabDirectInteractor : UnityEngine.XR.Interaction.Toolkit.Interacto
 
     protected void DetachBody(SelectExitEventArgs args)
     {
-        Debug.Log("[GrabDirectInteractor] DetachBody");
         DetachJoint(args.interactableObject.colliders[0].attachedRigidbody);
     }
 
     public void AttachJoint(Rigidbody rigidbodyToAttach)
     {
-        Debug.Log("[GrabDirectInteractor] AttachJoint");
         FixedJoint joint = gameObject.AddComponent<FixedJoint>();
         rigidbodyToAttach.mass = rigidbodyToAttach.mass * massScaling;
         joint.connectedBody = rigidbodyToAttach;
@@ -43,7 +40,6 @@ public class GrabDirectInteractor : UnityEngine.XR.Interaction.Toolkit.Interacto
 
     protected void DetachJoint(Rigidbody bodyToDetach)
     {
-        Debug.Log("[GrabDirectInteractor] DetachJoint");
         FixedJoint[] joints = GetComponents<FixedJoint>();
         foreach(FixedJoint joint in joints)
         {
