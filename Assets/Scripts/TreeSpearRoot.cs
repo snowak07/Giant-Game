@@ -18,6 +18,8 @@ public class TreeSpearRoot : MonoBehaviour
     {
         applyReturnForce = true;
 
+        GetComponent<Rigidbody>().angularDamping = 10.0f;
+
         ConfigurableJoint joint = gameObject.AddComponent<ConfigurableJoint>();
 
         joint.xMotion = ConfigurableJointMotion.Locked;
@@ -26,7 +28,7 @@ public class TreeSpearRoot : MonoBehaviour
 
         joint.angularXMotion = ConfigurableJointMotion.Free;
         joint.angularYMotion = ConfigurableJointMotion.Free;
-        joint.angularZMotion = ConfigurableJointMotion.Free;
+        joint.angularZMotion = ConfigurableJointMotion.Locked;
 
         joint.anchor = -groundOffset;
         joint.breakForce = 5000.0f;
@@ -49,12 +51,14 @@ public class TreeSpearRoot : MonoBehaviour
 
     public void DisableReturnForce(SelectEnterEventArgs args)
     {
-        // Disabled on Select so that it doesn't interfere with PhysicsHand joint update
+        Debug.Log("DisableReturnForce");
+        //// Disabled on Select so that it doesn't interfere with PhysicsHand joint update
         applyReturnForce = false;
     }
 
     public void EnableReturnForce(SelectExitEventArgs args)
     {
+        Debug.Log("EnableReturnForce");
         applyReturnForce = true;
     }
 }
