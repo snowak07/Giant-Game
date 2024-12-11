@@ -47,6 +47,7 @@ public class TreeSpearRoot : MonoBehaviour
     protected void OnJointBreak(float breakForce)
     {
         broken = true;
+        GetComponent<Rigidbody>().angularDamping = 0.05f;
     }
 
     public void DisableReturnForce(SelectEnterEventArgs args)
