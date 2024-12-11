@@ -5,8 +5,8 @@ public class TreeSpearRoot : MonoBehaviour
 {
     public bool broken { get; private set; }
     protected Vector3 groundOffset = new Vector3(0, 0, 2.5f);
-    protected float uprightForce = 1000.0f;
-    public float uprightDampening = 2.0f; // FIXME: Adjust so it doesn't vibrate when stationary
+    protected float uprightForce = 5000.0f;
+    public float uprightDampening = 3.0f;
     protected bool applyReturnForce;
 
     void Start()
@@ -18,7 +18,7 @@ public class TreeSpearRoot : MonoBehaviour
     {
         applyReturnForce = true;
 
-        GetComponent<Rigidbody>().angularDamping = 10.0f;
+        GetComponent<Rigidbody>().angularDamping = 27.0f;
 
         ConfigurableJoint joint = gameObject.AddComponent<ConfigurableJoint>();
 
