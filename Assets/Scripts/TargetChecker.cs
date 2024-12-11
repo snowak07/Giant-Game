@@ -31,6 +31,11 @@ public class TargetChecker : MonoBehaviour
             velocity += Physics.gravity * Time.fixedDeltaTime;
         }
 
+        if (transform.position.y < -1 && targetDetectedCallback != null)
+        {
+            Destroy(gameObject);
+        }
+
         velocity = Vector3.zero;
         targetDetectedCallback = null;
     }
