@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-// Handle hands colliding with interactables and connecting a joint to them on select activated.
 public class GrabDirectInteractor : UnityEngine.XR.Interaction.Toolkit.Interactors.XRDirectInteractor
 {
     public float massScaling = 0.1f;

@@ -4,7 +4,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class TreeSpearRoot : MonoBehaviour
 {
     public bool broken { get; private set; }
-    protected Vector3 groundOffset = new Vector3(0, 0, 2.5f);
+    protected Vector3 groundOffset = new Vector3(0, 0, -2.5f);
     protected float uprightForce = 5000.0f;
     public float uprightDampening = 3.0f;
     protected bool applyReturnForce;
@@ -30,7 +30,7 @@ public class TreeSpearRoot : MonoBehaviour
         joint.angularYMotion = ConfigurableJointMotion.Free;
         joint.angularZMotion = ConfigurableJointMotion.Locked;
 
-        joint.anchor = -groundOffset;
+        joint.anchor = groundOffset;
         joint.breakForce = 5000.0f;
         joint.breakTorque = 5000.0f;
     }
@@ -51,14 +51,12 @@ public class TreeSpearRoot : MonoBehaviour
 
     public void DisableReturnForce(SelectEnterEventArgs args)
     {
-        Debug.Log("DisableReturnForce");
-        //// Disabled on Select so that it doesn't interfere with PhysicsHand joint update
+        // Disabled on Select so that it doesn't interfere with PhysicsHand joint update
         applyReturnForce = false;
     }
 
     public void EnableReturnForce(SelectExitEventArgs args)
     {
-        Debug.Log("EnableReturnForce");
         applyReturnForce = true;
     }
 }

@@ -8,9 +8,6 @@ public class TreeSpear : GiantGrabInteractable
     public GameObject targetChecker = null;
     protected bool detached = false;
     protected Collider detectedEnemyCollider = null;
-    protected bool flightAlignmentEnabled = false;
-
-    //public bool debugThrowTreeSpear = false;
 
     protected override void OnEnable()
     {
@@ -26,7 +23,7 @@ public class TreeSpear : GiantGrabInteractable
     protected override void OnDisable()
     {
         base.OnDisable();
-        Debug.Log("[TreeSpear] OnDisable");
+
         if (TryGetComponent(out TreeSpearRoot root))
         {
             selectEntered.RemoveListener(root.DisableReturnForce);
@@ -50,6 +47,7 @@ public class TreeSpear : GiantGrabInteractable
     protected override void Detach()
     {
         base.Detach();
+
         if (TryGetComponent(out TreeSpearRoot root) && root.broken)
         {
             InitializeTargetChecker();
@@ -63,16 +61,6 @@ public class TreeSpear : GiantGrabInteractable
 
     protected void FixedUpdate()
     {
-        //if (debugThrowTreeSpear)
-        //{
-        //    GetComponent<Rigidbody>().useGravity = true;
-        //    debugThrowTreeSpear = false;
-        //    Vector3 debugVelocity = new Vector3(-60.0f, 0, 0);
-        //    GetComponent<Rigidbody>().linearVelocity = debugVelocity;
-        //    InitializeTargetChecker();
-        //    flightAlignmentEnabled = true;
-        //}
-
         if (detached && detectedEnemyCollider != null && Helpers.TryGetComponentInParent(detectedEnemyCollider.gameObject, out Enemy detectedEnemy))
         {
             Vector3 interceptDirection = TrajectoryHelper.CalculateInterceptionDirection(transform.position, GetComponent<Rigidbody>().linearVelocity.magnitude, detectedEnemy.GetNextTransform);
