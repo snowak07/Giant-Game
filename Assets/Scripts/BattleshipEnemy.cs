@@ -64,14 +64,6 @@ public class BattleshipEnemy : Enemy
         explosionForce = 1000.0f;
         explosionRadius = 10.0f;
         upwardsExplosionModifier = 2.0f;
-
-        //if (debugFutureTransform != null)
-        //{
-        //    (Vector3, Quaternion) futurePositionRotation = GetNextTransform(30.0f);
-        //    Debug.Log("Future position: " + futurePositionRotation.Item1 + ", rotation: " + futurePositionRotation.Item2);
-        //    debugFutureTransform.position = futurePositionRotation.Item1;
-        //    debugFutureTransform.rotation = futurePositionRotation.Item2;
-        //}
     }
 
     protected override void UpdateEnemy()

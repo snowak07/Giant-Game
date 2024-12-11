@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PathFollower : MonoBehaviour
@@ -32,6 +33,11 @@ public class PathFollower : MonoBehaviour
 
     public (Vector3, Quaternion) getNextPathPoint(Vector3 currentPosition)
     {
+        if (pathPoints.Length == 0)
+        {
+            throw new InvalidOperationException("The PathFollower does not have a Path.");
+        }
+
         int closestPointIndex = getClosestPathPointIndex(currentPosition);
         if (closestPointIndex == lastPointIndex)
         {

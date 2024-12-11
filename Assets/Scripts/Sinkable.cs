@@ -8,7 +8,7 @@ public class Sinkable : MonoBehaviour
 {
     private bool sinkEnabled = false;
     private bool sinking = false;
-    private float sinkingSpeed = 0.003f;
+    private float sinkingSpeed = 0.005f;
     private float settledVelocityThreshold = 0.01f;
     private float settledAngularVelocityThreshold = 0.005f;
 
@@ -18,9 +18,6 @@ public class Sinkable : MonoBehaviour
         if (!sinking && sinkEnabled && IsSettled(GetComponent<Rigidbody>()))
         {
             sinking = true;
-
-            // Destroy sinking object after 15 seconds as it should have disappeared beneath the water
-            Destroy(gameObject, 15);
 
             // Disable all collisions
             Collider[] colliders = GetComponentsInChildren<Collider>();
@@ -70,6 +67,6 @@ public class Sinkable : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
 
         sinkEnabled = true;
-        Destroy(gameObject, 30); // Failsafe incase the object never settles
+        Destroy(gameObject, 30);
     }
 }

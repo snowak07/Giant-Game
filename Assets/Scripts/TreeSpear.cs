@@ -92,11 +92,6 @@ public class TreeSpear : GiantGrabInteractable
         if (collision.collider.gameObject.tag == "Water" || collision.collider.gameObject.tag == "Ground")
         {
             GetComponent<FlightAlignment>().Disable();
-
-            if (TryGetComponent(out Sinkable sinkable))
-            {
-                sinkable.EnableSink();
-            }
         }
     }
 }
