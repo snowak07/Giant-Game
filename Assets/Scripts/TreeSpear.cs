@@ -47,7 +47,7 @@ public class TreeSpear : GiantGrabInteractable
     {
         base.DisablePickup(args);
 
-        //GetComponent<FlightAlignment>().Enable();
+        GetComponent<FlightAlignment>().Enable();
     }
 
     /**
@@ -107,10 +107,10 @@ public class TreeSpear : GiantGrabInteractable
     {
         base.OnCollisionEnter(collision);
 
-        //if (collision.collider.gameObject.tag == "Water" || collision.collider.gameObject.tag == "Ground")
-        //{
-        //    GetComponent<FlightAlignment>().Disable();
-        //// TODO: Enable Sink here
-        //}
+        if (collision.collider.gameObject.tag == "Water" || collision.collider.gameObject.tag == "Ground")
+        {
+            GetComponent<FlightAlignment>().Disable();
+            // TODO: Enable Sink here
+        }
     }
 }
