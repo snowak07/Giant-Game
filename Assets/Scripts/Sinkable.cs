@@ -29,13 +29,7 @@ public class Sinkable : MonoBehaviour
                 collider.enabled = false;
             }
 
-            // Set velocity to 0 and disable gravity since we are controlling its downward movement manually
-            Rigidbody body = GetComponent<Rigidbody>();
-            body.linearVelocity = new Vector3(0, 0, 0);
-            body.angularVelocity = new Vector3(0, 0, 0);
-            body.useGravity = false;
-            body.isKinematic = true; // Disable all forces, collision, and joints acting on the rigidbody. Movement controlled through setting transform.position
-            body.detectCollisions = false; // Free up processing from collision detection
+            DisableMovement();
         }
 
         if (sinking)
@@ -43,6 +37,17 @@ public class Sinkable : MonoBehaviour
             Vector3 newPosition = new Vector3(transform.position.x, transform.position.y - sinkingSpeed, transform.position.z);
             transform.position = newPosition;
         }
+    }
+
+    protected void DisableMovement()
+    {
+        // Set velocity to 0 and disable gravity since we are controlling its downward movement manually
+        Rigidbody body = GetComponent<Rigidbody>();
+        body.linearVelocity = new Vector3(0, 0, 0);
+        body.angularVelocity = new Vector3(0, 0, 0);
+        body.useGravity = false;
+        body.isKinematic = true; // Disable all forces, collision, and joints acting on the rigidbody. Movement controlled through setting transform.position
+        body.detectCollisions = false; // Free up processing from collision detection
     }
 
     public void EnableSink()

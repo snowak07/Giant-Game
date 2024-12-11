@@ -50,9 +50,11 @@ public class TreeSpearRoot : MonoBehaviour
         GetComponent<Rigidbody>().angularDamping = 0.05f;
     }
 
+    /**
+     * Disabled on Select so that it doesn't interfere with PhysicsHand joint update
+     */
     public void DisableReturnForce(SelectEnterEventArgs args)
     {
-        // Disabled on Select so that it doesn't interfere with PhysicsHand joint update
         applyReturnForce = false;
     }
 

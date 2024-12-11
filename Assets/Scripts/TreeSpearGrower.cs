@@ -57,12 +57,7 @@ public class TreeSpearGrower : MonoBehaviour
             }
         }
 
-        if (
-            fullyGrown && 
-            spawnedTreeSpear != null && 
-            spawnedTreeSpear.TryGetComponent(out TreeSpearRoot root) && 
-            root.broken
-           )
+        if (TreeSpearFullyGrownAndUprooted())
         {
             GrowTreeSpear(); // Loop tree spear growth
         }
@@ -79,5 +74,14 @@ public class TreeSpearGrower : MonoBehaviour
             spawnedTreeSpear.transform.localScale = Vector3.one; // Round off scale values to 1
             spawnedTreeSpear.GetComponent<TreeSpearRoot>().AddRoot();
         }
+    }
+
+    protected bool TreeSpearFullyGrownAndUprooted()
+    {
+        return
+            fullyGrown &&
+            spawnedTreeSpear != null &&
+            spawnedTreeSpear.TryGetComponent(out TreeSpearRoot root) &&
+            root.broken;
     }
 }

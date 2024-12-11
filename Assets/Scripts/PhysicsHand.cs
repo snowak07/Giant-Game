@@ -29,7 +29,7 @@ public class PhysicsHand : MonoBehaviour
         Vector3 lerpTrackedTransformPosition = Vector3.Lerp(transform.position, trackedTransform.position, positionSpeed * Time.deltaTime);
         float distance = Vector3.Distance(lerpTrackedTransformPosition, body.position);
 
-        if (distance > minTeleportDistance) // FIXME: Will want to check that the hand isn't carrying anything first before the hand gets teleported away
+        if (distance > minTeleportDistance)
         {
             transform.position = trackedTransform.position;
         }
@@ -67,7 +67,7 @@ public class PhysicsHand : MonoBehaviour
         }
         /////////////////////////////////////////////////////////////////////////////////////
 
-        body.angularVelocity = Vector3.zero; // TODO caculate new torque based on current angularVelocity
+        body.angularVelocity = Vector3.zero;
         body.AddTorque(torque, ForceMode.VelocityChange);
     }
 
@@ -82,12 +82,5 @@ public class PhysicsHand : MonoBehaviour
             torque.y > 180f ? torque.y - 360f : torque.y,
             torque.z > 180f ? torque.z - 360f : torque.z
         );
-
-        //return new Vector3
-        //(
-        //    torque.x > 180f ? 180f - torque.x : torque.x,
-        //    torque.y > 180f ? 180f - torque.y : torque.y,
-        //    torque.z > 180f ? 180f - torque.z : torque.z
-        //);
     }
 }

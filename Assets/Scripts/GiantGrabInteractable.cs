@@ -44,12 +44,6 @@ public class GiantGrabInteractable : UnityEngine.XR.Interaction.Toolkit.Interact
     {
         Rigidbody body = GetComponent<Rigidbody>();
         body.useGravity = gravityEnabled;
-
-        Sinkable sinkable;
-        //if (TryGetComponent<Sinkable>(out sinkable))
-        //{
-        //    sinkable.EnableSink();
-        //}
     }
 
     protected virtual void OnCollisionEnter(Collision collision)
@@ -57,6 +51,7 @@ public class GiantGrabInteractable : UnityEngine.XR.Interaction.Toolkit.Interact
         // Destroy object 20 seconds after contact with water.
         if (collision.gameObject.transform.root.tag == "Water")
         {
+            // TODO: Maybe just have Sinkable handle destroying the object and Require on this script
             Destroy(gameObject, 20.0f);
         }
     }
