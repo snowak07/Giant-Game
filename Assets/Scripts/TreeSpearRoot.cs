@@ -56,12 +56,12 @@ public class TreeSpearRoot : MonoBehaviour
     {
         Debug.Log("DisableReturnForce");
         //// Disabled on Select so that it doesn't interfere with PhysicsHand joint update
-        //applyReturnForce = false;
+        applyReturnForce = false;
     }
 
     public void EnableReturnForce(SelectExitEventArgs args)
     {
         Debug.Log("EnableReturnForce");
-        //applyReturnForce = true;
+        applyReturnForce = true;
     }
 }
