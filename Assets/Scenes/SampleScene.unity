@@ -7804,7 +7804,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &775488644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11206,6 +11206,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TreeSpear (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 854231859794480277, guid: a04ccc9ec061ae04d92c600aa40c4b7a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2418443251176187139, guid: a04ccc9ec061ae04d92c600aa40c4b7a,
         type: 3}

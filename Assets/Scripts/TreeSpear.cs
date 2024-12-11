@@ -35,7 +35,7 @@ public class TreeSpear : GiantGrabInteractable
     protected override void OnDisable()
     {
         base.OnDisable();
-
+        Debug.Log("[TreeSpear] OnDisable");
         if (TryGetComponent(out TreeSpearRoot root))
         {
             selectEntered.RemoveListener(root.DisableReturnForce);
@@ -56,7 +56,10 @@ public class TreeSpear : GiantGrabInteractable
     protected override void Detach()
     {
         base.Detach();
-        InitializeTargetChecker();
+        if (TryGetComponent(out TreeSpearRoot root) && root.broken)
+        {
+            InitializeTargetChecker();
+        }
     }
 
     protected void TargetDetected(Collider detectedEnemyCollider)
@@ -107,6 +110,7 @@ public class TreeSpear : GiantGrabInteractable
         //if (collision.collider.gameObject.tag == "Water" || collision.collider.gameObject.tag == "Ground")
         //{
         //    GetComponent<FlightAlignment>().Disable();
+        //// TODO: Enable Sink here
         //}
     }
 }

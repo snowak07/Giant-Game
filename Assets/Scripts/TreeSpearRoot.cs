@@ -19,6 +19,8 @@ public class TreeSpearRoot : MonoBehaviour
         Debug.Log("AddRoot");
         applyReturnForce = true;
 
+        GetComponent<Rigidbody>().angularDamping = 10.0f;
+
         ConfigurableJoint joint = gameObject.AddComponent<ConfigurableJoint>();
 
         joint.xMotion = ConfigurableJointMotion.Locked;
@@ -27,7 +29,7 @@ public class TreeSpearRoot : MonoBehaviour
 
         joint.angularXMotion = ConfigurableJointMotion.Free;
         joint.angularYMotion = ConfigurableJointMotion.Free;
-        joint.angularZMotion = ConfigurableJointMotion.Free;
+        joint.angularZMotion = ConfigurableJointMotion.Locked;
 
         joint.anchor = -groundOffset;
         joint.breakForce = 5000.0f;
