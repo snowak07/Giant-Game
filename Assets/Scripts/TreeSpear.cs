@@ -12,15 +12,6 @@ public class TreeSpear : GiantGrabInteractable
 
     //public bool debugThrowTreeSpear = false;
 
-    //protected void Start()
-    //{
-    //    //if (TryGetComponent(out TreeSpearRoot root))
-    //    //{
-    //        //selectEntered.AddListener(root.DisableReturnForce);
-    //        //selectExited.AddListener(root.EnableReturnForce);
-    //    //}
-    //}
-
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -47,7 +38,10 @@ public class TreeSpear : GiantGrabInteractable
     {
         base.DisablePickup(args);
 
-        GetComponent<FlightAlignment>().Enable();
+        if (TryGetComponent(out TreeSpearRoot root) && root.broken)
+        {
+            GetComponent<FlightAlignment>().Enable();
+        }
     }
 
     /**
