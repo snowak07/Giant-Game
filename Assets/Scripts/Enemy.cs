@@ -64,7 +64,7 @@ public abstract class Enemy : MonoBehaviour
             UpdateEnemy();
         }
     }
-    
+
     /**
      *  Handle killing enemy including disabling animations, breaking them apart, disabling gravity, and setting destroy timer
      *  
@@ -74,15 +74,28 @@ public abstract class Enemy : MonoBehaviour
     {
         if (killInstantly)
         {
-            foreach (GameObject child in gameObject.GetComponentsInChildren<Transform>().Select(element => element.gameObject))
-            {
-                Destroy(child);
-            }
-
+            DestroyAllChildren();
+            Destroy(gameObject);
             return;
         }
 
-        OnKill(); // Handle child OnKill functions. // TODO: Add below calls to OnKill?
+        HandleKillActions();
+    }
+
+    private void DestroyAllChildren()
+    {
+        foreach (Transform childTransform in GetComponentsInChildren<Transform>())
+        {
+            if (childTransform.gameObject != gameObject) // Avoid destroying self
+            {
+                Destroy(childTransform.gameObject);
+            }
+        }
+    }
+
+    private void HandleKillActions()
+    {
+        OnKill(); // Handle child OnKill functions.
 
         ScoreManager.Add(); // FIXME: Scoreable component?
 
@@ -98,34 +111,45 @@ public abstract class Enemy : MonoBehaviour
      */
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        if (!ignoredDamageCollisionTags.Contains(collision.transform.root.gameObject.tag))
+        if (ignoredDamageCollisionTags.Contains(collision.transform.root.gameObject.tag))
         {
-            if (killInstantly)
-            {
-                Kill(collision.gameObject);
-            }
+            return;
+        }
 
-            if (collision.transform.TryGetComponent(out GiantGrabInteractable forceGrabPullInteractable))
-            {
-                // Check for impact cooldown so that an Enemy can only be hit once by an object after leaving the player's hand
-                if (!forceGrabPullInteractable.ImpactCooldown) // FIXME: Move this to its own component
-                {
-                    forceGrabPullInteractable.ImpactCooldown = true;
+        if (killInstantly)
+        {
+            Kill(collision.gameObject);
+        }
 
-                    health -= collision.impulse.magnitude;
-                }
-            }
-            else
-            {
-                health -= collision.impulse.magnitude;
-            }
+        ProcessCollisionImpact(collision);
 
-            if (health <= 0)
-            {
-                Kill(collision.gameObject);
-            }
+        if (health <= 0)
+        {
+            Kill(collision.gameObject);
         }
     }
+
+    private void ProcessCollisionImpact(Collision collision)
+    {
+        if (collision.transform.TryGetComponent(out GiantGrabInteractable giantGrabInteractable))
+        {
+            if (!giantGrabInteractable.impactCooldown)
+            {
+                giantGrabInteractable.impactCooldown = true;
+                ApplyDamage(collision);
+            }
+        }
+        else
+        {
+            ApplyDamage(collision);
+        }
+    }
+
+    private void ApplyDamage(Collision collision)
+    {
+        health -= collision.impulse.magnitude;
+    }
+
 
     protected virtual void OnKill() { }
 

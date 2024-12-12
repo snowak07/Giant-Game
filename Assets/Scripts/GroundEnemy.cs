@@ -74,7 +74,7 @@ public class GroundEnemy : Enemy
     protected override void OnCollisionEnter(Collision collision)
     {
         // Disable movement until
-        if (collision.transform.tag == "Giant" || collision.transform.root.TryGetComponent(out Shockwave shockwave) || (collision.transform.root.TryGetComponent(out GiantGrabInteractable interactable) && !interactable.ImpactCooldown))
+        if (collision.transform.tag == "Giant" || collision.transform.root.TryGetComponent(out Shockwave shockwave) || (collision.transform.root.TryGetComponent(out GiantGrabInteractable interactable) && !interactable.impactCooldown))
         {
             knockedDown = true;
         }

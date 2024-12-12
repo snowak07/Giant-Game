@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Sinkable))]
 public class GiantGrabInteractable : UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable
 {
-    public bool ImpactCooldown { get; set; }
+    public bool impactCooldown { get; set; }
 
     private bool gravityEnabled;
 
@@ -34,7 +34,7 @@ public class GiantGrabInteractable : UnityEngine.XR.Interaction.Toolkit.Interact
     // Disable isKinematic and enable useGravity so that the Interactable can be moved while selected.
     protected virtual void EnablePickup(SelectEnterEventArgs args)
     {
-        ImpactCooldown = false;
+        impactCooldown = false;
 
         Rigidbody body = GetComponent<Rigidbody>();
         body.isKinematic = false;

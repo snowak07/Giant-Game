@@ -26,7 +26,7 @@ public class ProjectileLauncher : MonoBehaviour
             // Enable impact cooldown so the projecile doesn't collide with the Enemy
             if (projectileObject.TryGetComponent(out GiantGrabInteractable enemyProjectile))
             {
-                enemyProjectile.ImpactCooldown = true;
+                enemyProjectile.impactCooldown = true;
             }
 
             // Get rigidbody and add force and torque
