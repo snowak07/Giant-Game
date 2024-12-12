@@ -11,21 +11,23 @@ using UnityEngine.InputSystem.HID;
 public abstract class Enemy : MonoBehaviour
 {
     public string[] ignoredDamageCollisionTags = { "Enemy", "Water" };
-    public Transform playerTransform = null;
-    public Transform playerBodyTransform = null;
-    public float health { get; set; } // TODO: Make this viewable but not editable in editor?
+    public Transform targetTransform = null;
+
+    public float health { get; private set; }
 
     public bool IsPickedUp { get; set; }
 
     protected bool killInstantly;
 
+    ////////////////////////// MovementProvider //////////////////////////
     // Movement
     protected bool flying;
     protected bool pitch;
     public float maxRotationalSpeed; // Measured in units/s
     public float maxTranslationalSpeed; // Measured in units/s
+    ////////////////////////// MovementProvider //////////////////////////
 
-    protected void Initialize(float health, float maxTranslationalSpeed, float maxRotationalSpeed, bool flying = false, bool pitch = false, bool killInstantly = false)
+    protected void Initialize(float health, float maxTranslationalSpeed, float maxRotationalSpeed, bool flying = false, bool pitch = false, bool killInstantly = false, float explosionForce = 200.0f, float explosionRadius = 3.0f, float upwardsExplosionModifier = 3.0f)
     {
         this.health = health;
         this.maxTranslationalSpeed = maxTranslationalSpeed;
@@ -33,11 +35,10 @@ public abstract class Enemy : MonoBehaviour
         this.flying = flying;
         this.pitch = pitch;
         this.killInstantly = killInstantly;
-    }
-
-    protected void InitializeDestructible(float explosionForce = 200.0f, float explosionRadius = 3.0f, float upwardsExplosionModifier = 3.0f)
-    {
         GetComponent<Destructible>().Initialize(explosionForce, explosionRadius, upwardsExplosionModifier);
+        ////////////////////////// MovementProvider //////////////////////////
+        // Initialize here
+        ////////////////////////// MovementProvider //////////////////////////
     }
 
     /**
@@ -111,7 +112,7 @@ public abstract class Enemy : MonoBehaviour
      */
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        if (ignoredDamageCollisionTags.Contains(collision.transform.root.gameObject.tag))
+        if (IsIgnoredCollision(collision))
         {
             return;
         }
@@ -127,6 +128,11 @@ public abstract class Enemy : MonoBehaviour
         {
             Kill(collision.gameObject);
         }
+    }
+
+    private bool IsIgnoredCollision(Collision collision)
+    {
+        return ignoredDamageCollisionTags.Contains(collision.transform.root.gameObject.tag);
     }
 
     private void ProcessCollisionImpact(Collision collision)
@@ -150,20 +156,7 @@ public abstract class Enemy : MonoBehaviour
         health -= collision.impulse.magnitude;
     }
 
-
     protected virtual void OnKill() { }
-
-    /**
-     * Set player body transform so enemies can react to the player's body position
-     * 
-     * @param pbTransform    transform of the player's body
-     * 
-     * @return void
-     */
-    public void setPlayerBodyTransform(Transform pbTransform)
-    {
-        playerBodyTransform = pbTransform;
-    }
 
     /**
      * Set player transform so enemies can react to the player's position
@@ -172,9 +165,9 @@ public abstract class Enemy : MonoBehaviour
      * 
      * @return void
      */
-    public void setPlayerTransform(Transform pTransform)
+    public void setTargetTransform(Transform pTransform)
     {
-        playerTransform = pTransform;
+        targetTransform = pTransform;
     }
 
     /**
@@ -184,14 +177,18 @@ public abstract class Enemy : MonoBehaviour
      */
     protected virtual void UpdateEnemy()
     {
+        ////////////////////////// MovementProvider //////////////////////////
+        // Call WaypointMovementProvider.HandleMovement
         if (GetComponent<PathFollower>().hasPath())
         {
             (Vector3, Quaternion) nextPositionRotation = GetNextTransform(Time.fixedDeltaTime);
             GetComponent<Rigidbody>().MoveRotation(nextPositionRotation.Item2);
             GetComponent<Rigidbody>().MovePosition(nextPositionRotation.Item1);
         }
+        ////////////////////////// MovementProvider //////////////////////////
     }
 
+    ////////////////////////// MovementProvider //////////////////////////
     public virtual (Vector3, Quaternion) GetNextTransform(float time, bool applyTargetingOffset = false)
     {
         float timeRemainingToSimulate = time;
@@ -226,4 +223,5 @@ public abstract class Enemy : MonoBehaviour
 
         return (currentPosition, currentRotation);
     }
+    ////////////////////////// MovementProvider //////////////////////////
 }

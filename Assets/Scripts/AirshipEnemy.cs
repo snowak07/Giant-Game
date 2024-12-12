@@ -14,9 +14,9 @@ public class AirshipEnemy : Enemy
     {
         base.UpdateEnemy();
 
-        if (playerTransform != null)
+        if (targetTransform != null)
         {
-            GetComponent<ProjectileLauncher>().ShootProjectile(playerTransform.position);
+            GetComponent<ProjectileLauncher>().ShootProjectile(targetTransform.position);
         }
     }
 }

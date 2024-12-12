@@ -61,19 +61,19 @@ public class FlyingEnemy : Enemy
             enteredRange = false;
         }
 
-        if (playerTransform != null && !isSelected)
+        if (targetTransform != null && !isSelected)
         {
-            bool inRange = (playerTransform.position - transform.position).magnitude < maxRange;
+            bool inRange = (targetTransform.position - transform.position).magnitude < maxRange;
             if (!inRange && !enteredRange) // Make the FlyingEnemy move towards the player before flying around them at a constant orbitSpeed.
             {
                 //enteredRange = false; // TODO set this to false if the FlyingEnemy is moved outside a farther radius than inRange checks for. Enough extra distance that oscillations don't have a chance to go outside the bounds.
 
-                Vector3 newPosition = Vector3.Lerp(transform.position, playerTransform.position, radialSpeed * Time.deltaTime); // Speed proportional to distance
-                //Vector3 newPosition = Vector3.MoveTowards(transform.position, playerTransform.position, radialSpeed); // Constant speed
+                Vector3 newPosition = Vector3.Lerp(transform.position, targetTransform.position, radialSpeed * Time.deltaTime); // Speed proportional to distance
+                //Vector3 newPosition = Vector3.MoveTowards(transform.position, targetTransform.position, radialSpeed); // Constant speed
                 newPosition.y = 0.5f; // TODO remove
                 body.MovePosition(newPosition);
 
-                Vector3 flyingEnemyToPlayer = playerTransform.position - transform.position;
+                Vector3 flyingEnemyToPlayer = targetTransform.position - transform.position;
                 Vector3 upwards = new Vector3(0, 1, 0);
                 Quaternion playerDirection = Quaternion.LookRotation(flyingEnemyToPlayer, upwards);
                 body.MoveRotation(playerDirection);
@@ -83,8 +83,8 @@ public class FlyingEnemy : Enemy
                 // Handle first time entering range
                 if (!enteredRange)
                 {
-                    xPlayerOffset = playerTransform.position.x;
-                    zPlayerOffset = playerTransform.position.z;
+                    xPlayerOffset = targetTransform.position.x;
+                    zPlayerOffset = targetTransform.position.z;
                     horizontalMaxDistance = Mathf.Sqrt(Mathf.Pow(transform.position.x - xPlayerOffset, 2) + Mathf.Pow(transform.position.z - zPlayerOffset, 2));
 
                     if (clockwiseOrbit)
@@ -103,7 +103,7 @@ public class FlyingEnemy : Enemy
                     enteredRange = true;
                 }
 
-                Vector3 playerPositionHorizontal = playerTransform.position;
+                Vector3 playerPositionHorizontal = targetTransform.position;
                 playerPositionHorizontal.y = 0;
                 Vector3 currentPosition = new Vector3(xPlayerOffset, 0, zPlayerOffset);
 
@@ -123,7 +123,7 @@ public class FlyingEnemy : Enemy
                 newPosition.y = 0.5f; // TODO remove
                 body.MovePosition(newPosition);
 
-                Vector3 flyingEnemyToPlayer = playerTransform.position - transform.position;
+                Vector3 flyingEnemyToPlayer = targetTransform.position - transform.position;
                 Vector3 upwards = new Vector3(0, 1, 0);
                 Quaternion playerDirection = Quaternion.LookRotation(flyingEnemyToPlayer, upwards);
                 body.MoveRotation(playerDirection);
@@ -152,7 +152,7 @@ public class FlyingEnemy : Enemy
     void Shoot()
     {
         Rigidbody p = Instantiate(projectile, transform.position, transform.rotation);
-        Vector3 directDistanceVector = playerTransform.position - transform.position;
+        Vector3 directDistanceVector = targetTransform.position - transform.position;
 
         // Calculate Velocity y vector needed to be at the pull y position in 1 second
         float y = directDistanceVector.y + (0.5f * Mathf.Abs(Physics.gravity.y));

@@ -22,8 +22,7 @@ public class GroundEnemy : Enemy
     protected override void UpdateEnemy()
     {
         // Move towards player until within striking distance
-        Vector3 playerPosition = playerTransform.position;
-        Vector3 targetPosition = playerPosition;
+        Vector3 targetPosition = targetTransform.position;
         targetPosition.y = transform.position.y; // TODO This assumes ground enemies are moving on flat ground towards enemies.
 
         if (!knockedDown)
@@ -34,7 +33,7 @@ public class GroundEnemy : Enemy
                 // Attack
                 Rigidbody body = GetComponent<Rigidbody>();
 
-                Vector3 projectileVector = calculateFiringDirection(transform.position, playerBodyTransform.position);
+                Vector3 projectileVector = calculateFiringDirection(transform.position, targetTransform.position);
 
                 if (projectileVector != Vector3.zero)
                 {

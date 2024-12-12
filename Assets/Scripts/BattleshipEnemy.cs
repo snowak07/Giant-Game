@@ -55,8 +55,8 @@ public class BattleshipEnemy : Enemy
     {
         base.Start();
 
-        Initialize(40.0f, 4, 20);
-        InitializeDestructible(1000.0f, 10.0f, 2.0f);
+        Initialize(40.0f, 4, 20, false, false, false, 1000.0f, 10.0f, 2.0f);
+        //InitializeDestructible(1000.0f, 10.0f, 2.0f);
     }
 
     protected override void UpdateEnemy()
@@ -69,9 +69,9 @@ public class BattleshipEnemy : Enemy
             Kill();
         }
 
-        if (playerTransform != null)
+        if (targetTransform != null)
         {
-            Vector3 firingDirection = GetComponent<ProjectileLauncher>().ShootProjectile(playerTransform.position);
+            Vector3 firingDirection = GetComponent<ProjectileLauncher>().ShootProjectile(targetTransform.position);
             UpdateCannonPosition(firingDirection);
         }
     }

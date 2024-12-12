@@ -8,8 +8,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public Transform playerTransform = null;
-    public Transform playerBodyTransform = null;
+    public Transform targetTransform = null;
 
     public float maxHorizontalDistance;
     public float minHorizontalDistance;
@@ -42,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
         float y = Random.Range(minVerticalDistance, maxVerticalDistance);
         Vector3 spawnPosition = new Vector3(x, y, z);
 
-        Vector3 towardsPlayer = playerTransform.position - spawnPosition;
+        Vector3 towardsPlayer = targetTransform.position - spawnPosition;
         towardsPlayer.y = y;
         Vector3 upwards = new Vector3(0, 1, 0);
         Quaternion towardsPlayerRotation = Quaternion.LookRotation(towardsPlayer, upwards);
@@ -50,8 +49,7 @@ public class EnemySpawner : MonoBehaviour
         // Instantiate Enemy prefab
         GameObject enemyObject = Instantiate(EnemyPrefab, spawnPosition, towardsPlayerRotation);
         Enemy enemy = enemyObject.GetComponent<Enemy>();
-        enemy.setPlayerTransform(playerTransform);
-        enemy.setPlayerBodyTransform(playerBodyTransform);
+        enemy.setTargetTransform(targetTransform);
 
         // Wait to end spawn cooldown
         yield return new WaitForSeconds(spawnCooldownTime);
