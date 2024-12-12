@@ -6,6 +6,8 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem.HID;
 
+[RequireComponent(typeof(Destructible))]
+[RequireComponent(typeof(PathFollower))]
 public abstract class Enemy : MonoBehaviour
 {
     public string[] ignoredDamageCollisionTags = { "Enemy", "Water" };
@@ -16,9 +18,6 @@ public abstract class Enemy : MonoBehaviour
     public bool IsPickedUp { get; set; }
 
     protected bool killInstantly;
-    protected float explosionForce = 200.0f;
-    protected float explosionRadius = 3.0f;
-    protected float upwardsExplosionModifier = 3.0f;
 
     // Movement
     protected bool flying;
@@ -34,6 +33,11 @@ public abstract class Enemy : MonoBehaviour
         this.flying = flying;
         this.pitch = pitch;
         this.killInstantly = killInstantly;
+    }
+
+    protected void InitializeDestructible(float explosionForce = 200.0f, float explosionRadius = 3.0f, float upwardsExplosionModifier = 3.0f)
+    {
+        GetComponent<Destructible>().Initialize(explosionForce, explosionRadius, upwardsExplosionModifier);
     }
 
     /**
@@ -60,59 +64,7 @@ public abstract class Enemy : MonoBehaviour
             UpdateEnemy();
         }
     }
-
-    /**
-     *  Handle breaking off Enemy piece.
-     *  
-     *  @return List<GameObject>    Return List of gameobjects so child functions can manipulate objects in their own ways
-     */
-    protected virtual void DismantleEnemyPart(GameObject part) // FIXME: This could probably be moved to a Dismantleable class
-    {
-        if (part.TryGetComponent(out MeshRenderer mesh))
-        {
-            part.transform.parent = null; // Detach enemy part
-            
-            Rigidbody childBody;
-            if (!part.TryGetComponent(out childBody))
-            {
-                childBody = part.AddComponent<Rigidbody>();
-            }
-
-            if (!part.TryGetComponent(out Collider collider))
-            {
-                collider = part.AddComponent<BoxCollider>();
-            }
-
-            // Add small explosion force to separate the objects on death
-            childBody.AddExplosionForce(explosionForce, transform.position, explosionRadius, upwardsExplosionModifier, ForceMode.Force);
-        }
-    }
-
-    private void HandlePhysicsPartOnKill(GameObject killer, GameObject child)
-    {
-        // Remove from Enemy layer and set to Default layer to avoid further interactions of child parts as a result of being on the Enemy layer
-        child.layer = LayerMask.NameToLayer("Default");
-
-        if (killer != null && child.TryGetComponent(out Collider childCollider) && killer.TryGetComponent(out Collider killerCollider))
-        {
-            // Disable collisions between Enemy part and the collider that killed it
-            Physics.IgnoreCollision(childCollider, killerCollider);
-        }
-
-        if (!child.TryGetComponent(out MeshRenderer mesh))
-        {
-            // Destroy all non-visible parts and the Parent gameobject
-            Destroy(child);
-        }
-        else
-        {
-            // Start sink and dismantle visual to rendered parts
-            Sinkable sinkable = child.AddComponent<Sinkable>();
-            sinkable.EnableSink();
-            DismantleEnemyPart(child);
-        }
-    }
-
+    
     /**
      *  Handle killing enemy including disabling animations, breaking them apart, disabling gravity, and setting destroy timer
      *  
@@ -134,17 +86,7 @@ public abstract class Enemy : MonoBehaviour
 
         ScoreManager.Add(); // FIXME: Scoreable component?
 
-        if (GetComponent<Animator>()) // FIXME: AnimationHandler component?
-        {
-            GetComponent<Animator>().enabled = false;
-        }
-
-        GetComponent<Rigidbody>().useGravity = true; // FIXME: Destructible component
-
-        foreach (var child in gameObject.GetComponentsInChildren<Transform>().Select(element => element.gameObject)) // FIXME: Destructible component
-        {
-            HandlePhysicsPartOnKill(killer, child);
-        }
+        GetComponent<Destructible>()?.DestructComponents();
     }
 
     /**
@@ -218,9 +160,12 @@ public abstract class Enemy : MonoBehaviour
      */
     protected virtual void UpdateEnemy()
     {
-        (Vector3, Quaternion) nextPositionRotation = GetNextTransform(Time.fixedDeltaTime);
-        GetComponent<Rigidbody>().MoveRotation(nextPositionRotation.Item2);
-        GetComponent<Rigidbody>().MovePosition(nextPositionRotation.Item1);
+        if (GetComponent<PathFollower>().hasPath())
+        {
+            (Vector3, Quaternion) nextPositionRotation = GetNextTransform(Time.fixedDeltaTime);
+            GetComponent<Rigidbody>().MoveRotation(nextPositionRotation.Item2);
+            GetComponent<Rigidbody>().MovePosition(nextPositionRotation.Item1);
+        }
     }
 
     public virtual (Vector3, Quaternion) GetNextTransform(float time, bool applyTargetingOffset = false)

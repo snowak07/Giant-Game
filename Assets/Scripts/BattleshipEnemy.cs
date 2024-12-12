@@ -7,9 +7,6 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(PathFollower))]
 public class BattleshipEnemy : Enemy
 {
-    public Transform targetingOffset = null;
-    public Transform debugFutureTransform = null;
-
     protected override void OnKill()
     {
         base.OnKill();
@@ -59,11 +56,7 @@ public class BattleshipEnemy : Enemy
         base.Start();
 
         Initialize(40.0f, 4, 20);
-
-        // Set battleship death explosion force
-        explosionForce = 1000.0f;
-        explosionRadius = 10.0f;
-        upwardsExplosionModifier = 2.0f;
+        InitializeDestructible(1000.0f, 10.0f, 2.0f);
     }
 
     protected override void UpdateEnemy()

@@ -176,8 +176,8 @@ GameObject:
   - component: {fileID: 1035198378715778261}
   - component: {fileID: 1035198378715778262}
   - component: {fileID: 2207493555832650013}
-  - component: {fileID: 2942136284965878730}
   - component: {fileID: 6054372219452169988}
+  - component: {fileID: 4400683023371067965}
   m_Layer: 11
   m_Name: Battleship Enemy
   m_TagString: Enemy
@@ -277,14 +277,8 @@ MonoBehaviour:
   - Water
   playerTransform: {fileID: 0}
   playerBodyTransform: {fileID: 0}
-  maxRandomizedOrbitRadius: 250
-  minRandonizedOrbitRadius: 200
-  orbitRadiusStepSize: 0.1
   maxRotationalSpeed: 20
   maxTranslationalSpeed: 4
-  desiredPositionLeadingAngleDegrees: 10
-  targetingOffset: {fileID: 6935501062853898052}
-  debugFutureTransform: {fileID: 0}
 --- !u!114 &2207493555832650013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,18 +296,6 @@ MonoBehaviour:
     type: 3}
   cooldownTime: 3
   projectileSpeed: 20
---- !u!114 &2942136284965878730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1035198378715778264}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8662ff6a6de29004ca98a3411f7ff251, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6054372219452169988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,6 +309,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathPoints: []
+--- !u!114 &4400683023371067965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035198378715778264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d870288b7bc2577499a41ce23efd8add, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1145500891456171626
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,12 @@ public class PathFollower : MonoBehaviour
 
     // TODO: Handle getting future position calls by not changing lastPointIndex or setting to a temp lastPointIndex value
     // TODO: Correct for a PathFollowers max rotational speed so that it doesn't try to loop around when it doesn't quite hit a waypoint
+
+    public bool hasPath()
+    {
+        return pathPoints != null && pathPoints.Length > 0;
+    }
+
     protected int getClosestPathPointIndex(Vector3 currentPosition)
     {
         int closestPointIndex = 0;
