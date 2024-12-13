@@ -37,7 +37,7 @@ public class Destructible : MonoBehaviour
      *  
      *  @return List<GameObject>    Return List of gameobjects so child functions can manipulate objects in their own ways
      */
-    protected virtual void DismantleEnemyPart(GameObject part) // FIXME: This could probably be moved to a Dismantleable class
+    protected virtual void DismantleEnemyPart(GameObject part)
     {
         if (part.TryGetComponent(out MeshRenderer mesh))
         {

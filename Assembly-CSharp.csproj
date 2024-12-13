@@ -81,7 +81,7 @@
     <Compile Include="Assets\Scripts\Helpers.cs" />
     <Compile Include="Assets\Scripts\TrajectoryHelper.cs" />
     <Compile Include="Assets\Scripts\ImpactExplosion.cs" />
-    <Compile Include="Assets\Scripts\PathFollower.cs" />
+    <Compile Include="Assets\Scripts\PathProvider.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\Shockwave.cs" />
     <Compile Include="Assets\Scripts\PhysicsHand.cs" />

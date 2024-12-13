@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(ProjectileLauncher))]
-[RequireComponent(typeof(PathFollower))]
 public class BattleshipEnemy : Enemy
 {
     protected override void OnKill()

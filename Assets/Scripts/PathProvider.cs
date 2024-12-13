@@ -1,11 +1,11 @@
 using System;
 using UnityEngine;
 
-public class PathFollower : MonoBehaviour
+public class PathProvider : MonoBehaviour
 {
     public Transform[] pathPoints = null;
 
-    // Used to keep the PathFollower going to each point instead of getting stuck at one path point
+    // Used to keep the PathProvider going to each point instead of getting stuck at one path point
     protected int lastPointIndex = -1;
     protected float arrivedThreshold = 1f;
 
@@ -41,7 +41,7 @@ public class PathFollower : MonoBehaviour
     {
         if (pathPoints.Length == 0)
         {
-            throw new InvalidOperationException("The PathFollower does not have a Path.");
+            throw new InvalidOperationException("The PathProvider does not have a Path.");
         }
 
         int closestPointIndex = getClosestPathPointIndex(currentPosition);

@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PathFollower))]
 [RequireComponent(typeof(ProjectileLauncher))]
 public class AirshipEnemy : Enemy
 {
