@@ -65,11 +65,6 @@ public class GroundEnemy : Enemy
         }
     }
 
-    public override (Vector3, Quaternion) GetNextTransform(float time, bool applyTargetOffset = false)
-    {
-        throw new System.NotImplementedException();
-    }
-
     protected override void OnCollisionEnter(Collision collision)
     {
         // Disable movement until

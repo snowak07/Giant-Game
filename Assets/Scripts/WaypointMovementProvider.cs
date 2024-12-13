@@ -1,36 +1,9 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class WaypointMovementProvider : MonoBehaviour
+public class WaypointMovementProvider : MovementProvider
 {
-    protected bool flying;
-    protected bool pitch;
-    public float maxRotationalSpeed; // Measured in units/s
-    public float maxTranslationalSpeed; // Measured in units/s
-
-    public void Initialize(float maxTranslationalSpeed, float maxRotationalSpeed, bool flying, bool pitch)
-    {
-        this.maxTranslationalSpeed = maxTranslationalSpeed;
-        this.maxRotationalSpeed = maxRotationalSpeed;
-        this.flying = flying;
-        this.pitch = pitch;
-    }
-
-    public (Vector3, Quaternion) HandleMovement()
-    {
-        if (GetComponent<PathProvider>().hasPath())
-        {
-            (Vector3, Quaternion) nextPositionRotation = GetNextTransform(Time.fixedDeltaTime);
-            GetComponent<Rigidbody>().MoveRotation(nextPositionRotation.Item2);
-            GetComponent<Rigidbody>().MovePosition(nextPositionRotation.Item1);
-
-            return nextPositionRotation;
-        }
-
-        return (Vector3.zero, Quaternion.identity);
-    }
-
-    public virtual (Vector3, Quaternion) GetNextTransform(float time, bool applyTargetingOffset = false)
+    public override (Vector3, Quaternion) GetNextTransform(float time, bool applyTargetingOffset = false)
     {
         float timeRemainingToSimulate = time;
         Vector3 currentPosition = transform.position;

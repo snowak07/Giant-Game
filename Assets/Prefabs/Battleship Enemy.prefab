@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 1035198378715778261}
   - component: {fileID: 1035198378715778262}
   - component: {fileID: 2207493555832650013}
+  - component: {fileID: -1364940316219298734}
   - component: {fileID: 6054372219452169988}
   - component: {fileID: 4400683023371067965}
   m_Layer: 11
@@ -275,10 +276,7 @@ MonoBehaviour:
   ignoredDamageCollisionTags:
   - Enemy
   - Water
-  playerTransform: {fileID: 0}
-  playerBodyTransform: {fileID: 0}
-  maxRotationalSpeed: 20
-  maxTranslationalSpeed: 4
+  targetTransform: {fileID: 0}
 --- !u!114 &2207493555832650013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,6 +294,20 @@ MonoBehaviour:
     type: 3}
   cooldownTime: 3
   projectileSpeed: 20
+--- !u!114 &-1364940316219298734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035198378715778264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49f0a23e4bc5a3940ba9803492496d2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRotationalSpeed: 0
+  maxTranslationalSpeed: 0
 --- !u!114 &6054372219452169988
 MonoBehaviour:
   m_ObjectHideFlags: 0

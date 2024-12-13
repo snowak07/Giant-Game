@@ -10,6 +10,11 @@ public class BattleshipEnemy : Enemy
     {
         base.OnKill();
 
+        SetHullMass(3);
+    }
+
+    private void SetHullMass(float mass)
+    {
         // Find "Hull" child object
         int i = 0;
         while (i < transform.childCount)
@@ -24,7 +29,7 @@ public class BattleshipEnemy : Enemy
                     body = child.AddComponent<Rigidbody>();
                 }
 
-                body.mass = 3;
+                body.mass = mass;
                 break;
             }
         }
@@ -55,15 +60,13 @@ public class BattleshipEnemy : Enemy
         base.Start();
 
         Initialize(40.0f, 4, 20, false, false, false, 1000.0f, 10.0f, 2.0f);
-        //InitializeDestructible(1000.0f, 10.0f, 2.0f);
     }
 
     protected override void UpdateEnemy()
     {
         base.UpdateEnemy();
 
-        // Check if the boat has tipped over
-        if ((transform.rotation.eulerAngles.x > 90 && transform.rotation.eulerAngles.x < 270) || (transform.rotation.eulerAngles.z > 90 && transform.rotation.eulerAngles.z < 270))
+        if (BoatHasTippedOver())
         {
             Kill();
         }
@@ -73,6 +76,13 @@ public class BattleshipEnemy : Enemy
             Vector3 firingDirection = GetComponent<ProjectileLauncher>().ShootProjectile(targetTransform.position);
             UpdateCannonPosition(firingDirection);
         }
+    }
+
+    private bool BoatHasTippedOver()
+    {
+        return 
+            (transform.rotation.eulerAngles.x > 90 && transform.rotation.eulerAngles.x < 270) ||
+            (transform.rotation.eulerAngles.z > 90 && transform.rotation.eulerAngles.z < 270);
     }
 
     private void UpdateCannonPosition(Vector3 firingDirection)
