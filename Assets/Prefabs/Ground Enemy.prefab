@@ -120,6 +120,9 @@ GameObject:
   - component: {fileID: 9007635070205819621}
   - component: {fileID: 1597325889214409190}
   - component: {fileID: 1709229599425785697}
+  - component: {fileID: 1695770749825054850}
+  - component: {fileID: 5723636765297170637}
+  - component: {fileID: 3411323554502579810}
   m_Layer: 11
   m_Name: Ground Enemy
   m_TagString: Untagged
@@ -186,9 +189,7 @@ MonoBehaviour:
   ignoredDamageCollisionTags:
   - Enemy
   - Water
-  playerTransform: {fileID: 0}
-  playerBodyTransform: {fileID: 0}
-  health: 0
+  targetTransform: {fileID: 0}
   moveSpeedPerSecond: 1
   attackRange: 8
   projectileSpeed: 9
@@ -315,6 +316,45 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!114 &1695770749825054850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3387594560214341730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8662ff6a6de29004ca98a3411f7ff251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5723636765297170637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3387594560214341730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff3d77fdecd394346b9ffb2256c07fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathPoints: []
+--- !u!114 &3411323554502579810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3387594560214341730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4566de7dfb190094491f4354f92808b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRotationalSpeed: 0
+  maxTranslationalSpeed: 0
 --- !u!1 &3718084657836851472
 GameObject:
   m_ObjectHideFlags: 0

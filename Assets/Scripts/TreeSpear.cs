@@ -63,7 +63,7 @@ public class TreeSpear : GiantGrabInteractable
     {
         if (detached && detectedEnemyCollider != null && Helpers.TryGetComponentInParent(detectedEnemyCollider.gameObject, out Enemy detectedEnemy))
         {
-            Vector3 interceptDirection = TrajectoryHelper.CalculateInterceptionDirection(transform.position, GetComponent<Rigidbody>().linearVelocity.magnitude, detectedEnemy.GetNextTransform);
+            Vector3 interceptDirection = TrajectoryHelper.CalculateInterceptionDirection(transform.position, GetComponent<Rigidbody>().linearVelocity.magnitude, detectedEnemy.transform.GetComponent<MovementProvider>().GetNextTransform);
 
             if (interceptDirection != Vector3.zero)
             {

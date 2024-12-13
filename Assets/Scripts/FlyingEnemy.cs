@@ -139,10 +139,6 @@ public class FlyingEnemy : Enemy
             }
         }
     }
-    public override (Vector3, Quaternion) GetNextTransform(float time, bool applyTargetOffset = false)
-    {
-        throw new System.NotImplementedException();
-    }
 
     public void setIsSelected(bool selected)
     {

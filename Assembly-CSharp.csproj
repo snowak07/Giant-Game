@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\PushInteractor.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\DecalDestroyer.cs" />
     <Compile Include="Assets\Scripts\NewActionBasedXRController.cs" />
+    <Compile Include="Assets\Scripts\StationaryMovementProvider.cs" />
     <Compile Include="Assets\Scripts\CannonTurn.cs" />
     <Compile Include="Assets\Scripts\ScrapeArrows.cs" />
     <Compile Include="Assets\Scripts\ScoreManager.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Assets\Scripts\Sinkable.cs" />
     <Compile Include="Assets\Scripts\GiantGrabInteractable.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\MovementProvider.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\ParticleExamples.cs" />
     <Compile Include="Assets\Scripts\EnemyProjectile.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\ParticleMenu.cs" />
