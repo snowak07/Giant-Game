@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PathProvider : MonoBehaviour
 {
-    public Transform[] pathPoints = null;
+    public GameObject pathContainer;
+    protected List<Transform> pathPoints = null;
 
     // Used to keep the PathProvider going to each point instead of getting stuck at one path point
     protected int lastPointIndex = -1;
@@ -12,16 +14,24 @@ public class PathProvider : MonoBehaviour
     // TODO: Handle getting future position calls by not changing lastPointIndex or setting to a temp lastPointIndex value
     // TODO: Correct for a PathFollowers max rotational speed so that it doesn't try to loop around when it doesn't quite hit a waypoint
 
+    protected void Start()
+    {
+        if (pathContainer != null)
+        {
+            foreach (Transform pathPoint in pathContainer.transform) pathPoints.Add(pathPoint);
+        }
+    }
+
     public bool hasPath()
     {
-        return pathPoints != null && pathPoints.Length > 0;
+        return pathPoints != null && pathPoints.Count > 0;
     }
 
     protected int getClosestPathPointIndex(Vector3 currentPosition)
     {
         int closestPointIndex = 0;
         float closestDistance = float.MaxValue;
-        for (int i = 0; i < pathPoints.Length; i++)
+        for (int i = 0; i < pathPoints.Count; i++)
         {
             Transform point = pathPoints[i];
             float distance = (point.position - currentPosition).magnitude;
@@ -39,7 +49,7 @@ public class PathProvider : MonoBehaviour
 
     public (Vector3, Quaternion) getNextPathPoint(Vector3 currentPosition)
     {
-        if (pathPoints.Length == 0)
+        if (pathPoints.Count == 0)
         {
             throw new InvalidOperationException("The PathProvider does not have a Path.");
         }
@@ -48,7 +58,7 @@ public class PathProvider : MonoBehaviour
         if (closestPointIndex == lastPointIndex)
         {
             // Return next point if the current closest has already been passed through
-            int nextPointIndex = (closestPointIndex + 1) % pathPoints.Length;
+            int nextPointIndex = (closestPointIndex + 1) % pathPoints.Count;
             return (pathPoints[nextPointIndex].position, pathPoints[nextPointIndex].rotation);
         }
 

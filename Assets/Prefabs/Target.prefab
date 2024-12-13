@@ -120,6 +120,8 @@ GameObject:
   - component: {fileID: 1074182463575706903}
   - component: {fileID: 5668587457075758988}
   - component: {fileID: 4808896628746339789}
+  - component: {fileID: 8403215212097197477}
+  - component: {fileID: -1716492780443349396}
   m_Layer: 11
   m_Name: Target
   m_TagString: Untagged
@@ -158,8 +160,7 @@ MonoBehaviour:
   ignoredDamageCollisionTags:
   - Enemy
   - Water
-  playerTransform: {fileID: 0}
-  playerBodyTransform: {fileID: 0}
+  targetTransform: {fileID: 0}
 --- !u!54 &5668587457075758988
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -197,5 +198,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8662ff6a6de29004ca98a3411f7ff251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8403215212097197477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7617885795113923301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff3d77fdecd394346b9ffb2256c07fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathPoints: []
+--- !u!114 &-1716492780443349396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7617885795113923301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4566de7dfb190094491f4354f92808b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

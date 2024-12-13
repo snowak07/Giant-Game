@@ -12562,8 +12562,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6054372219452169988, guid: 601d5d5aed7d4f84eaf388e418d8a9ee,
         type: 3}
+      propertyPath: pathContainer
+      value: 
+      objectReference: {fileID: 182507180}
+    - target: {fileID: 6054372219452169988, guid: 601d5d5aed7d4f84eaf388e418d8a9ee,
+        type: 3}
       propertyPath: pathPoints.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6054372219452169988, guid: 601d5d5aed7d4f84eaf388e418d8a9ee,
         type: 3}
