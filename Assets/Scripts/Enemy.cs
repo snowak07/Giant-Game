@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine.InputSystem.HID;
 
 [RequireComponent(typeof(Destructible))]
-[RequireComponent(typeof(PathFollower))]
+[RequireComponent(typeof(PathProvider))]
 public abstract class Enemy : MonoBehaviour
 {
     public string[] ignoredDamageCollisionTags = { "Enemy", "Water" };
@@ -38,6 +38,7 @@ public abstract class Enemy : MonoBehaviour
         GetComponent<Destructible>().Initialize(explosionForce, explosionRadius, upwardsExplosionModifier);
         ////////////////////////// MovementProvider //////////////////////////
         // Initialize here
+         //GetComponent<WaypointMovementProvider>().Initialize(maxTranslationalSpeed, maxRotationalSpeed, flying, pitch);
         ////////////////////////// MovementProvider //////////////////////////
     }
 
@@ -178,8 +179,8 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void UpdateEnemy()
     {
         ////////////////////////// MovementProvider //////////////////////////
-        // Call WaypointMovementProvider.HandleMovement
-        if (GetComponent<PathFollower>().hasPath())
+        //GetComponent<WaypointMovementProvider>().HandleMovement();
+        if (GetComponent<PathProvider>().hasPath())
         {
             (Vector3, Quaternion) nextPositionRotation = GetNextTransform(Time.fixedDeltaTime);
             GetComponent<Rigidbody>().MoveRotation(nextPositionRotation.Item2);
@@ -194,7 +195,7 @@ public abstract class Enemy : MonoBehaviour
         float timeRemainingToSimulate = time;
         Vector3 currentPosition = transform.position;
         Quaternion currentRotation = transform.rotation;
-        PathFollower pathFollower = GetComponent<PathFollower>();
+        PathProvider pathFollower = GetComponent<PathProvider>();
 
         while (timeRemainingToSimulate > 0)
         {
