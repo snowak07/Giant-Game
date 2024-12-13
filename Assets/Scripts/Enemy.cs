@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine.InputSystem.HID;
 
 [RequireComponent(typeof(Destructible))]
-[RequireComponent(typeof(PathFollower))]
+[RequireComponent(typeof(PathProvider))]
 public abstract class Enemy : MonoBehaviour
 {
     public string[] ignoredDamageCollisionTags = { "Enemy", "Water" };
@@ -19,13 +19,11 @@ public abstract class Enemy : MonoBehaviour
 
     protected bool killInstantly;
 
-    ////////////////////////// MovementProvider //////////////////////////
     // Movement
     protected bool flying;
     protected bool pitch;
     public float maxRotationalSpeed; // Measured in units/s
     public float maxTranslationalSpeed; // Measured in units/s
-    ////////////////////////// MovementProvider //////////////////////////
 
     protected void Initialize(float health, float maxTranslationalSpeed, float maxRotationalSpeed, bool flying = false, bool pitch = false, bool killInstantly = false, float explosionForce = 200.0f, float explosionRadius = 3.0f, float upwardsExplosionModifier = 3.0f)
     {
@@ -36,9 +34,6 @@ public abstract class Enemy : MonoBehaviour
         this.pitch = pitch;
         this.killInstantly = killInstantly;
         GetComponent<Destructible>().Initialize(explosionForce, explosionRadius, upwardsExplosionModifier);
-        ////////////////////////// MovementProvider //////////////////////////
-        // Initialize here
-        ////////////////////////// MovementProvider //////////////////////////
     }
 
     /**
@@ -177,24 +172,20 @@ public abstract class Enemy : MonoBehaviour
      */
     protected virtual void UpdateEnemy()
     {
-        ////////////////////////// MovementProvider //////////////////////////
-        // Call WaypointMovementProvider.HandleMovement
-        if (GetComponent<PathFollower>().hasPath())
+        if (GetComponent<PathProvider>().hasPath())
         {
             (Vector3, Quaternion) nextPositionRotation = GetNextTransform(Time.fixedDeltaTime);
             GetComponent<Rigidbody>().MoveRotation(nextPositionRotation.Item2);
             GetComponent<Rigidbody>().MovePosition(nextPositionRotation.Item1);
         }
-        ////////////////////////// MovementProvider //////////////////////////
     }
 
-    ////////////////////////// MovementProvider //////////////////////////
     public virtual (Vector3, Quaternion) GetNextTransform(float time, bool applyTargetingOffset = false)
     {
         float timeRemainingToSimulate = time;
         Vector3 currentPosition = transform.position;
         Quaternion currentRotation = transform.rotation;
-        PathFollower pathFollower = GetComponent<PathFollower>();
+        PathProvider pathFollower = GetComponent<PathProvider>();
 
         while (timeRemainingToSimulate > 0)
         {
@@ -223,5 +214,4 @@ public abstract class Enemy : MonoBehaviour
 
         return (currentPosition, currentRotation);
     }
-    ////////////////////////// MovementProvider //////////////////////////
 }
