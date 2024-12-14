@@ -9,7 +9,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public Transform targetTransform = null;
-
+    public GameObject pathContainer = null;
     public float maxHorizontalDistance;
     public float minHorizontalDistance;
     public float maxVerticalDistance;
@@ -48,8 +48,9 @@ public class EnemySpawner : MonoBehaviour
 
         // Instantiate Enemy prefab
         GameObject enemyObject = Instantiate(EnemyPrefab, spawnPosition, towardsPlayerRotation);
+        enemyObject.GetComponent<PathProvider>().pathContainer = pathContainer;
         Enemy enemy = enemyObject.GetComponent<Enemy>();
-        enemy.setTargetTransform(targetTransform);
+        enemy.targetTransform = targetTransform;
 
         // Wait to end spawn cooldown
         yield return new WaitForSeconds(spawnCooldownTime);

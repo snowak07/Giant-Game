@@ -11,12 +11,9 @@ using UnityEngine.InputSystem.HID;
 public abstract class Enemy : MonoBehaviour
 {
     public string[] ignoredDamageCollisionTags = { "Enemy", "Water" };
-    public Transform targetTransform = null;
-
+    public Transform targetTransform { get; set; }
     public float health { get; private set; }
-
     public bool IsPickedUp { get; set; }
-
     protected bool killInstantly;
 
     protected void Initialize(float health, float maxTranslationalSpeed, float maxRotationalSpeed, bool flying = false, bool pitch = false, bool killInstantly = false, float explosionForce = 200.0f, float explosionRadius = 3.0f, float upwardsExplosionModifier = 3.0f)
@@ -82,7 +79,7 @@ public abstract class Enemy : MonoBehaviour
 
     private void HandleKillActions()
     {
-        OnKill(); // Handle child OnKill functions.
+        OnKill();
 
         ScoreManager.Add(); // FIXME: Scoreable component?
 
@@ -143,18 +140,6 @@ public abstract class Enemy : MonoBehaviour
     }
 
     protected virtual void OnKill() { }
-
-    /**
-     * Set player transform so enemies can react to the player's position
-     * 
-     * @param pTransform    transform of the player
-     * 
-     * @return void
-     */
-    public void setTargetTransform(Transform pTransform)
-    {
-        targetTransform = pTransform;
-    }
 
     /**
      * Where subclasses should handle updating the enemy each frame

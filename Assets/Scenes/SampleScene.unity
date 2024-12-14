@@ -12071,7 +12071,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1333606540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12084,7 +12084,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95733d8dae4595441bdaa899bad56b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTransform: {fileID: 0}
+  targetTransform: {fileID: 539724499}
+  pathContainer: {fileID: 182507180}
   maxHorizontalDistance: 250
   minHorizontalDistance: 150
   maxVerticalDistance: 0
@@ -12559,6 +12560,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Battleship Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1035198378715778264, guid: 601d5d5aed7d4f84eaf388e418d8a9ee,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6054372219452169988, guid: 601d5d5aed7d4f84eaf388e418d8a9ee,
         type: 3}
@@ -15176,6 +15182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 0}
+  pathContainer: {fileID: 0}
   maxHorizontalDistance: 50
   minHorizontalDistance: 50
   maxVerticalDistance: 1

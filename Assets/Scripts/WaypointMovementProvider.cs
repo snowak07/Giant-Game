@@ -8,11 +8,11 @@ public class WaypointMovementProvider : MovementProvider
         float timeRemainingToSimulate = time;
         Vector3 currentPosition = transform.position;
         Quaternion currentRotation = transform.rotation;
-        PathProvider pathFollower = GetComponent<PathProvider>();
+        PathProvider pathProvider = GetComponent<PathProvider>();
 
         while (timeRemainingToSimulate > 0)
         {
-            (Vector3, Quaternion) waypoint = pathFollower.getNextPathPoint(currentPosition);
+            (Vector3, Quaternion) waypoint = pathProvider.getNextPathPoint(currentPosition);
 
             Vector3 towardsDesiredPosition = waypoint.Item1 - currentPosition;
             Vector3 rotationDirection = towardsDesiredPosition;

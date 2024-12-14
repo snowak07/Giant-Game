@@ -18,8 +18,22 @@ public class PathProvider : MonoBehaviour
     {
         if (pathContainer != null)
         {
-            foreach (Transform pathPoint in pathContainer.transform) pathPoints.Add(pathPoint);
+            InitializePathPoints();
         }
+    }
+
+    protected void Update()
+    {
+        if (pathContainer != null && pathPoints == null)
+        {
+            InitializePathPoints();
+        }
+    }
+
+    private void InitializePathPoints()
+    {
+        pathPoints = new List<Transform>();
+        foreach (Transform pathPoint in pathContainer.transform) pathPoints.Add(pathPoint);
     }
 
     public bool hasPath()
