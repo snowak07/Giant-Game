@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Effects\ExplosionHandler.cs" />
     <Compile Include="Assets\Scripts\Player\CreateBoulder.cs" />
     <Compile Include="Assets\Scripts\Enemies\HoveringTarget.cs" />
+    <Compile Include="Assets\Scripts\Interactables\TreeSpear\TreeSpearRoot.cs" />
     <Compile Include="Assets\Scripts\Player\SummonShield.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\ParticleCollision.cs" />
     <Compile Include="Assets\Scripts\Movement\TrajectoryHelper.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Assets\Scripts\Player\GrabDirectInteractor.cs" />
     <Compile Include="Assets\Scripts\Player\GiantBody.cs" />
     <Compile Include="Assets\Scripts\Player\PunchThrow.cs" />
+    <Compile Include="Assets\Scripts\Movement\MovementProviders\WaypointMovementProvider.cs" />
     <Compile Include="Assets\Scripts\Effects\Destructible.cs" />
     <Compile Include="Assets\Scripts\Interactables\BreakableInteractable.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\ParticleExamples.cs" />
@@ -96,30 +98,27 @@
     <Compile Include="Assets\Scripts\Movement\FlightAlignment.cs" />
     <Compile Include="Assets\Scripts\Effects\ParticleEffectDestroy.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Misc Effects\Scripts\SpawnEffect.cs" />
-    <Compile Include="Assets\Scripts\Interactables\TreeSpearGrower.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\AdjustTimeScale.cs" />
     <Compile Include="Assets\Scripts\Enemies\CannonTurn.cs" />
     <Compile Include="Assets\Scripts\Enemies\TargetEnemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\ProjectileLauncher.cs" />
-    <Compile Include="Assets\Scripts\Movement\WaypointMovementProvider.cs" />
-    <Compile Include="Assets\Scripts\Interactables\TreeSpearRoot.cs" />
+    <Compile Include="Assets\Scripts\Interactables\TreeSpear\TreeSpearGrower.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyArrow.cs" />
     <Compile Include="Assets\Scripts\Player\Shockwave.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\GunShoot.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Third Party Assets\IgniteCoders\Simple Water Shader\Resources\WaterReflection.cs" />
-    <Compile Include="Assets\Scripts\Movement\StationaryMovementProvider.cs" />
     <Compile Include="Assets\Scripts\Player\Punch.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\SimpleCharacterMotor.cs" />
-    <Compile Include="Assets\Scripts\Movement\MovementProvider.cs" />
     <Compile Include="Assets\Third Party Assets\PeerPlay\Ripple Water\_scripts\CollisionScript.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\GunAim.cs" />
     <Compile Include="Assets\Scripts\Movement\PathProvider.cs" />
     <Compile Include="Assets\Scripts\Enemies\BattleshipEnemy.cs" />
     <Compile Include="Assets\Scripts\Player\ScrapeArrows.cs" />
-    <Compile Include="Assets\Scripts\Interactables\TreeSpear.cs" />
+    <Compile Include="Assets\Scripts\Interactables\TreeSpear\TreeSpear.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Movement\MovementProviders\StationaryMovementProvider.cs" />
     <Compile Include="Assets\Scripts\Player\StickOnHit.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Ramps\Runtime\RampAsset.cs" />
     <Compile Include="Assets\Scripts\Player\OmniDirectionForcePullInteractor.cs" />
@@ -135,6 +134,7 @@
     <Compile Include="Assets\Scripts\UI\LineRendererSettings.cs" />
     <Compile Include="Assets\Scripts\Player\RayInteractorHandler.cs" />
     <Compile Include="Assets\Scripts\Enemies\AirshipEnemy.cs" />
+    <Compile Include="Assets\Scripts\Movement\MovementProviders\MovementProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
