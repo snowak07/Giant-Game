@@ -11,7 +11,7 @@ using UnityEngine.InputSystem.HID;
 public abstract class Enemy : MonoBehaviour
 {
     public string[] ignoredDamageCollisionTags = { "Enemy", "Water" };
-    public Transform targetTransform { get; set; }
+    public Transform targetTransform = null;
     public float health { get; private set; }
     public bool IsPickedUp { get; set; }
     protected bool killInstantly;

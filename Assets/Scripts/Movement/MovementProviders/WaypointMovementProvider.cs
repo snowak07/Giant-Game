@@ -1,9 +1,8 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class WaypointMovementProvider : MovementProvider
 {
-    public override (Vector3, Quaternion) GetNextTransform(float time, bool applyTargetingOffset = false)
+    public override (Vector3, Quaternion) GetNextTransform(float time)
     {
         float timeRemainingToSimulate = time;
         Vector3 currentPosition = transform.position;
@@ -13,6 +12,11 @@ public class WaypointMovementProvider : MovementProvider
         while (timeRemainingToSimulate > 0)
         {
             (Vector3, Quaternion) waypoint = pathProvider.getNextPathPoint(currentPosition);
+
+            if (pathProvider.arrivedAtFinalPathPoint())
+            {
+                return (currentPosition, currentRotation);
+            }
 
             Vector3 towardsDesiredPosition = waypoint.Item1 - currentPosition;
             Vector3 rotationDirection = towardsDesiredPosition;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public delegate (Vector3, Quaternion) GetNextTransformCallback(float time, bool applyTargetOffset = false);
+public delegate (Vector3, Quaternion) GetNextTransformCallback(float time);
 
 public static class TrajectoryHelper
 {

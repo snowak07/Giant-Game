@@ -66,9 +66,9 @@
     <Compile Include="Assets\Scripts\Interactables\BreakableInteractablePiece.cs" />
     <Compile Include="Assets\Scripts\Enemies\GroundEnemy.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\DecalDestroyer.cs" />
+    <Compile Include="Assets\Scripts\Effects\ExplosionHandler.cs" />
     <Compile Include="Assets\Scripts\Enemies\FlyingEnemy.cs" />
     <Compile Include="Assets\Scripts\UI\ScoreManager.cs" />
-    <Compile Include="Assets\Scripts\Effects\ExplosionHandler.cs" />
     <Compile Include="Assets\Scripts\Player\CreateBoulder.cs" />
     <Compile Include="Assets\Scripts\Enemies\HoveringTarget.cs" />
     <Compile Include="Assets\Scripts\Interactables\TreeSpear\TreeSpearRoot.cs" />

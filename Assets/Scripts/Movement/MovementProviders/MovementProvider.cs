@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(PathProvider))]
+[RequireComponent(typeof(Rigidbody))]
 public abstract class MovementProvider : MonoBehaviour
 {
     protected bool flying;
@@ -30,5 +31,5 @@ public abstract class MovementProvider : MonoBehaviour
         return (Vector3.zero, Quaternion.identity);
     }
 
-    public abstract (Vector3, Quaternion) GetNextTransform(float time, bool applyTargetingOffset = false);
+    public abstract (Vector3, Quaternion) GetNextTransform(float time);
 }

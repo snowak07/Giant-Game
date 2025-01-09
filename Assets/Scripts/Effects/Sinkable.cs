@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// FIXME Handles and Flag_pole aren't ever registering as sinking and never get destroyed.
 [RequireComponent(typeof(Rigidbody))]
 public class Sinkable : MonoBehaviour
 {

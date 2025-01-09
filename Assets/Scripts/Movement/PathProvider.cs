@@ -6,13 +6,13 @@ public class PathProvider : MonoBehaviour
 {
     public GameObject pathContainer;
     protected List<Transform> pathPoints = null;
+    public bool loop = true;
 
     // Used to keep the PathProvider going to each point instead of getting stuck at one path point
     protected int lastPointIndex = -1;
     protected float arrivedThreshold = 1f;
 
     // TODO: Handle getting future position calls by not changing lastPointIndex or setting to a temp lastPointIndex value
-    // TODO: Correct for a PathFollowers max rotational speed so that it doesn't try to loop around when it doesn't quite hit a waypoint
 
     protected void Start()
     {
@@ -41,6 +41,11 @@ public class PathProvider : MonoBehaviour
         return pathPoints != null && pathPoints.Count > 0;
     }
 
+    public bool arrivedAtFinalPathPoint()
+    {
+        return !loop && lastPointIndex == pathPoints.Count - 1;
+    }
+
     protected int getClosestPathPointIndex(Vector3 currentPosition)
     {
         int closestPointIndex = 0;
@@ -67,12 +72,21 @@ public class PathProvider : MonoBehaviour
         {
             throw new InvalidOperationException("The PathProvider does not have a Path.");
         }
-
+        // lastPointIndex needs to be not changed globally if called from TrajectoryHelper
         int closestPointIndex = getClosestPathPointIndex(currentPosition);
         if (closestPointIndex == lastPointIndex)
         {
-            // Return next point if the current closest has already been passed through
-            int nextPointIndex = (closestPointIndex + 1) % pathPoints.Count;
+            int nextPointIndex;
+            if (loop)
+            {
+                // Return next point if the current closest has already been passed through
+                nextPointIndex = (closestPointIndex + 1) % pathPoints.Count;
+            }
+            else
+            {
+                nextPointIndex = Math.Min(closestPointIndex + 1, pathPoints.Count - 1);
+            }
+
             return (pathPoints[nextPointIndex].position, pathPoints[nextPointIndex].rotation);
         }
 
