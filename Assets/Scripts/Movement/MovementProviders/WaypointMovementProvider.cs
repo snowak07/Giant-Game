@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WaypointMovementProvider : MovementProvider
 {
-    public override (Vector3, Quaternion) GetNextTransform(float time)
+    public override (Vector3, Quaternion) GetNextTransform(float time, bool preserveState = false)
     {
         float timeRemainingToSimulate = time;
         Vector3 currentPosition = transform.position;
@@ -11,7 +11,7 @@ public class WaypointMovementProvider : MovementProvider
 
         while (timeRemainingToSimulate > 0)
         {
-            (Vector3, Quaternion) waypoint = pathProvider.getNextPathPoint(currentPosition);
+            (Vector3, Quaternion) waypoint = pathProvider.getNextPathPoint(currentPosition, preserveState);
 
             if (pathProvider.arrivedAtFinalPathPoint())
             {

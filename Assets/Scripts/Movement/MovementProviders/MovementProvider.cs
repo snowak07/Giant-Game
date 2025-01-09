@@ -31,5 +31,5 @@ public abstract class MovementProvider : MonoBehaviour
         return (Vector3.zero, Quaternion.identity);
     }
 
-    public abstract (Vector3, Quaternion) GetNextTransform(float time);
+    public abstract (Vector3, Quaternion) GetNextTransform(float time, bool preserveState = false);
 }

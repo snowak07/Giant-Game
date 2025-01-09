@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public delegate (Vector3, Quaternion) GetNextTransformCallback(float time);
+public delegate (Vector3, Quaternion) GetNextTransformCallback(float time, bool preserveState = false);
 
 public static class TrajectoryHelper
 {
@@ -87,7 +87,7 @@ public static class TrajectoryHelper
     {
         // Initial guess for the time of interception
         float time = 0;
-        (Vector3, Quaternion) evaderTransform = getNextTransformCallback(time);
+        (Vector3, Quaternion) evaderTransform = getNextTransformCallback(time, true);
 
         // Calculate the relative position
         Vector3 relativePosition = evaderTransform.Item1 - pursuerPosition; // FIXME: No longer needed I think
@@ -99,7 +99,7 @@ public static class TrajectoryHelper
         while (true)
         {
             // Calculate the evader's position at the current time
-            evaderTransform = getNextTransformCallback(time);
+            evaderTransform = getNextTransformCallback(time, true);
 
             float tPursuer = CalculateTimeToImpact(pursuerPosition, evaderTransform.Item1, pursuerSpeed);
 
@@ -119,7 +119,7 @@ public static class TrajectoryHelper
         }
 
         // Calculate the required direction
-        Vector3 interceptPoint = getNextTransformCallback(time).Item1;
+        Vector3 interceptPoint = getNextTransformCallback(time, true).Item1;
         Vector3 direction = CalculateFiringDirection(pursuerPosition, interceptPoint, pursuerSpeed).normalized;
 
         return direction;

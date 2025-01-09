@@ -12,8 +12,6 @@ public class PathProvider : MonoBehaviour
     protected int lastPointIndex = -1;
     protected float arrivedThreshold = 1f;
 
-    // TODO: Handle getting future position calls by not changing lastPointIndex or setting to a temp lastPointIndex value
-
     protected void Start()
     {
         if (pathContainer != null)
@@ -66,31 +64,35 @@ public class PathProvider : MonoBehaviour
         return closestPointIndex;
     }
 
-    public (Vector3, Quaternion) getNextPathPoint(Vector3 currentPosition)
+    public (Vector3, Quaternion) getNextPathPoint(Vector3 currentPosition, bool preserveState)
     {
         if (pathPoints.Count == 0)
         {
             throw new InvalidOperationException("The PathProvider does not have a Path.");
         }
-        // lastPointIndex needs to be not changed globally if called from TrajectoryHelper
-        int closestPointIndex = getClosestPathPointIndex(currentPosition);
-        if (closestPointIndex == lastPointIndex)
+
+        int tempLastPointIndex = lastPointIndex;
+
+        int nextPointIndex = getClosestPathPointIndex(currentPosition);
+        if (nextPointIndex == lastPointIndex)
         {
-            int nextPointIndex;
             if (loop)
             {
                 // Return next point if the current closest has already been passed through
-                nextPointIndex = (closestPointIndex + 1) % pathPoints.Count;
+                nextPointIndex = (nextPointIndex + 1) % pathPoints.Count;
             }
             else
             {
-                nextPointIndex = Math.Min(closestPointIndex + 1, pathPoints.Count - 1);
+                nextPointIndex = Math.Min(nextPointIndex + 1, pathPoints.Count - 1);
             }
-
-            return (pathPoints[nextPointIndex].position, pathPoints[nextPointIndex].rotation);
         }
 
-        return (pathPoints[closestPointIndex].position, pathPoints[closestPointIndex].rotation);
+        if (preserveState)
+        {
+            lastPointIndex = tempLastPointIndex;
+        }
+
+        return (pathPoints[nextPointIndex].position, pathPoints[nextPointIndex].rotation);
     }
 
     private void UpdateLastPointIndex(float distance, int pointIndex)
