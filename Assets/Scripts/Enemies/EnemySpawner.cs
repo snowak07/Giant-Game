@@ -39,15 +39,26 @@ public class EnemySpawner : MonoBehaviour
         float x = distanceFromPlayer * spawnDirectionHorizontal.x;
         float z = distanceFromPlayer * spawnDirectionHorizontal.y;
         float y = Random.Range(minVerticalDistance, maxVerticalDistance);
-        Vector3 spawnPosition = new Vector3(x, y, z);
+
+        Vector3 spawnPosition;
+        if (RandomizedSpawnLocationEnabled())
+        {
+            spawnPosition = new Vector3(x, y, z);
+        } 
+        else
+        {
+            spawnPosition = transform.position;
+        }
 
         Vector3 towardsPlayer = targetTransform.position - spawnPosition;
         towardsPlayer.y = y;
         Vector3 upwards = new Vector3(0, 1, 0);
-        Quaternion towardsPlayerRotation = Quaternion.LookRotation(towardsPlayer, upwards);
+        Vector3 firstPathPoint = pathContainer.transform.GetChild(0).position;
+        Vector3 towardsFirstPathPoint = firstPathPoint - spawnPosition;
+        Quaternion towardsPath = Quaternion.LookRotation(towardsFirstPathPoint, upwards);
 
         // Instantiate Enemy prefab
-        GameObject enemyObject = Instantiate(EnemyPrefab, spawnPosition, towardsPlayerRotation);
+        GameObject enemyObject = Instantiate(EnemyPrefab, spawnPosition, towardsPath);
         enemyObject.GetComponent<PathProvider>().pathContainer = pathContainer;
         Enemy enemy = enemyObject.GetComponent<Enemy>();
         enemy.targetTransform = targetTransform;
@@ -56,5 +67,15 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(spawnCooldownTime);
         spawnCooldown = false;
         yield break;
+    }
+
+    private bool RandomizedSpawnLocationEnabled()
+    {
+        return !(
+                maxHorizontalDistance == 0 &&
+                minHorizontalDistance == 0 &&
+                maxVerticalDistance == 0 &&
+                minVerticalDistance == 0
+            );
     }
 }

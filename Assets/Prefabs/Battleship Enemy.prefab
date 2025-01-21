@@ -293,7 +293,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 3648142049155997184, guid: 4419cf91675d77d48b2c8a10f737e544,
     type: 3}
   cooldownTime: 3
-  projectileSpeed: 20
+  projectileSpeed: 30
 --- !u!114 &-1364940316219298734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,8 +306,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f0a23e4bc5a3940ba9803492496d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRotationalSpeed: 0
-  maxTranslationalSpeed: 0
 --- !u!114 &6054372219452169988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,7 +318,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff3d77fdecd394346b9ffb2256c07fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathPoints: []
+  pathContainer: {fileID: 0}
+  loop: 1
 --- !u!114 &4400683023371067965
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -29,14 +29,22 @@ public class EnemyProjectile : MonoBehaviour
 
     protected void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "Giant" && collision.gameObject.transform.parent.gameObject.TryGetComponent(out NewActionBasedXRController controller) && collision.gameObject.GetComponentInParent<NewActionBasedXRController>().PickupEnabled()) // Potential error fix: TryGetComponent(out NewActionBasedXRController controller)
-        {
-            // Do nothing
+        if (
+            collision.collider.tag == "Giant" && 
+            Helpers.TryGetComponentInParent(collision.gameObject, out NewActionBasedXRController controller) && 
+            collision.gameObject.GetComponentInParent<NewActionBasedXRController>().PickupEnabled()
+        ) {
+            // Change layer off Enemy layer when interacted with by the player so that it can damage enemies afterward
+            gameObject.layer = LayerMask.NameToLayer("Default");
         }
         else
         {
+            // Create LayerMask that doesn't interact with itself
+            int layer = gameObject.layer;
+            int layerMask = ~(1 << layer);
+
             // Check if Enemies and in explosion radius and if so kill them
-            Collider[] explosionKills = Physics.OverlapSphere(transform.position, killRadius);
+            Collider[] explosionKills = Physics.OverlapSphere(transform.position, killRadius, layerMask);
             foreach (var explosionHit in explosionKills)
             {
                 if (explosionHit.transform.root.gameObject.TryGetComponent(out Enemy enemy))
@@ -46,7 +54,7 @@ public class EnemyProjectile : MonoBehaviour
             }
 
             // Check if Enemies and in explosion radius and if so kill them
-            Collider[] explosionHits = Physics.OverlapSphere(transform.position, explosionRadius);
+            Collider[] explosionHits = Physics.OverlapSphere(transform.position, explosionRadius, layerMask);
             foreach (var explosionHit in explosionHits)
             {
                 if (explosionHit.transform.root.gameObject.TryGetComponent(out Rigidbody body) && explosionHit.transform.tag != "Giant")

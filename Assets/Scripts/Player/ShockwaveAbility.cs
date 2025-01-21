@@ -33,8 +33,9 @@ public class ShockwaveAbility : MonoBehaviour
     {
         if (shockwaveEnabled)
         {
-            if (collision.gameObject.tag == "Ground" && collision.relativeVelocity.magnitude > velocityToActivate)
+            if (LayerMask.LayerToName(collision.gameObject.layer) == "Ground" && collision.relativeVelocity.magnitude > velocityToActivate)
             {
+                Debug.Log("[ShockwaveAbility->OnCollisionEnter] Shockwave created | collision speed = " + collision.relativeVelocity.magnitude);
                 // Create vector on x,z plane pointing straight out from GiantHand
                 Vector3 horizontalVector = transform.forward;
                 horizontalVector.y = 0;

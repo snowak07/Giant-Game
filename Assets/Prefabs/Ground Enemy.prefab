@@ -289,8 +289,8 @@ MonoBehaviour:
   firingOffset: {fileID: 2713397634587158319}
   projectilePrefab: {fileID: 3974958867815912455, guid: 8a0d11ee43cd35841b14f6ab97749c86,
     type: 3}
-  cooldownTime: 0
-  projectileSpeed: 0
+  cooldownTime: 3
+  projectileSpeed: 8
 --- !u!1 &3718084657836851472
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,5 +397,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.026400914, y: 0.028716145, z: 0.02263366}
+  m_Size: {x: 0.05, y: 0.028716145, z: 0.05}
   m_Center: {x: 0.000026724301, y: -0.017531062, z: 0.0000000069849193}
