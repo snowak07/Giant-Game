@@ -13,7 +13,7 @@ public class TreeSpear : GiantGrabInteractable
     {
         base.OnEnable();
 
-        if (TryGetComponent(out TreeSpearRoot root))
+        if (TryGetComponent(out InteractableRoot root))
         {
             selectEntered.AddListener(root.DisableReturnForce);
             selectExited.AddListener(root.EnableReturnForce);
@@ -24,7 +24,7 @@ public class TreeSpear : GiantGrabInteractable
     {
         base.OnDisable();
 
-        if (TryGetComponent(out TreeSpearRoot root))
+        if (TryGetComponent(out InteractableRoot root))
         {
             selectEntered.RemoveListener(root.DisableReturnForce);
             selectExited.RemoveListener(root.EnableReturnForce);
@@ -35,7 +35,7 @@ public class TreeSpear : GiantGrabInteractable
     {
         base.DisablePickup(args);
 
-        if (TryGetComponent(out TreeSpearRoot root) && root.broken)
+        if (TryGetComponent(out InteractableRoot root) && root.broken)
         {
             GetComponent<FlightAlignment>().Enable();
         }
@@ -48,7 +48,7 @@ public class TreeSpear : GiantGrabInteractable
     {
         base.Detach();
 
-        if (TryGetComponent(out TreeSpearRoot root) && root.broken)
+        if (TryGetComponent(out InteractableRoot root) && root.broken)
         {
             InitializeTargetChecker();
         }

@@ -71,9 +71,9 @@
     <Compile Include="Assets\Scripts\UI\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\Player\CreateBoulder.cs" />
     <Compile Include="Assets\Scripts\Enemies\HoveringTarget.cs" />
-    <Compile Include="Assets\Scripts\Interactables\TreeSpear\TreeSpearRoot.cs" />
     <Compile Include="Assets\Scripts\Player\SummonShield.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\ParticleCollision.cs" />
+    <Compile Include="Assets\Scripts\Interactables\InteractableGrower.cs" />
     <Compile Include="Assets\Scripts\Movement\TrajectoryHelper.cs" />
     <Compile Include="Assets\Scripts\Interactables\EnemyGrabInteractable.cs" />
     <Compile Include="Assets\Scripts\UI\ReadRotation.cs" />
@@ -85,6 +85,7 @@
     <Compile Include="Assets\Scripts\Player\PushInteractor.cs" />
     <Compile Include="Assets\Scripts\Player\NewActionBasedXRController.cs" />
     <Compile Include="Assets\Scripts\UI\MenuManager.cs" />
+    <Compile Include="Assets\Scripts\Interactables\InteractableRoot.cs" />
     <Compile Include="Assets\Scripts\Player\HandFriction.cs" />
     <Compile Include="Assets\Scripts\Effects\ImpactAudio.cs" />
     <Compile Include="Assets\Scripts\Player\GrabDirectInteractor.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Ramps\Runtime\RampAsset.cs" />
     <Compile Include="Assets\Scripts\Player\OmniDirectionForcePullInteractor.cs" />
     <Compile Include="Assets\Scripts\Interactables\GiantGrabInteractable.cs" />
+    <Compile Include="Assets\Scripts\Interactables\BoulderGrower.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemySpawner.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\Effects\TestExplosion.cs" />

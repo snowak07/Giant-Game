@@ -1,10 +1,9 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class TreeSpearRoot : MonoBehaviour
+public class InteractableRoot : MonoBehaviour
 {
     public bool broken { get; private set; }
-    protected Vector3 groundOffset = new Vector3(0, 0, -2.5f);
     protected float uprightForce = 5000.0f;
     public float uprightDampening = 3.0f;
     protected bool applyReturnForce;
@@ -14,7 +13,7 @@ public class TreeSpearRoot : MonoBehaviour
         broken = false;
     }
 
-    public void AddRoot()
+    public void AddRoot(Vector3 groundOffset)
     {
         applyReturnForce = true;
 

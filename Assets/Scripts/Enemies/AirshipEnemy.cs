@@ -6,7 +6,7 @@ public class AirshipEnemy : Enemy
     protected override void Start()
     {
         base.Start();
-        Initialize(20, 3, 20, true, false);
+        Initialize(20, 3, 40, true, false);
     }
 
     protected override void UpdateEnemy()

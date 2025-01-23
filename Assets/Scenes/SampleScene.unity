@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 24631809}
   - component: {fileID: 24631812}
   - component: {fileID: 24631811}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -672,7 +672,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 32892677}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1122,7 +1122,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &95669426
 Transform:
   m_ObjectHideFlags: 0
@@ -1842,7 +1842,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 182507181}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Player Circle Path
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2162,6 +2162,80 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1765008694}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &223610739
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2062977778449422150, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: interactablePrefab
+      value: 
+      objectReference: {fileID: 854231859794480277, guid: a04ccc9ec061ae04d92c600aa40c4b7a,
+        type: 3}
+    - target: {fileID: 6233886640496032337, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 6233886640496032337, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.48999977
+      objectReference: {fileID: 0}
+    - target: {fileID: 6233886640496032337, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6233886640496032337, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6233886640496032337, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6233886640496032337, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6233886640496032337, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6233886640496032337, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6233886640496032337, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6233886640496032337, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7169997298333479452, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_Name
+      value: TreeSpearGrower (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4ec2b5abc10816d4aae8c7e553dafbba, type: 3}
 --- !u!1 &224475758
 GameObject:
   m_ObjectHideFlags: 0
@@ -2623,7 +2697,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 244965280}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2965,7 +3039,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 254506945}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3346,7 +3420,7 @@ GameObject:
   - component: {fileID: 287075569}
   - component: {fileID: 287075572}
   - component: {fileID: 287075571}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3549,7 +3623,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 291486949}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5250,7 +5324,7 @@ GameObject:
   - component: {fileID: 435100588}
   - component: {fileID: 435100591}
   - component: {fileID: 435100590}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6142,7 +6216,7 @@ GameObject:
   - component: {fileID: 475306429}
   - component: {fileID: 475306432}
   - component: {fileID: 475306431}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6232,7 +6306,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 488173843}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6366,7 +6440,7 @@ GameObject:
   - component: {fileID: 504370234}
   - component: {fileID: 504370237}
   - component: {fileID: 504370236}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6667,6 +6741,85 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20b13628ee5faae40b4036039e357c18, type: 3}
+--- !u!1001 &515773719
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1944117614038025067, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: interactablePrefab
+      value: 
+      objectReference: {fileID: 2323250492134829559, guid: 05f1332c7e8dfb044b232347a7cfa322,
+        type: 3}
+    - target: {fileID: 5888372782924639743, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.969038
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888372782924639743, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.49000072
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888372782924639743, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.7865477
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888372782924639743, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888372782924639743, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888372782924639743, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888372782924639743, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888372782924639743, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888372782924639743, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888372782924639743, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7589605555058645544, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_Name
+      value: BoulderGrower
+      objectReference: {fileID: 0}
+    - target: {fileID: 7589605555058645544, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4be90f7a36d64af4b947880e3018ba67, type: 3}
 --- !u!1 &526610864
 GameObject:
   m_ObjectHideFlags: 0
@@ -7597,7 +7750,7 @@ GameObject:
   - component: {fileID: 550657953}
   - component: {fileID: 550657956}
   - component: {fileID: 550657955}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8268,7 +8421,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 621857514}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9940,7 +10093,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 690430889}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10153,7 +10306,7 @@ GameObject:
   - component: {fileID: 713904556}
   - component: {fileID: 713904559}
   - component: {fileID: 713904558}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10748,7 +10901,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 780408059}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12161,7 +12314,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 887369680}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12445,7 +12598,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 906673851}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12627,7 +12780,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 914898737}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12694,7 +12847,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 935171041}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12760,13 +12913,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 951637270}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Airship Path
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &951637270
 Transform:
   m_ObjectHideFlags: 0
@@ -12980,7 +13133,7 @@ GameObject:
   - component: {fileID: 972076647}
   - component: {fileID: 972076650}
   - component: {fileID: 972076649}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13158,7 +13311,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 992655522}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13470,7 +13623,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1017706918}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13744,7 +13897,7 @@ GameObject:
   - component: {fileID: 1070148813}
   - component: {fileID: 1070148816}
   - component: {fileID: 1070148815}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14164,7 +14317,7 @@ GameObject:
   - component: {fileID: 1099724805}
   - component: {fileID: 1099724808}
   - component: {fileID: 1099724807}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14996,7 +15149,7 @@ GameObject:
   - component: {fileID: 1131240748}
   - component: {fileID: 1131240751}
   - component: {fileID: 1131240750}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16047,7 +16200,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1243110530}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16079,7 +16232,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1245231983}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16235,7 +16388,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1266681289}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17227,6 +17380,59 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286454109}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1288780136
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1288780137}
+  - component: {fileID: 1288780138}
+  m_Layer: 0
+  m_Name: AirshipEnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1288780137
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288780136}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1288780138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288780136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95733d8dae4595441bdaa899bad56b40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTransform: {fileID: 1804730024}
+  pathContainer: {fileID: 951637269}
+  maxHorizontalDistance: 250
+  minHorizontalDistance: 150
+  maxVerticalDistance: 90
+  minVerticalDistance: 75
+  spawnCooldownTime: 10
+  EnemyPrefab: {fileID: 3762526004316660454, guid: b32c54a0171cea44da6e4cbd2a6fce6d,
+    type: 3}
 --- !u!4 &1294007342 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3540469933408463588, guid: 5a383f0ed23e4fc44af7a5c6470b5911,
@@ -17242,7 +17448,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1296085625}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17340,7 +17546,7 @@ GameObject:
   - component: {fileID: 1301847198}
   - component: {fileID: 1301847201}
   - component: {fileID: 1301847200}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18189,7 +18395,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1376449308}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18274,7 +18480,7 @@ Transform:
   m_GameObject: {fileID: 1388799041}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.61, y: 1.287, z: 5.09}
+  m_LocalPosition: {x: -11.05, y: 1.287, z: 1.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18536,7 +18742,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1415784851}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18922,7 +19128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1451996914}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20263,7 +20469,7 @@ GameObject:
   - component: {fileID: 1546578720}
   - component: {fileID: 1546578723}
   - component: {fileID: 1546578722}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20944,7 +21150,7 @@ GameObject:
   - component: {fileID: 1616734645}
   - component: {fileID: 1616734648}
   - component: {fileID: 1616734647}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21497,7 +21703,7 @@ Transform:
   m_GameObject: {fileID: 1656487690}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.93, y: 1.286, z: 10.3}
+  m_LocalPosition: {x: -5.56, y: 1.286, z: 10.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21732,7 +21938,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1689315732}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21765,7 +21971,7 @@ GameObject:
   - component: {fileID: 1694799946}
   - component: {fileID: 1694799949}
   - component: {fileID: 1694799948}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22244,7 +22450,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1751713312}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22551,6 +22757,85 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20b13628ee5faae40b4036039e357c18, type: 3}
+--- !u!1001 &1775371754
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1944117614038025067, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: interactablePrefab
+      value: 
+      objectReference: {fileID: 2323250492134829559, guid: 05f1332c7e8dfb044b232347a7cfa322,
+        type: 3}
+    - target: {fileID: 5888372782924639743, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.225974
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888372782924639743, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.48999977
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888372782924639743, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.9033661
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888372782924639743, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888372782924639743, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888372782924639743, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888372782924639743, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888372782924639743, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888372782924639743, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888372782924639743, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7589605555058645544, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_Name
+      value: BoulderGrower (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7589605555058645544, guid: 4be90f7a36d64af4b947880e3018ba67,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4be90f7a36d64af4b947880e3018ba67, type: 3}
 --- !u!4 &1777006798 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3540469933408463588, guid: 5a383f0ed23e4fc44af7a5c6470b5911,
@@ -22597,7 +22882,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1791038921}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23491,7 +23776,7 @@ GameObject:
   - component: {fileID: 1824703452}
   - component: {fileID: 1824703455}
   - component: {fileID: 1824703454}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23880,7 +24165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1848870439}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24160,7 +24445,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1878431040}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24183,6 +24468,80 @@ Transform:
   - {fileID: 24631809}
   m_Father: {fileID: 951637270}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1892851722
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2062977778449422150, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: interactablePrefab
+      value: 
+      objectReference: {fileID: 854231859794480277, guid: a04ccc9ec061ae04d92c600aa40c4b7a,
+        type: 3}
+    - target: {fileID: 6233886640496032337, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6233886640496032337, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.48999977
+      objectReference: {fileID: 0}
+    - target: {fileID: 6233886640496032337, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 6233886640496032337, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6233886640496032337, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6233886640496032337, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6233886640496032337, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6233886640496032337, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6233886640496032337, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6233886640496032337, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7169997298333479452, guid: 4ec2b5abc10816d4aae8c7e553dafbba,
+        type: 3}
+      propertyPath: m_Name
+      value: TreeSpearGrower (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4ec2b5abc10816d4aae8c7e553dafbba, type: 3}
 --- !u!1 &1893061466
 GameObject:
   m_ObjectHideFlags: 0
@@ -24794,7 +25153,7 @@ GameObject:
   - component: {fileID: 1984438340}
   - component: {fileID: 1984438343}
   - component: {fileID: 1984438342}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25767,7 +26126,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2029502434}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26076,7 +26435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2066479818}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PathPoint (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27116,7 +27475,6 @@ SceneRoots:
   - {fileID: 1366954399}
   - {fileID: 1665898388}
   - {fileID: 258255340}
-  - {fileID: 1333606541}
   - {fileID: 1755787008}
   - {fileID: 356246463}
   - {fileID: 26184431}
@@ -27133,3 +27491,9 @@ SceneRoots:
   - {fileID: 1804730024}
   - {fileID: 225540726}
   - {fileID: 1049775374}
+  - {fileID: 223610739}
+  - {fileID: 1892851722}
+  - {fileID: 515773719}
+  - {fileID: 1775371754}
+  - {fileID: 1288780137}
+  - {fileID: 1333606541}
