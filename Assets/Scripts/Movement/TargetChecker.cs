@@ -10,6 +10,7 @@ public class TargetChecker : MonoBehaviour
     protected Vector3 initialPosition = Vector3.zero;
     void Start()
     {
+        Debug.Log("[TargetChecker] Start");
         initialPosition = transform.position;
     }
 
@@ -21,6 +22,7 @@ public class TargetChecker : MonoBehaviour
             float detectorSphereSize = 0.5f * (initialPosition - transform.position).magnitude; // TODO: Incorporate into Sphere collider size
             if (Physics.SphereCast(transform.position, 15.0f, velocity.normalized, out raycastHit, Mathf.Infinity, LayerMask.GetMask("Enemy")))
             {
+                Debug.Log("[TargetChecker] Enemy Detected");
                 targetDetectedCallback(raycastHit.collider);
                 targetDetectedCallback = null;
                 velocity = Vector3.zero;

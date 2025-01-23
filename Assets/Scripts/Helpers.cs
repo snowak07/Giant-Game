@@ -7,16 +7,18 @@ public static class Helpers : object
     public static bool TryGetComponentInParent<T>(GameObject obj, out T component)
     {
         Transform currentTransform = obj.transform;
-        if (obj.TryGetComponent(out component))
-        {
-            return true;
-        }
 
-        while (currentTransform.parent != null)
+        while (true)
         {
+            Debug.Log("[Helpers] currentTransform name: " + currentTransform.name);
             if (currentTransform.gameObject.TryGetComponent(out component))
             {
                 return true;
+            }
+
+            if (currentTransform.parent == null)
+            {
+                break;
             }
 
             currentTransform = currentTransform.parent;

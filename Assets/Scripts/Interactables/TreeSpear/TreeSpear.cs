@@ -56,6 +56,7 @@ public class TreeSpear : GiantGrabInteractable
 
     protected void TargetDetected(Collider detectedEnemyCollider)
     {
+        Debug.Log("[TreeSpear] TargetDetected");
         this.detectedEnemyCollider = detectedEnemyCollider;
     }
 
@@ -63,10 +64,12 @@ public class TreeSpear : GiantGrabInteractable
     {
         if (detached && detectedEnemyCollider != null && Helpers.TryGetComponentInParent(detectedEnemyCollider.gameObject, out Enemy detectedEnemy))
         {
+            Debug.Log("[TreeSpear] Calculating intercept direction");
             Vector3 interceptDirection = TrajectoryHelper.CalculateInterceptionDirection(transform.position, GetComponent<Rigidbody>().linearVelocity.magnitude, detectedEnemy.transform.GetComponent<MovementProvider>().GetNextTransform);
 
             if (interceptDirection != Vector3.zero)
             {
+                Debug.Log("[TreeSpear] Adjusting course towards Enemy");
                 Vector3 interceptVelocity = GetComponent<Rigidbody>().linearVelocity.magnitude * interceptDirection;
                 GetComponent<Rigidbody>().linearVelocity = interceptVelocity;
             } 
@@ -78,6 +81,7 @@ public class TreeSpear : GiantGrabInteractable
 
     protected void InitializeTargetChecker()
     {
+        Debug.Log("[TreeSpear] InitializeTargetChecker");
         GameObject targetChecker = Instantiate(this.targetChecker, transform.position, transform.rotation);
         TargetChecker checker = targetChecker.GetComponent<TargetChecker>();
         checker.SetCallback(TargetDetected);
