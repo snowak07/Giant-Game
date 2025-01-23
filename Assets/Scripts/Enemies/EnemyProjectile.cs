@@ -44,8 +44,8 @@ public class EnemyProjectile : MonoBehaviour
         else
         {
             // Create LayerMask that doesn't interact with itself
-            int layer = gameObject.layer;
-            int layerMask = ~(1 << layer);
+            int layerMask = ~(1 << gameObject.layer);
+            layerMask = layerMask &= ~(1 << LayerMask.NameToLayer("GroundEnemy"));
 
             // Check if Enemies and in explosion radius and if so kill them
             Collider[] explosionKills = Physics.OverlapSphere(transform.position, killRadius, layerMask);

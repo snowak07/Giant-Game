@@ -10,7 +10,7 @@ using UnityEngine.InputSystem.HID;
 [RequireComponent(typeof(MovementProvider))]
 public abstract class Enemy : MonoBehaviour
 {
-    public string[] ignoredDamageCollisionTags = { "Enemy", "Water" };
+    public string[] ignoredDamageCollisionTags = { "Enemy", "GroundEnemy", "Water" };
     public Transform targetTransform = null;
     public float health { get; private set; }
     public bool IsPickedUp { get; set; }
