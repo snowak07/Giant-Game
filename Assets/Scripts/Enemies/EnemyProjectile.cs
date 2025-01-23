@@ -35,7 +35,11 @@ public class EnemyProjectile : MonoBehaviour
             collision.gameObject.GetComponentInParent<NewActionBasedXRController>().PickupEnabled()
         ) {
             // Change layer off Enemy layer when interacted with by the player so that it can damage enemies afterward
-            gameObject.layer = LayerMask.NameToLayer("Default");
+            int defaultLayer = LayerMask.NameToLayer("Default");
+            gameObject.layer = defaultLayer;
+
+            // Change collider layer to the default layer
+            GetComponentInChildren<Collider>().gameObject.layer = defaultLayer;
         }
         else
         {
