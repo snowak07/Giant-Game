@@ -9,8 +9,13 @@ public class ProjectileLauncher : MonoBehaviour
     public GameObject projectilePrefab = null;
     public int cooldownTime = 0;
     public float projectileSpeed = 0;
+    public bool launcherEnabled { get; set; }
+    public bool onCooldown { get; set; }
 
-    protected bool onCooldown { get; set; }
+    private void Start()
+    {
+        launcherEnabled = true;
+    }
 
     protected ProjectileLauncher()
     {
@@ -22,7 +27,6 @@ public class ProjectileLauncher : MonoBehaviour
         if (!projectileVector.Equals(Vector3.zero))
         {
             GameObject projectileObject = Instantiate(projectilePrefab, firingPosition, transform.rotation);
-
             // Enable impact cooldown so the projecile doesn't collide with the Enemy
             if (projectileObject.TryGetComponent(out GiantGrabInteractable enemyProjectile))
             {
@@ -52,9 +56,14 @@ public class ProjectileLauncher : MonoBehaviour
 
     public Vector3 ShootProjectile(Vector3 targetPosition)
     {
-        Vector3 projectileVector = TrajectoryHelper.CalculateFiringDirection(firingOffset.position, targetPosition, projectileSpeed);
+        if (launcherEnabled && !onCooldown)
+        {
+            Vector3 projectileVector = TrajectoryHelper.CalculateFiringDirection(firingOffset.position, targetPosition, projectileSpeed);
 
-        StartCoroutine(ShootProjectileWorker(targetPosition, projectileVector));
-        return projectileVector.normalized; // Return firing direction
+            StartCoroutine(ShootProjectileWorker(targetPosition, projectileVector));
+            return projectileVector.normalized; // Return firing direction
+        }
+
+        return Vector3.zero;
     }
 }

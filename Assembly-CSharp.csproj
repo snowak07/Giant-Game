@@ -118,10 +118,12 @@
     <Compile Include="Assets\Scripts\Enemies\BattleshipEnemy.cs" />
     <Compile Include="Assets\Scripts\Player\ScrapeArrows.cs" />
     <Compile Include="Assets\Scripts\Interactables\TreeSpear\TreeSpear.cs" />
+    <Compile Include="Assets\Scripts\LayeredMonoBehaviour.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Movement\MovementProviders\StationaryMovementProvider.cs" />
     <Compile Include="Assets\Scripts\Player\StickOnHit.cs" />
     <Compile Include="Assets\Third Party Assets\EffectExamples\Shared\Ramps\Runtime\RampAsset.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemyExplosiveCannonball.cs" />
     <Compile Include="Assets\Scripts\Player\OmniDirectionForcePullInteractor.cs" />
     <Compile Include="Assets\Scripts\Interactables\GiantGrabInteractable.cs" />
     <Compile Include="Assets\Scripts\Interactables\BoulderGrower.cs" />

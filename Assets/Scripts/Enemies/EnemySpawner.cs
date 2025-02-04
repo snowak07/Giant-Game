@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    //public Player player = null;
     public Transform targetTransform = null;
     public GameObject pathContainer = null;
     public float maxHorizontalDistance;
@@ -62,6 +63,8 @@ public class EnemySpawner : MonoBehaviour
         enemyObject.GetComponent<PathProvider>().pathContainer = pathContainer;
         Enemy enemy = enemyObject.GetComponent<Enemy>();
         enemy.targetTransform = targetTransform;
+        // Backlog: OnGameEnd Event Freeze system (performance enhancement)
+        //enemy.InitializePlayerListener(player); // Put in a base global MonoBehaviour child class
 
         // Wait to end spawn cooldown
         yield return new WaitForSeconds(spawnCooldownTime);

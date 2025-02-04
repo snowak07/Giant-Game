@@ -4,10 +4,16 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class MovementProvider : MonoBehaviour
 {
+    public bool movementEnabled { get; set; }
     protected bool flying;
     protected bool pitch;
     protected float maxRotationalSpeed; // Measured in units/s
     protected float maxTranslationalSpeed; // Measured in units/s
+
+    private void Start()
+    {
+        movementEnabled = true;
+    }
 
     public virtual void Initialize(float maxTranslationalSpeed, float maxRotationalSpeed, bool flying = false, bool pitch = false)
     {
@@ -19,7 +25,7 @@ public abstract class MovementProvider : MonoBehaviour
 
     public virtual (Vector3, Quaternion) HandleMovement()
     {
-        if (GetComponent<PathProvider>().hasPath())
+        if (movementEnabled && GetComponent<PathProvider>().hasPath())
         {
             (Vector3, Quaternion) nextPositionRotation = GetNextTransform(Time.fixedDeltaTime);
             GetComponent<Rigidbody>().MoveRotation(nextPositionRotation.Item2);

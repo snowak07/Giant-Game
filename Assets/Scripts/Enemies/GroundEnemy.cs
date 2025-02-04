@@ -22,7 +22,7 @@ public class GroundEnemy : Enemy
 
         if (!knockedDown)
         {
-            if (targetTransform != null)
+            if (targetTransform != null) // && !GetComponent<ProjectileLauncher>().onCooldown
             {
                 GetComponent<ProjectileLauncher>().ShootProjectile(targetTransform.position);
             }

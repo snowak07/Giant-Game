@@ -87,6 +87,9 @@ public class BattleshipEnemy : Enemy
 
     private void UpdateCannonPosition(Vector3 firingDirection)
     {
-        GetComponentInChildren<CannonTurn>().setFiringDirection(firingDirection);
+        if (firingDirection != Vector3.zero)
+        {
+            GetComponentInChildren<CannonTurn>().setFiringDirection(firingDirection);
+        }
     }
 }

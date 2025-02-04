@@ -3,21 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public delegate void EndGameEventHandler();
+
 public class Player : MonoBehaviour
 {
-    //public Canvas menu;
+    //public event EndGameEventHandler OnEndGame; // Backlog: OnGameEnd Event Freeze system (performance enhancement)
     public MenuManager menu;
     public RayInteractorHandler rayInteractorHandler;
 
-    public float maxLife = 10;
-
-    private float lifeTotal;
+    public float MaxLife = 10;
+    public float lifeTotal;
     private string[] damageSourceTags = new string[] { "Projectile" };
+
+    private void ResetHealth()
+    {
+        lifeTotal = MaxLife;
+    }
 
     private void Start()
     {
-        lifeTotal = maxLife;
-        rayInteractorHandler.DisableComponents();
+        ResetHealth();
+    }
+
+    private void Update()
+    {
+        if (lifeTotal <= 0)
+        {
+            EndGame();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -28,7 +41,6 @@ public class Player : MonoBehaviour
 
             if (lifeTotal <= 0)
             {
-                lifeTotal = maxLife;
                 EndGame();
             }
         }
@@ -36,12 +48,21 @@ public class Player : MonoBehaviour
 
     private void EndGame()
     {
-        // Destroy all Enemies // NOTE: This is accomplished in the Menu Manager
+        // Freeze all Enemies
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemies)
         {
-            Destroy(enemy);
+            enemy.GetComponent<Enemy>().Freeze();
         }
+
+        // Freeze all projectiles
+        GameObject[] projectiles = GameObject.FindGameObjectsWithTag("Projectile");
+        foreach (GameObject projectile in projectiles)
+        {
+            projectile.GetComponent<EnemyProjectile>().Freeze();
+        }
+
+        //OnEndGame.Invoke(); // Backlog: OnGameEnd Event Freeze system (performance enhancement)
 
         // Stop all spawners
         GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");

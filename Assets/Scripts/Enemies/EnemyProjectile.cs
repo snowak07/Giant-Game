@@ -1,76 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
-    // TODO add projectile destroy after collision or after 10 seconds have passed.
-    // Start is called before the first frame update
-    public GameObject explosion = null;
-    public float explosionRadius = 5.0f;
-    public float explosionPower = 100.0f;
-    public float killRadius = 2.0f;
+    //public Player player = null;
+    //public void InitializePlayerListener(Player player) // Backlog: OnGameEnd Event Freeze system (performance enhancement)
+    //{
+    //    Debug.Log("[EnemyProjectile] InitializePlayerListener");
 
+    //    player.OnEndGame += Freeze;
+    //}
+    private bool frozen { get; set; }
     private float startTime;
     private readonly float lifespan = 15;
 
-    void Start()
+    protected virtual void Start()
     {
         startTime = Time.time;
     }
 
-    private void Update()
+    protected void Update()
     {
-        if (Time.time - startTime > lifespan)
+        if (!frozen && Time.time - startTime > lifespan)
         {
             Destroy(gameObject);
         }
     }
 
-    protected void OnCollisionEnter(Collision collision)
+    public void Freeze()
     {
-        if (
-            collision.collider.tag == "Giant" && 
-            Helpers.TryGetComponentInParent(collision.gameObject, out NewActionBasedXRController controller) && 
-            collision.gameObject.GetComponentInParent<NewActionBasedXRController>().PickupEnabled()
-        ) {
-            // Change layer off Enemy layer when interacted with by the player so that it can damage enemies afterward
-            int defaultLayer = LayerMask.NameToLayer("Default");
-            gameObject.layer = defaultLayer;
-
-            // Change collider layer to the default layer
-            GetComponentInChildren<Collider>().gameObject.layer = defaultLayer;
-        }
-        else
-        {
-            // Create LayerMask that doesn't interact with itself
-            int layerMask = ~(1 << gameObject.layer);
-            layerMask = layerMask &= ~(1 << LayerMask.NameToLayer("GroundEnemy"));
-
-            // Check if Enemies and in explosion radius and if so kill them
-            Collider[] explosionKills = Physics.OverlapSphere(transform.position, killRadius, layerMask);
-            foreach (var explosionHit in explosionKills)
-            {
-                if (explosionHit.transform.root.gameObject.TryGetComponent(out Enemy enemy))
-                {
-                    enemy.Kill(gameObject);
-                }
-            }
-
-            // Check if Enemies and in explosion radius and if so kill them
-            Collider[] explosionHits = Physics.OverlapSphere(transform.position, explosionRadius, layerMask);
-            foreach (var explosionHit in explosionHits)
-            {
-                if (explosionHit.transform.root.gameObject.TryGetComponent(out Rigidbody body) && explosionHit.transform.tag != "Giant")
-                {
-                    body.AddExplosionForce(explosionPower, transform.position, explosionRadius, 3.0f);
-                }
-            }
-
-            // Trigger explosion effect and destroy object
-            GameObject explosionPrefab = Instantiate(explosion, transform.position, Quaternion.identity);
-            explosionPrefab.GetComponent<ExplosionHandler>().Explode();
-            Destroy(gameObject);
-        }
+        frozen = true;
+        Rigidbody body = GetComponent<Rigidbody>();
+        body.isKinematic = true;
+        body.useGravity = false;
     }
 }

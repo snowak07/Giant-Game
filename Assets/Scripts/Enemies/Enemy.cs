@@ -5,16 +5,47 @@ using UnityEngine;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem.HID;
+using static UnityEngine.EventSystems.EventTrigger;
 
 [RequireComponent(typeof(Destructible))]
 [RequireComponent(typeof(MovementProvider))]
 public abstract class Enemy : MonoBehaviour
 {
+    public Player player = null;
     public string[] ignoredDamageCollisionTags = { "Enemy", "GroundEnemy", "Water" };
     public Transform targetTransform = null;
     public float health { get; private set; }
     public bool IsPickedUp { get; set; }
     protected bool killInstantly;
+
+    //public void InitializePlayerListener(Player player) // Backlog: OnGameEnd Event Freeze system (performance enhancement)
+    //{
+    //    Debug.Log("[Enemy] InitializePlayerListener");
+    //    player.OnEndGame += Freeze;
+
+    //    if (TryGetComponent(out ProjectileLauncher launcher))
+    //    {
+    //        launcher.SetPlayer(player);
+    //    }
+    //}
+
+    public void Freeze()
+    {
+        Rigidbody body = GetComponent<Rigidbody>();
+        body.isKinematic = true;
+        body.useGravity = false;
+        GetComponent<MovementProvider>().movementEnabled = false;
+
+        if (TryGetComponent(out ProjectileLauncher launcher))
+        {
+            launcher.launcherEnabled = false;
+        }
+
+        if (TryGetComponent(out Animator animator))
+        {
+            animator.enabled = false;
+        }
+    }
 
     protected void Initialize(float health, float maxTranslationalSpeed, float maxRotationalSpeed, bool flying = false, bool pitch = false, bool killInstantly = false, float explosionForce = 200.0f, float explosionRadius = 3.0f, float upwardsExplosionModifier = 3.0f)
     {
@@ -54,7 +85,7 @@ public abstract class Enemy : MonoBehaviour
      *  
      *  @return void
      */
-    public virtual void Kill(GameObject killer = null)
+    public void Kill(GameObject killer = null)
     {
         if (killInstantly)
         {

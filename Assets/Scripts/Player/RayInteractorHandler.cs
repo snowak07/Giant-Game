@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class RayInteractorHandler : MonoBehaviour
 {
+    private void Start()
+    {
+        DisableComponents();
+    }
     public void DisableComponents()
     {
         //GetComponent<XRController>().enabled = false;

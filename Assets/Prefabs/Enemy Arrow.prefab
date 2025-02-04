@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 8265888826502783930}
   - component: {fileID: 7935613933186318529}
   m_Layer: 11
-  m_Name: EnemyArrow
-  m_TagString: Untagged
+  m_Name: Enemy Arrow
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,6 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d466e8f2765e364b86fe115b6f7f0a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!114 &7935613933186318529
 MonoBehaviour:
   m_ObjectHideFlags: 0

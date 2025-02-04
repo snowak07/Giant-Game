@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 3781906088029282433}
   m_Layer: 11
   m_Name: AirshipEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,8 +216,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f0a23e4bc5a3940ba9803492496d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRotationalSpeed: 0
-  maxTranslationalSpeed: 0
 --- !u!114 &3670718952475245386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,7 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff3d77fdecd394346b9ffb2256c07fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathPoints: []
+  pathContainer: {fileID: 0}
+  loop: 1
 --- !u!114 &3781906088029282433
 MonoBehaviour:
   m_ObjectHideFlags: 0
