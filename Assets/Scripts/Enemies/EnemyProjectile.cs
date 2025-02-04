@@ -29,8 +29,10 @@ public class EnemyProjectile : MonoBehaviour
     public void Freeze()
     {
         frozen = true;
-        Rigidbody body = GetComponent<Rigidbody>();
-        body.isKinematic = true;
-        body.useGravity = false;
+        if (TryGetComponent(out Rigidbody body))
+        {
+            body.isKinematic = true;
+            body.useGravity = false;
+        }
     }
 }
