@@ -93,7 +93,7 @@ public class TreeSpear : GiantGrabInteractable
     {
         base.OnCollisionEnter(collision);
 
-        if (collision.collider.gameObject.tag == "Water" || collision.collider.gameObject.tag == "Ground")
+        if (collision.collider.gameObject.tag == "Water" || LayerMask.LayerToName(collision.collider.gameObject.layer) == "Ground")
         {
             GetComponent<FlightAlignment>().Disable();
         }

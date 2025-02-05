@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2089830267872946476}
   - component: {fileID: -1936603701630246294}
   - component: {fileID: 9198484068292930305}
-  - component: {fileID: 8669610435114986526}
+  - component: {fileID: -536493623687852084}
   m_Layer: 0
   m_Name: TreeSpear
   m_TagString: Untagged
@@ -57,7 +57,7 @@ Rigidbody:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
+  m_ImplicitCom: 0
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d59f58ad7992d4d80d58a61217d779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8669610435114986526
+--- !u!114 &-536493623687852084
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,6 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3192ffbeb5c95e34084180559302b6c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uprightDampening: 3
 --- !u!1 &1364946640360459987
 GameObject:
   m_ObjectHideFlags: 0

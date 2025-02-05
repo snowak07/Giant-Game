@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6070760427312975389}
   - component: {fileID: 338876612718310714}
   - component: {fileID: 8265888826502783930}
-  - component: {fileID: 7935613933186318529}
   m_Layer: 11
   m_Name: Enemy Arrow
   m_TagString: Projectile
@@ -85,18 +84,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d466e8f2765e364b86fe115b6f7f0a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7935613933186318529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3974958867815912455}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f7607cfff8fb8347bb31707c4782cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4848774694303881555

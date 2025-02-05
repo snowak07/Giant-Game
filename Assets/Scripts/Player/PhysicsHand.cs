@@ -17,11 +17,25 @@ public class PhysicsHand : MonoBehaviour
     public float force = 10f;
 
     private float speedLimit = 90.0f;
+    private bool frozen { get; set; }
 
     void FixedUpdate()
     {
-        SetPosition();
-        SetRotation();
+        if (!frozen)
+        {
+            SetPosition();
+            SetRotation();
+        }
+    }
+
+    public void Freeze()
+    {
+        frozen = true;
+        if (TryGetComponent(out Rigidbody body)) // Get Component in children?
+        {
+            body.isKinematic = true;
+            body.useGravity = false;
+        }
     }
 
     void SetPosition()

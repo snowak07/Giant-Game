@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     //public event EndGameEventHandler OnEndGame; // Backlog: OnGameEnd Event Freeze system (performance enhancement)
     public MenuManager menu;
     public RayInteractorHandler rayInteractorHandler;
+    public PhysicsHand rightHand;
+    public PhysicsHand leftHand;
 
     public float MaxLife = 10;
     public float lifeTotal;
@@ -82,5 +84,9 @@ public class Player : MonoBehaviour
 
         // Enable Ray Interactor
         rayInteractorHandler.EnableComponents();
+
+        // Freeze PhysicsHands (Detach position tracking from controller?)
+        rightHand.Freeze();
+        leftHand.Freeze();
     }
 }
