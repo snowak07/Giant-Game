@@ -273,8 +273,8 @@ MonoBehaviour:
     y: 0
     width: 633
     height: 1293
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 76}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -302,8 +302,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 480
-    y: 79
+    x: 481
+    y: 24
     width: 1445
     height: 811
   m_SerializedDataModeController:
@@ -848,7 +848,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: 22.513569, y: 15.875969, z: 15.503741}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0}
+    m_Value: {x: 22.513569, y: 15.875969, z: 15.503741}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -896,11 +896,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.05266188, y: -0.5645436, z: 0.03612492, w: -0.8230243}
     speed: 2
-    m_Value: {x: -0.052657757, y: -0.5644994, z: 0.03612209, w: -0.82295984}
+    m_Value: {x: 0.05266188, y: 0.5645436, z: -0.03612492, w: 0.8230243}
   m_Size:
     m_Target: 25.064753
     speed: 2
-    m_Value: 0.8660254
+    m_Value: 25.064753
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -954,7 +954,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 79
+    y: 24
     width: 479
     height: 811
   m_SerializedDataModeController:
@@ -971,8 +971,8 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: f2c00000
-      m_LastClickedID: 49394
+      m_SelectedIDs: 
+      m_LastClickedID: 0
       m_ExpandedIDs: c6faffff6cbc000090bd0000ecbd00004ebf000084bf0000a0bf0000f2c0000060c10000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -1231,7 +1231,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 916
+    y: 861
     width: 1926
     height: 430
   m_SerializedDataModeController:
@@ -1275,7 +1275,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 88c90000
     m_LastClickedID: 51592
-    m_ExpandedIDs: 0000000090c7000092c7000094c7000096c7000000ca9a3bffffff7f
+    m_ExpandedIDs: 0000000090c7000092c7000094c7000096c70000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1336,18 +1336,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: c6230000bab500008678000002be0000000000009cbe0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Shockwave
-      m_OriginalName: Shockwave
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 50050
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
       m_ClientGUIView: {fileID: 10}
@@ -1421,8 +1421,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1927
-    y: 79
+    x: 1928
+    y: 24
     width: 632
     height: 1267
   m_SerializedDataModeController:
